@@ -83,13 +83,47 @@ def first_working(name, models, call):
     raise ApiError("; ".join(errors))
 
 
-def models_from(env, defaults):
-    return [m.strip() for m in os.environ.get(env, "").split(",") if m.strip()] or defaults
+def get_json(url, headers):
+    req = urllib.request.Request(url, headers={"user-agent": UA, **headers})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        raise ApiError(f"HTTP {e.code} listing models") from None
+
+
+def version_key(name):
+    """Sort key so newer model versions come first (gemini-3.8-flash before gemini-3.5-flash)."""
+    return [-int(n) for n in re.findall(r"\d+", name)] or [0]
+
+
+def models_from(env, discovered):
+    override = [m.strip() for m in os.environ.get(env, "").split(",") if m.strip()]
+    return override or discovered
+
+
+def gemini_models():
+    """Ask the API which Flash models this key may call (new accounts lose access to older ones)."""
+    try:
+        data = get_json("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",
+                        {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+    except ApiError as e:
+        print(f"  gemini: could not list models ({e}); using defaults")
+        return ["gemini-3.8-flash", "gemini-3.5-flash-lite"]
+    names = [m["name"].split("/", 1)[1] for m in data.get("models", [])
+             if "generateContent" in m.get("supportedGenerationMethods", [])]
+    skip = ("image", "tts", "audio", "live", "embedding", "thinking", "exp", "preview", "latest")
+    flash = sorted((n for n in names if "flash" in n and not any(x in n for x in skip)), key=version_key)
+    full = [n for n in flash if "lite" not in n]
+    lite = [n for n in flash if "lite" in n]
+    picks = full[:2] + lite[:1]
+    print(f"  gemini: models available to this key → trying {picks or 'none found'}")
+    return picks
 
 
 def ask_gemini(prompt):
-    # Free-tier-friendly models first; GEMINI_MODEL (comma-separated) overrides the list.
-    models = models_from("GEMINI_MODEL", ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest"])
+    # GEMINI_MODEL (comma-separated) overrides discovery.
+    models = models_from("GEMINI_MODEL", gemini_models())
 
     def call(model):
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
@@ -100,12 +134,29 @@ def ask_gemini(prompt):
     return first_working("gemini", models, call)
 
 
+def groq_models():
+    """Web-search-capable models this key may call: 'compound' systems, else gpt-oss with browser search."""
+    try:
+        data = get_json("https://api.groq.com/openai/v1/models", {"authorization": "Bearer " + os.environ["GROQ_API_KEY"]})
+    except ApiError as e:
+        print(f"  groq: could not list models ({e}); using defaults")
+        return ["groq/compound", "openai/gpt-oss-120b"]
+    ids = [m["id"] for m in data.get("data", []) if m.get("active", True)]
+    compound = sorted((i for i in ids if "compound" in i), key=lambda i: ("mini" in i, i))
+    oss = sorted((i for i in ids if "gpt-oss" in i and "safeguard" not in i), key=version_key)
+    picks = compound[:2] + oss[:2]
+    print(f"  groq: models available to this key → trying {picks or 'none found'}")
+    return picks
+
+
 def ask_groq(prompt):
-    # Groq's agentic "compound" systems have built-in web search; GROQ_MODEL (comma-separated) overrides.
-    models = models_from("GROQ_MODEL", ["groq/compound", "groq/compound-mini", "compound-beta", "compound-beta-mini"])
+    # GROQ_MODEL (comma-separated) overrides discovery.
+    models = models_from("GROQ_MODEL", groq_models())
 
     def call(model):
         body = {"model": model, "messages": [{"role": "user", "content": prompt}]}
+        if "compound" not in model:
+            body["tools"] = [{"type": "browser_search"}]  # gpt-oss models search the web through this tool
         data = post_json("https://api.groq.com/openai/v1/chat/completions", body,
                          {"authorization": "Bearer " + os.environ["GROQ_API_KEY"]})
         return data["choices"][0]["message"]["content"]
