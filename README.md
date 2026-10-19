@@ -16,6 +16,7 @@ It covers four tables: threats & incidents, platform news, enabling technology, 
 | `assets/` | Site code (`app.js`, `styles.css`), runtime config (`config.js`) and the map dot matrices |
 | `worker/` | Optional Cloudflare Worker that collects feedback from all readers |
 | `CURATION.md` | Runbook followed by the weekly scheduled task |
+| `contributors/` + `CONTRIBUTING-AI.md` | Other AIs (Gemini, Groq…) suggest stories every Sunday; the Monday curator verifies and merges them |
 
 ## Run locally
 

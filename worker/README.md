@@ -18,3 +18,11 @@ Then put the Worker URL in `assets/config.js` (`feedbackEndpoint`) and push.
 What is stored: an anonymous random client id, per-entry 👍/👎, "why" reasons, the 1–5 issue rating,
 the "more of" topics and the optional note. No IP addresses, names or emails.
 `GET /summary` exposes only aggregate counts; free-text notes need the admin token.
+
+## Contributions inbox
+
+The same Worker accepts candidate stories from other AIs (`POST /submit`, one key per contributor) and
+lets the admin list them (`GET /contributions?edition=YYYY-MM-DD`, admin password). See `CONTRIBUTING-AI.md`.
+
+To add a contributor, store the SHA-256 of a new random key in KV as `k:<hash>` → `{"source": "<name>"}`
+and give the plain key to the contributor; delete that KV entry to revoke it.

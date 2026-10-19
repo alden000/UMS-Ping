@@ -36,6 +36,7 @@ REGIONS = {"Southeast Asia", "East Asia", "South Asia", "Middle East", "Black Se
 DOMAINS = {"surface", "subsurface", "cross-domain"}
 # Paths that indicate an index / archive page rather than a standalone article.
 INDEX_PATH = re.compile(r"^/?$|/(news|blog|press|media|category|categories|tag|tags|topics?|search|archive)/?$", re.I)
+VIA = re.compile(r"^[a-z0-9-]{1,24}$")
 GATED_HOSTS = {"janes.com", "www.janes.com", "lloydslist.com", "www.lloydslist.com", "ft.com", "www.ft.com",
                "wsj.com", "www.wsj.com", "bloomberg.com", "www.bloomberg.com", "techbriefs.com",
                "www.techbriefs.com"}
@@ -113,6 +114,9 @@ def validate_issue(data):
                 err(iid, f"{where}: lat/lng out of range")
             if len(e.get("summary", "")) > 200:
                 warn(iid, f"{where}: summary longer than 200 chars")
+            via = e.get("via", [])
+            if not isinstance(via, list) or not all(isinstance(v, str) and VIA.match(v) for v in via):
+                err(iid, f"{where}: via must be a list of short lowercase source names, e.g. [\"gemini\"]")
     picks = data.get("editorial", {}).get("picks", [])
     ids = {e["id"] for s in data["sections"] for e in s.get("entries", [])}
     for p in picks:
@@ -123,6 +127,14 @@ def validate_issue(data):
 def fmt_window(data):
     f = lambda s: parse_date(s).strftime("%-d %b %Y")
     return f"{f(data['window']['start'])} – {f(data['window']['end'])}"
+
+
+def via_note(ent):
+    """Credit for stories first suggested by a contributing AI (shown under the source link)."""
+    via = [v for v in ent.get("via", []) if v != "claude"]
+    if not via:
+        return ""
+    return f'<br><span style="font-size: 11px; color: #888888;">via {html.escape(", ".join(v.title() for v in via))}</span>'
 
 
 def render_email(data):
@@ -160,7 +172,7 @@ def render_email(data):
                     f'          <td style="{td} font-weight: bold;">{e(ent["title"])}</td>',
                     f'          <td style="{td}">{e(third)}</td>',
                     f'          <td style="{td}">{e(ent["details"])}</td>',
-                    f'          <td style="{td}"><a href="{e(src["url"])}" target="_blank" rel="noopener noreferrer" style="color: #1F4E79; text-decoration: underline;">{e(src["name"])}</a></td>',
+                    f'          <td style="{td}"><a href="{e(src["url"])}" target="_blank" rel="noopener noreferrer" style="color: #1F4E79; text-decoration: underline;">{e(src["name"])}</a>{via_note(ent)}</td>',
                     "        </tr>"]
         notes = []
         if not rows:

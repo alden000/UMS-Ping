@@ -108,6 +108,9 @@
       <text x="24" y="336" fill="${color}" fill-opacity=".55" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="3">${esc((DOMAIN[e.domain]?.label || "").toUpperCase())} · ${esc(e.region.toUpperCase())}</text></svg>`;
   }
 
+  // Contributing AIs credited on a story ("claude" is the curator itself, so it is not shown).
+  const viaLabel = (e) => (e.via || []).filter((v) => v !== "claude").map((v) => v.charAt(0).toUpperCase() + v.slice(1)).join(", ");
+
   function ytId(url) {
     const m = String(url || "").match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
     return m ? m[1] : null;
@@ -237,10 +240,23 @@
               </svg>
               <ul>${dom.map(([k, n]) => `<li style="--c:${DOMAIN[k].c}"><i></i>${DOMAIN[k].label}<b>${n}</b></li>`).join("")}</ul>
             </div>
+            ${contributors(issue)}
           </div>
         </div>
       </div>
     </section>`;
+  }
+
+  // Who found this week's stories: { "claude": {"published": 15}, "gemini": {"submitted": 9, "published": 4} }
+  function contributors(issue) {
+    const c = issue.contributors;
+    if (!c || Object.keys(c).length < 2) return "";
+    const rows = Object.entries(c).map(([name, v]) => {
+      const label = name === "claude" ? "Ping curator" : name.charAt(0).toUpperCase() + name.slice(1);
+      const of = v.submitted != null ? ` <small>of ${v.submitted} suggested</small>` : "";
+      return `<li><span>${esc(label)}</span><b>${v.published ?? 0}</b>${of}</li>`;
+    }).join("");
+    return `<div class="contrib"><h4>Sources of this week's stories</h4><ul>${rows}</ul></div>`;
   }
 
   /* ---------- Render: entry card ---------- */
@@ -261,7 +277,7 @@
         ${extra ? `<span class="badge">${esc(extra)}</span>` : ""}
       </button>
       <div class="body">
-        <div class="kicker"><span class="sec">${esc(sec.short)}</span><span>${esc(e.region)}</span><span>${esc(DOMAIN[e.domain]?.label || "")}</span></div>
+        <div class="kicker"><span class="sec">${esc(sec.short)}</span><span>${esc(e.region)}</span><span>${esc(DOMAIN[e.domain]?.label || "")}</span>${viaLabel(e) ? `<span class="via" title="First suggested by a contributing AI, verified by the Ping curator">via ${esc(viaLabel(e))}</span>` : ""}</div>
         <h3 id="h-${esc(e.id)}">${esc(t)}</h3>
         ${vendor ? `<p class="vendor">${esc(vendor)}</p>` : ""}
         <p class="meta"><b>${esc(sec.third)}</b>${esc(third)}</p>
