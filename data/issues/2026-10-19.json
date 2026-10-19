@@ -1,0 +1,795 @@
+{
+  "id": "2026-10-19",
+  "number": 1,
+  "title": "🛥 Weekly Maritime Systems Intelligence & Technology Update",
+  "window": {
+    "start": "2026-10-12",
+    "end": "2026-10-19"
+  },
+  "published": "2026-10-19T08:00:00+08:00",
+  "editorial": {
+    "headline": "Sea drones go to war, and to sea with the fleet.",
+    "lede": "Combined aerial and surface drone strikes sank merchant ships off NATO's Black Sea coast. A large USV deployed with a US carrier strike group for the first time. Close to home, Singapore-tested acoustic links and Malaysia's first private 5G port network show the region's digital waterfront filling in.",
+    "picks": [
+      "t1-3",
+      "t2-6",
+      "t4-1"
+    ]
+  },
+  "regionalWatch": {
+    "status": "calm",
+    "label": "No uncrewed incidents",
+    "note": "No verified hostile incidents involving uncrewed waterborne systems or WBIEDs occurred in Singapore, the Singapore and Malacca Straits, the South China Sea or wider Southeast Asia from 12 to 19 Oct 2026. Targeted searches found no USV or WBIED attacks, no recovered UUVs or gliders, and no ROV-linked seabed-cable incidents in the region. One Singapore link outside the region: the Singapore-registered GFS Pride sank in the Strait of Hormuz after being hit on 13 Oct (all 21 crew safe), and GFS Giselle was damaged on 14 Oct. Singapore's MPA attributed both to 'unidentified projectiles', and no source ties either incident to an uncrewed surface vessel."
+  },
+  "sections": [
+    {
+      "key": "threats",
+      "title": "Threats & Incidents (Past 7 Days)",
+      "emptyNote": "No verified uncrewed waterborne threats or incidents were published within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-14",
+          "title": "Aerial drone and two USVs reportedly sink HS Dignity / Western Black Sea",
+          "location": "Black Sea, about 15 nm east of Krapets, Bulgaria",
+          "details": "HS Dignity, a Guinea-Bissau-flagged cargo ship with 16 crew (14 of them Syrian), sank overnight on 12–13 Oct. Five crew were rescued and 11 were missing while six boats and two helicopters searched. The Syrian Sailors' Union said one aerial drone and two uncrewed surface vessels hit the ship; this is the union's account, not an official finding. In the same wave the Maltese-flagged Chelsea 3 was hit by three drones off Byala, and all 15 of its crew were rescued. Bulgaria summoned Russia's ambassador but did not formally attribute the attack.",
+          "summary": "Sailors' union says an aerial drone plus two USVs sank HS Dignity off Bulgaria; 11 crew missing.",
+          "source": {
+            "name": "Arab News Pakistan (AP)",
+            "url": "https://www.arabnews.pk/middle-east/14-syrians-aboard-hs-dignity-sunk-in-drone-attack-off-bulgaria-3004081"
+          },
+          "image": "https://assets.maestronewsroom.com/media/system/proxies/a7bb4e96-be9a-4dd4-ad5b-ed559f2916df.webp",
+          "video": null,
+          "region": "Black Sea",
+          "lat": 43.63,
+          "lng": 28.92,
+          "domain": "cross-domain",
+          "severity": "high",
+          "tags": [
+            "WBIED",
+            "USV",
+            "Bulgaria",
+            "merchant shipping"
+          ],
+          "id": "t1-1"
+        },
+        {
+          "date": "2026-10-15",
+          "title": "UK-made Kraken K3 Scout drone boat linked to strike on Russian vessel / Ukraine",
+          "location": "Port of Sochi, Russia (Black Sea)",
+          "details": "Industry sources say Kraken Technology's K3 Scout, a 28 ft (about 8.4 m) uncrewed attack boat, has been used in at least one live strike on a Russian vessel. The K3 reaches about 55 kt, carries up to 600 kg and has a range of about 650 nm, enough to reach Sochi from Odesa. In the 3 Sep attack on the offshore vessel Nefrit at Sochi, one USV got through the perimeter and damaged its port side, and a second detonated early. The report does not confirm that the Sochi boats were K3s. Kraken is targeting 1,000 units a year, and Rheinmetall is adding 200–1,000 units a year of capacity in Germany.",
+          "summary": "Britain's Kraken K3 Scout (55 kt, 600 kg payload) is reported to have been used in a Ukrainian strike on a Russian ship.",
+          "source": {
+            "name": "The Maritime Executive",
+            "url": "https://maritime-executive.com/article/uk-made-drone-boat-was-used-in-strike-on-russian-supply-ship"
+          },
+          "image": "https://maritime-executive.com/media/images/article/1792108128_6ad16660f23c4.jpg",
+          "video": null,
+          "region": "Black Sea",
+          "lat": 43.58,
+          "lng": 39.72,
+          "domain": "surface",
+          "severity": "medium",
+          "tags": [
+            "USV",
+            "one-way attack",
+            "Ukraine",
+            "Russia"
+          ],
+          "specs": [
+            {
+              "label": "Speed",
+              "value": "~55 kt"
+            },
+            {
+              "label": "Payload",
+              "value": "600 kg"
+            },
+            {
+              "label": "Range",
+              "value": "~650 nm"
+            }
+          ],
+          "id": "t1-2"
+        },
+        {
+          "date": "2026-10-18",
+          "title": "Six ships hit in 10 days by combined aerial and surface drone attacks / Western Black Sea",
+          "location": "Black Sea basin: Romanian territorial waters near Sulina and the Bulgarian EEZ",
+          "details": "Suspected Russian air and naval drones hit six merchant ships in 10 days: Alfa Watan (sank, 10 crew lost), HS Dignity (11 dead), Able, Chelsea-3, and the chemical tankers Wine Trader and Yara J (7 missing). Wine Trader and Yara J were hit on 14–15 Oct in or near Romanian territorial waters. Ambrey analysts describe 'double tap' attacks that pair aerial drones with surface drones often carrying up to half a tonne of explosives, and say the tempo has risen since July. More than 60 seafarers have died in the Black Sea since 2022, and Bulgaria and Romania are discussing Black Sea security with NATO.",
+          "summary": "Six ships in 10 days as 'double tap' aerial plus surface-drone attacks with half-tonne warheads reach NATO's shores.",
+          "source": {
+            "name": "The Guardian",
+            "url": "https://www.theguardian.com/business/2026/oct/18/drone-attacks-ships-black-sea-russia-ukraine-war"
+          },
+          "image": "https://i.guim.co.uk/img/media/e886f1a13a50a50476946b3452987388831e52f9/73_0_2249_1800/master/2249.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=e4b4403b6c83eb7a09d3eed721692921",
+          "video": null,
+          "region": "Black Sea",
+          "lat": 44.6,
+          "lng": 29.6,
+          "domain": "cross-domain",
+          "severity": "high",
+          "tags": [
+            "WBIED",
+            "double-tap",
+            "NATO",
+            "Romania",
+            "Bulgaria"
+          ],
+          "specs": [
+            {
+              "label": "Ships hit",
+              "value": "6 in 10 days"
+            },
+            {
+              "label": "Warhead",
+              "value": "up to ~500 kg"
+            },
+            {
+              "label": "Seafarer deaths",
+              "value": "60+ since 2022"
+            }
+          ],
+          "id": "t1-3"
+        }
+      ]
+    },
+    {
+      "key": "platforms",
+      "title": "Unmanned Maritime Systems Product News (Past 7 Days)",
+      "emptyNote": "No new unmanned maritime platforms were announced within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-13",
+          "title": "Devil Ray T-24 USV / MARTAC (Maritime Tactical Systems)",
+          "tech": "High-speed USV that can serve as a mothership for smaller USVs and third-party aerial and underwater drones, to be built in the US and in Taiwan.",
+          "details": "Taiwan's Coast Guard will acquire MARTAC USVs. The quantity, contract value and delivery schedule were not disclosed. Some hulls will be built in Edgewater, Florida and the rest in Taiwan by local partner Confucian, under a 2025 MoU with NCSIST. The craft is 8.4 m long with a 3 m beam, carries up to 816 kg, sprints above 50 kt and has a range of up to 600 nm in open water.",
+          "summary": "Taiwan's Coast Guard is buying US-built MARTAC USVs and will co-produce them locally with NCSIST partner Confucian.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/taiwan-devil-ray-t24-usv"
+          },
+          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fvy5bryp2%2FT24-idle-02-1-1.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "region": "East Asia",
+          "lat": 25.03,
+          "lng": 121.56,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "8.4 m"
+            },
+            {
+              "label": "Payload",
+              "value": "816 kg"
+            },
+            {
+              "label": "Speed",
+              "value": ">50 kt"
+            },
+            {
+              "label": "Range",
+              "value": "600 nm"
+            }
+          ],
+          "tags": [
+            "USV",
+            "Taiwan",
+            "Coast Guard",
+            "co-production",
+            "MARTAC"
+          ],
+          "id": "t2-1"
+        },
+        {
+          "date": "2026-10-13",
+          "title": "DANAE Armed USV Prototypes / SeaOwl, Orcas (SEAir-MBDA), Sirehna-Couach-Naval Group",
+          "tech": "French Defence Innovation Agency (AID) programme for armed port-protection and escort USVs, with a human operator deciding on weapon use.",
+          "details": "The AID and the French Navy picked three teams from seven systems trialled near Toulon on 19–23 January. SeaOwl offers an optionally crewed boat with a non-lethal turret. The Orcas group, led by SEAir, offers a hydrofoil 'flying USV' that can be embarked on a frigate. Sirehna, Couach and Naval Group offer a 9 m modular USV. The teams have 12 months to refine their designs, and a final selection is expected by the end of 2027.",
+          "summary": "France narrows its DANAE armed-USV competition to three teams, including a hydrofoil 'flying USV' and a 9 m Naval Group design.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/france-danae-armed-usv-prototypes"
+          },
+          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fgzb5m5sc%2F7e0858a1_6a44_42a4_a0e4_06caae9274c9.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "region": "Europe",
+          "lat": 43.12,
+          "lng": 5.93,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Teams",
+              "value": "3 of 7"
+            },
+            {
+              "label": "Sirehna USV",
+              "value": "9 m"
+            },
+            {
+              "label": "Refinement",
+              "value": "12 months"
+            }
+          ],
+          "tags": [
+            "USV",
+            "armed USV",
+            "France",
+            "Naval Group",
+            "MBDA",
+            "prototype"
+          ],
+          "id": "t2-2"
+        },
+        {
+          "date": "2026-10-13",
+          "title": "UMIS Mine Countermeasures Package / Exail",
+          "tech": "Unmanned mine countermeasures system of USVs, mine-identification ROVs and expendable mine disposal systems, run from host MCM vessels through Exail's C2 software.",
+          "details": "Exail has started production of the Indonesian Navy's UMIS package, which includes four USVs plus a towed sonar and an influence sweep. The package will be hosted on KRI Pulau Fani and KRI Pulau Fanildo. Each USV is 9.2 m long with twin diesel waterjets, carries up to 900 kg, reaches 32 kt and has up to 40 h of endurance. The contract runs over three years and includes training in France and Indonesia.",
+          "summary": "Exail starts building four mine-hunting USVs and an ROV toolkit for Indonesia's new Pulau Fani-class MCM ships.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/exail-begins-indonesian-mcm-production"
+          },
+          "image": "https://media.assettype.com/bairdmaritime%2F2025-06-24%2Ft1pzdkcp%2Fexail-inspector-90-usv-021200x663.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "region": "Southeast Asia",
+          "lat": -6.1,
+          "lng": 106.85,
+          "domain": "cross-domain",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "9.2 m"
+            },
+            {
+              "label": "Payload",
+              "value": "900 kg"
+            },
+            {
+              "label": "Speed",
+              "value": "32 kt"
+            },
+            {
+              "label": "Endurance",
+              "value": "40 h"
+            }
+          ],
+          "tags": [
+            "MCM",
+            "USV",
+            "ROV",
+            "Indonesia",
+            "Exail",
+            "production"
+          ],
+          "id": "t2-3"
+        },
+        {
+          "date": "2026-10-14",
+          "title": "Corsair USV / Saronic Technologies",
+          "tech": "Swarm-capable 7 m autonomous surface vessel for ISR, anti-surface warfare, one-way attack and search and rescue.",
+          "details": "The Hellenic Navy is trialling at least two Corsairs from HS Perseas and has sent the US a Letter of Request for at least 30. Corsair is 7 m long, carries up to 1,000 lb (about 454 kg) and has a range of more than 1,000 nm. The article reports that three Corsairs were used in a July 2026 strike on Bandar Abbas.",
+          "summary": "Greece trials Saronic's combat-proven Corsair and asks Washington for at least 30 of them.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/hellenic-navy-tests-saronics-corsair-usv-ahead-of-major-order/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Saronic-Corsair-USV-on-the-open-deck-of-Perseus.jpg",
+          "video": null,
+          "region": "Europe",
+          "lat": 38.0,
+          "lng": 23.58,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "7 m"
+            },
+            {
+              "label": "Payload",
+              "value": "454 kg"
+            },
+            {
+              "label": "Range",
+              "value": ">1,000 nm"
+            },
+            {
+              "label": "Order sought",
+              "value": "30+"
+            }
+          ],
+          "tags": [
+            "USV",
+            "Saronic",
+            "Greece",
+            "FMS",
+            "swarming"
+          ],
+          "id": "t2-4"
+        },
+        {
+          "date": "2026-10-14",
+          "title": "Pyrpolitis USV / Hellenic Navy",
+          "tech": "Greece's first fully home-built USV, developed in-house by naval officers and NCOs for ISR, surface attack and kamikaze strikes.",
+          "details": "The boat was unveiled at Skaramangas after six months of secret development, at the opening of a new unmanned-systems training centre. It is 5 m long with a top speed of 40 kt. Mass production and fleet induction are next. The same display featured the Kanaris 1/2 and MESE craft (1.8–6.5 m) and Italian Pluto Plus/Plutino underwater vehicles.",
+          "summary": "Greece's navy unveils Pyrpolitis, a 40-knot home-built strike USV built in six months, with mass production next.",
+          "source": {
+            "name": "Greek City Times",
+            "url": "https://greekcitytimes.com/2026/10/14/pyrpolitis-usv/"
+          },
+          "image": null,
+          "video": null,
+          "region": "Europe",
+          "lat": 37.99,
+          "lng": 23.55,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "5 m"
+            },
+            {
+              "label": "Speed",
+              "value": "40 kt"
+            },
+            {
+              "label": "Dev time",
+              "value": "6 months"
+            }
+          ],
+          "tags": [
+            "USV",
+            "kamikaze USV",
+            "Greece",
+            "indigenous",
+            "unveiling"
+          ],
+          "id": "t2-5"
+        },
+        {
+          "date": "2026-10-15",
+          "title": "Seahawk MUSV / Leidos (US Navy)",
+          "tech": "Self-navigating trimaran medium USV derived from Sea Hunter, now operating as an escort for a deployed carrier strike group.",
+          "details": "The US Navy confirmed that Seahawk is operating with the USS Theodore Roosevelt CSG, which left San Diego on 8 October. It is the first time a deployed CSG has been accompanied by a USV too large to stow aboard a ship. The prototype came from a 2017 Leidos contract and was delivered in 2021. In September it practised astern refuelling with USS Chafee, and its payload configuration for this deployment has not been released.",
+          "summary": "Leidos' Seahawk becomes the first large USV to deploy with a US carrier strike group.",
+          "source": {
+            "name": "The Maritime Executive",
+            "url": "https://maritime-executive.com/article/unmanned-vessel-deploys-with-carrier-strike-group-for-the-first-time"
+          },
+          "image": "https://maritime-executive.com/media/images/article/1792122287_6ad19daf73167.jpg",
+          "video": null,
+          "region": "Americas",
+          "lat": 32.7,
+          "lng": -117.16,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Hull",
+              "value": "Trimaran"
+            },
+            {
+              "label": "Delivered",
+              "value": "2021"
+            }
+          ],
+          "tags": [
+            "MUSV",
+            "Leidos",
+            "US Navy",
+            "carrier strike group",
+            "deployment"
+          ],
+          "id": "t2-6"
+        },
+        {
+          "date": "2026-10-16",
+          "title": "LUUV Demonstrator / Saab, FMV & Swedish Armed Forces",
+          "tech": "Large uncrewed underwater vehicle demonstrator running Saab's Autonomous Ocean Core control software and drawing on Swedish submarine design and sensor-integration expertise, meant to work alongside crewed submarines.",
+          "details": "Sweden's FMV and Armed Forces built and launched the LUUV demonstrator in under a year with Saab, and it has completed sea trials, ending phase one. Phase two will develop more advanced capabilities in software, sensors and autonomy. The results will inform Swedish decisions on buying autonomous underwater systems. No dimensions or endurance figures were released.",
+          "summary": "Sweden's Saab-powered large drone sub goes from concept to completed sea trials in under a year.",
+          "source": {
+            "name": "Naval Today",
+            "url": "https://www.navaltoday.com/2026/10/16/large-uncrewed-underwater-vehicle-launched-in-sweden"
+          },
+          "image": "https://navaltoday.com/api/media/file/a535b8ae17e18e54_org.jpg?prefix=media",
+          "video": null,
+          "region": "Europe",
+          "lat": 56.16,
+          "lng": 15.59,
+          "domain": "subsurface",
+          "specs": [
+            {
+              "label": "Build time",
+              "value": "<1 year"
+            }
+          ],
+          "tags": [
+            "LUUV",
+            "Saab",
+            "Sweden",
+            "FMV",
+            "sea trials"
+          ],
+          "id": "t2-7"
+        },
+        {
+          "date": "2026-10-18",
+          "title": "Second Possible UUV Mothership / PLAN (likely COMEC, Guangzhou)",
+          "tech": "PLAN auxiliary ship with stern lifting masts that may raise a cradle to launch and recover very large UUVs.",
+          "details": "Weibo footage shows a ship of about 150 m under tow on the Pearl River near Panyu. The footage has not been authenticated. The ship is smaller than the roughly 200 m Shanghai-built mothership, whose cradle can carry payloads up to 50 m. It has six stern masts in two rows, against twelve on the Shanghai ship. Satellite imagery suggests China is evaluating 35–45 m UUV designs, and COMEC is the likely builder.",
+          "summary": "A second ~150 m Chinese ship built to launch and recover giant UUVs turns up in Guangzhou.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/second-possible-chinese-uuv-mothership-appears-in-guangzhou/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/HU5Z86PaUAA5-Da.jpg",
+          "video": null,
+          "region": "East Asia",
+          "lat": 22.94,
+          "lng": 113.5,
+          "domain": "subsurface",
+          "specs": [
+            {
+              "label": "Length (est.)",
+              "value": "~150 m"
+            },
+            {
+              "label": "Lift masts",
+              "value": "6"
+            },
+            {
+              "label": "Target UUVs",
+              "value": "35–45 m"
+            }
+          ],
+          "tags": [
+            "China",
+            "PLAN",
+            "XLUUV",
+            "mothership",
+            "OSINT"
+          ],
+          "id": "t2-8"
+        }
+      ]
+    },
+    {
+      "key": "tech",
+      "title": "Product & Technology of Interest for Maritime Applications (Past 7 Days)",
+      "emptyNote": "No qualifying auxiliary products or technologies were published within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-13",
+          "title": "Ranger Torpedo-Tube-Launched USV / FLANQ & Gabler",
+          "tech": "A sensor USV launched from a submarine's 21-inch torpedo tube; it rises to the surface, unfolds its keel and sensor mast, and runs a vehicle- and sensor-agnostic autonomy stack with edge computing.",
+          "details": "Ranger is 4.5 m long with a tubular hull just under 21 in (530 mm) in diameter, rated to 300 m depth, so it fits a standard torpedo tube. It has an electric drivetrain, a configurable payload bay, and folding keel and mast for real-time surveillance and reconnaissance. FLANQ handles autonomy and payload integration; Gabler handles system integration, electronics and commercialisation.",
+          "summary": "FLANQ and Gabler's Ranger leaves a submarine's torpedo tube, surfaces and raises a sensor mast for covert ISR.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/ranger-torpedo-tube-usv-review"
+          },
+          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fsf2e0cep%2FRanger-Gabler-main1.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "region": "Europe",
+          "lat": 53.87,
+          "lng": 10.69,
+          "domain": "cross-domain",
+          "application": "Launch & Recovery",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "4.5 m"
+            },
+            {
+              "label": "Tube",
+              "value": "21 in / 530 mm"
+            },
+            {
+              "label": "Depth rating",
+              "value": "300 m"
+            },
+            {
+              "label": "Drive",
+              "value": "Electric"
+            }
+          ],
+          "tags": [
+            "submarine-launched",
+            "ISR",
+            "edge autonomy"
+          ],
+          "id": "t3-1"
+        },
+        {
+          "date": "2026-10-14",
+          "title": "Machine Vision for T38 Devil Ray USVs / SEA.AI & MARTAC",
+          "tech": "SEA.AI electro-optical and thermal machine vision on MARTAC USVs classifies contacts in real time at the sensor, picking up dark, spoofed or unlit craft that radar and AIS miss.",
+          "details": "The integration outputs object type, heading and proximity for ISR, security and patrol missions without a person reviewing video. MARTAC's T38 Devil Ray recently completed an 8-day fully autonomous mission off California, more than 400 nm offshore in Sea State 5. SEA.AI has been collecting sea data since 2018 and has more than 1,300 systems in service.",
+          "summary": "SEA.AI's thermal/EO machine vision gives MARTAC USVs real-time detection of dark and unlit vessels that radar and AIS miss.",
+          "source": {
+            "name": "SEA.AI",
+            "url": "https://www.sea.ai/martac-partnership/"
+          },
+          "image": "https://www.sea.ai/uploads/2026/10/Martac_socialpreview.png",
+          "video": null,
+          "region": "Americas",
+          "lat": 28.08,
+          "lng": -80.61,
+          "domain": "surface",
+          "application": "Surveillance",
+          "specs": [
+            {
+              "label": "Sensors",
+              "value": "EO + thermal"
+            },
+            {
+              "label": "Ref. mission",
+              "value": "8 days · 400+ nm"
+            },
+            {
+              "label": "Fielded",
+              "value": "1,300+ systems"
+            }
+          ],
+          "tags": [
+            "machine vision",
+            "target classification",
+            "dark vessels"
+          ],
+          "id": "t3-2"
+        },
+        {
+          "date": "2026-10-15",
+          "title": "V-BAT Shipborne VTOL UAS for Taiwan Coast Guard / Shield AI & AIDC",
+          "tech": "A ducted-fan, single-engine VTOL Group 3 UAS that launches and lands on ship decks without assistance, giving persistent maritime domain awareness.",
+          "details": "Shield AI and partner AIDC delivered the first of 12 V-BATs to Taiwan's Coast Guard Administration, which selected it in July 2026 for its Shipborne UAV program. V-BAT runs on heavy fuel, has more than 12 hours of endurance, and its enclosed rotor allows launch and recovery from decks with no extra equipment. It will fly surveillance, coastal patrol and law enforcement missions.",
+          "summary": "Taiwan's Coast Guard gets its first of 12 ship-launched V-BAT VTOL drones, with 12+ h endurance for maritime patrol.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/shield-ai-delivers-first-v-bat-to-taiwan-coast-guard/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Shield-AI-Delivers-First-V-BAT-to-Taiwan-Coast-Guard.jpg",
+          "video": null,
+          "region": "East Asia",
+          "lat": 24.2,
+          "lng": 120.6,
+          "domain": "cross-domain",
+          "application": "Surveillance",
+          "specs": [
+            {
+              "label": "Class",
+              "value": "Group 3 VTOL"
+            },
+            {
+              "label": "Endurance",
+              "value": ">12 h"
+            },
+            {
+              "label": "Fuel",
+              "value": "Heavy fuel"
+            },
+            {
+              "label": "Ordered",
+              "value": "12 units"
+            }
+          ],
+          "tags": [
+            "VTOL",
+            "shipborne UAS",
+            "coast guard"
+          ],
+          "id": "t3-3"
+        },
+        {
+          "date": "2026-10-17",
+          "title": "INS Samarthak Multi-Purpose Vessel & Uncrewed Mothership / Indian Navy & L&T",
+          "tech": "A naval multi-purpose vessel with a flight deck, stern crane and dynamic positioning, built to be a mothership for uncrewed aerial, surface and subsurface systems, including MCM USVs and UUVs.",
+          "details": "INS Samarthak (A 10) was commissioned on 16 October 2026 at Naval Base Karwar. It is the first of two MPVs ordered in March 2022 for Rs 887 crore and has more than 75% indigenous content. The ship is about 107 m long, displaces about 3,700 t, reaches 15 knots and has an endurance of over 4,500 nm at 10 knots. It can also launch and recover aerial and subsurface targets.",
+          "summary": "India commissions INS Samarthak, a 3,700 t multi-purpose vessel that serves as a mothership for MCM USVs, UUVs and drones.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/indian-navy-first-multi-purpose-vessel-ins-samarthak/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Samarthak.png",
+          "video": null,
+          "region": "South Asia",
+          "lat": 14.81,
+          "lng": 74.12,
+          "domain": "cross-domain",
+          "application": "Launch & Recovery",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "~107 m"
+            },
+            {
+              "label": "Displacement",
+              "value": "~3,700 t"
+            },
+            {
+              "label": "Endurance",
+              "value": "4,500+ nm"
+            },
+            {
+              "label": "Indigenous",
+              "value": ">75%"
+            }
+          ],
+          "tags": [
+            "mothership",
+            "MCM",
+            "India"
+          ],
+          "id": "t3-4"
+        }
+      ]
+    },
+    {
+      "key": "comms",
+      "title": "Maritime Comms Products & Technologies (Past 7 Days)",
+      "emptyNote": "No qualifying maritime communications products were published within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-12",
+          "title": "Smart Acoustic Modems Natively Integrated on LAUV / Subnero & OceanScan MST",
+          "tech": "Subnero's UnetStack acoustic network stack is linked to the LAUV's Dune software through a small open-source bridge that runs on the modem itself.",
+          "details": "The Acoustic Research Laboratory at NUS integrated Subnero modems natively into OceanScan MST's Light AUV. Neither the modem, the vehicle nor either side's software needed modification. The vehicle side needed only a few lines of configuration, and full integration and validation took less than a week. ARL has run the vehicle and its acoustic link for more than a year in Singapore waters, which are noisy with snapping shrimp, strong currents and ship bubble clouds, and reports reliable command and control and acoustic ranging.",
+          "summary": "Subnero acoustic modems now plug natively into OceanScan's LAUV, proven over a year in Singapore's noisy waters.",
+          "source": {
+            "name": "Hydro International",
+            "url": "https://www.hydro-international.com/news/oceanscan-msts-lauv-adds-native-support-for-subnero-acoustic-modems"
+          },
+          "image": "https://cdn.hydro-international.com/DR3WML9R.jpg",
+          "video": null,
+          "region": "Southeast Asia",
+          "lat": 1.2966,
+          "lng": 103.7764,
+          "domain": "subsurface",
+          "medium": "Acoustic",
+          "specs": [
+            {
+              "label": "Integration",
+              "value": "< 1 week"
+            },
+            {
+              "label": "Field ops",
+              "value": "1+ yr, Singapore"
+            },
+            {
+              "label": "Bridge",
+              "value": "Open source"
+            }
+          ],
+          "tags": [
+            "acoustic modem",
+            "AUV",
+            "UnetStack",
+            "Singapore"
+          ],
+          "id": "t4-1"
+        },
+        {
+          "date": "2026-10-13",
+          "title": "Intellian C700 In-Place Iridium GMDSS Upgrade / Marlink, Intellian & Iridium",
+          "tech": "An Intellian C700 Iridium Certus terminal already installed on the ship is upgraded in place to a commissioned Iridium GMDSS system, with no new antenna or cabling.",
+          "details": "Marlink did the upgrade on Fugro's offshore vessel Fugro Revelation, keeping the existing above-deck and below-deck units, antenna and cabling. Only a Safety Display Terminal, a handset, approved bridge installation parts and a GMDSS SIM were added. The system provides Distress Alert, Safety Voice and Maritime Safety Information via Iridium SafetyCast. It also keeps 3 simultaneous non-GMDSS voice lines plus commercial data, and supports LRIT and SSAS once activated.",
+          "summary": "Marlink upgrades an installed Intellian C700 to full Iridium GMDSS without swapping terminals, a world first.",
+          "source": {
+            "name": "MarineLink",
+            "url": "https://www.marinelink.com/news/marlink-delivers-iridium-safety-543635"
+          },
+          "image": "https://images.marinelink.com/images/maritime/w800/credit-marlink-174281.jpg",
+          "video": null,
+          "region": "Europe",
+          "lat": 52.0,
+          "lng": 4.4,
+          "domain": "surface",
+          "medium": "Satellite",
+          "specs": [
+            {
+              "label": "Terminal",
+              "value": "Intellian C700"
+            },
+            {
+              "label": "Voice lines",
+              "value": "3 simultaneous"
+            },
+            {
+              "label": "Safety",
+              "value": "GMDSS · LRIT · SSAS"
+            }
+          ],
+          "tags": [
+            "Iridium",
+            "GMDSS",
+            "L-band",
+            "retrofit"
+          ],
+          "id": "t4-2"
+        },
+        {
+          "date": "2026-10-14",
+          "title": "Hydra MAX Multi-Orbit Ka-Band Terminals / ALL.SPACE & Viasat Government",
+          "tech": "A lens-array digital beamforming terminal holds simultaneous links across commercial and military Ka-band networks in several orbits, and policy-based routing moves traffic between them as performance changes.",
+          "details": "Viasat Government ordered multiple Hydra MAX terminals for government and defence users who need communications on the move on land and at sea. The terminals operate on Viasat's global NextGen Ka-band network, including Mil-Ka. Each beam offers up to 500 MHz of instantaneous bandwidth, with up to 1 GHz aggregate in Ka-band, across HEO, GEO, MEO and emerging LEO constellations. Order quantity and value were not disclosed.",
+          "summary": "Viasat Government orders ALL.SPACE Hydra MAX multi-orbit Ka-band terminals for land and maritime comms-on-the-move.",
+          "source": {
+            "name": "Space & Defense",
+            "url": "https://spaceanddefense.io/all-space-terminals-selected-by-viasat-for-multi-orbit-satcom-requirements/"
+          },
+          "image": "https://spaceanddefense.io/wp-content/uploads/2026/10/ALL.SPACE_.jpg",
+          "video": null,
+          "region": "Global",
+          "lat": 51.51,
+          "lng": -0.13,
+          "domain": "cross-domain",
+          "medium": "Satellite",
+          "specs": [
+            {
+              "label": "Band",
+              "value": "Ka / Mil-Ka"
+            },
+            {
+              "label": "Per beam",
+              "value": "500 MHz"
+            },
+            {
+              "label": "Aggregate",
+              "value": "1 GHz"
+            },
+            {
+              "label": "Orbits",
+              "value": "HEO·GEO·MEO·LEO"
+            }
+          ],
+          "tags": [
+            "multi-orbit",
+            "Ka-band",
+            "COTM",
+            "beamforming"
+          ],
+          "id": "t4-3"
+        },
+        {
+          "date": "2026-10-17",
+          "title": "Penang Port Private 5G Network / Altel Communications & Penang Port",
+          "tech": "A standalone private 5G network on dedicated spectrum, with its 5G core and port applications hosted entirely on port premises, separate from public mobile networks.",
+          "details": "Altel deployed the network across Penang Port's North Butterworth Container Terminal and Butterworth Deep Water Wharves, covering about 2.5 sq km. It is Malaysia's first port network of this kind. It supports applications needing high availability and latency below 15 ms. Planned uses include autonomous prime movers, remote-controlled cranes and gantries, AI video analytics and intelligent surveillance.",
+          "summary": "Penang Port goes live with Malaysia's first dedicated-spectrum private 5G port network: 2.5 sq km and sub-15 ms latency.",
+          "source": {
+            "name": "New Straits Times (Bernama)",
+            "url": "https://www.nst.com.my/news/nation/2026/10/1557479/malaysia-explores-5g-coverage-beyond-populated-areas"
+          },
+          "image": "https://storage.googleapis.com/origin-awsassets.nst.com.my/images/listing-featured/7135B8DD0C1857D0296EBE58EDFB4DE3_data_0_1.jpg",
+          "video": null,
+          "region": "Southeast Asia",
+          "lat": 5.41,
+          "lng": 100.36,
+          "domain": "surface",
+          "medium": "Cellular/5G",
+          "specs": [
+            {
+              "label": "Coverage",
+              "value": "~2.5 sq km"
+            },
+            {
+              "label": "Latency",
+              "value": "< 15 ms"
+            },
+            {
+              "label": "Core",
+              "value": "On-premises"
+            }
+          ],
+          "tags": [
+            "private 5G",
+            "smart port",
+            "Malaysia"
+          ],
+          "id": "t4-4"
+        }
+      ]
+    }
+  ]
+}

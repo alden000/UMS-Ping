@@ -1,0 +1,13 @@
+name = "ping-feedback"
+main = "feedback-worker.js"
+compatibility_date = "2026-01-01"
+
+# Create the namespace with:  npx wrangler kv namespace create PING_KV
+# then paste the id below.
+[[kv_namespaces]]
+binding = "PING_KV"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+# Your GitHub Pages origin, e.g. "https://alden000.github.io"
+ALLOWED_ORIGIN = "*"

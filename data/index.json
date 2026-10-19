@@ -1,0 +1,20 @@
+{
+  "latest": "2026-10-19",
+  "issues": [
+    {
+      "id": "2026-10-19",
+      "number": 1,
+      "window": {
+        "start": "2026-10-12",
+        "end": "2026-10-19"
+      },
+      "headline": "Sea drones go to war, and to sea with the fleet.",
+      "counts": {
+        "threats": 3,
+        "platforms": 8,
+        "tech": 4,
+        "comms": 4
+      }
+    }
+  ]
+}
