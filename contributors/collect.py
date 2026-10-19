@@ -21,6 +21,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -43,28 +44,72 @@ def edition_window(now=None):
     return monday - dt.timedelta(days=7), monday
 
 
+class ApiError(Exception):
+    pass
+
+
 def post_json(url, body, headers, timeout=TIMEOUT):
+    """POST JSON and return the parsed reply. HTTP errors carry the API's own message (never the key)."""
     req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST",
                                  headers={"content-type": "application/json", "user-agent": UA, **headers})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read().decode())
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            return json.loads(r.read().decode())
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode(errors="replace")
+        try:
+            err = json.loads(detail).get("error", detail)
+            detail = err.get("message", err) if isinstance(err, dict) else err
+        except (ValueError, AttributeError):
+            pass
+        raise ApiError(f"HTTP {e.code}: {str(detail)[:300]}") from None
+
+
+def first_working(name, models, call):
+    """Try each model in turn; on a rate limit, wait once and retry the same model."""
+    errors = []
+    for model in models:
+        for attempt in (1, 2):
+            try:
+                text = call(model)
+                print(f"  {name}: answered by {model}")
+                return text
+            except ApiError as e:
+                errors.append(f"{model}: {e}")
+                if "HTTP 429" in str(e) and attempt == 1:
+                    time.sleep(30)
+                    continue
+                break
+    raise ApiError("; ".join(errors))
+
+
+def models_from(env, defaults):
+    return [m.strip() for m in os.environ.get(env, "").split(",") if m.strip()] or defaults
 
 
 def ask_gemini(prompt):
-    model = os.environ.get("GEMINI_MODEL", "gemini-flash-latest")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-    body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}], "tools": [{"google_search": {}}]}
-    data = post_json(url, body, {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
-    parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
-    return "".join(p.get("text", "") for p in parts)
+    # Free-tier-friendly models first; GEMINI_MODEL (comma-separated) overrides the list.
+    models = models_from("GEMINI_MODEL", ["gemini-2.5-flash", "gemini-2.5-flash-lite", "gemini-flash-latest"])
+
+    def call(model):
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+        body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}], "tools": [{"google_search": {}}]}
+        data = post_json(url, body, {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+        parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
+        return "".join(p.get("text", "") for p in parts)
+    return first_working("gemini", models, call)
 
 
 def ask_groq(prompt):
-    body = {"model": os.environ.get("GROQ_MODEL", "groq/compound"),
-            "messages": [{"role": "user", "content": prompt}]}
-    data = post_json("https://api.groq.com/openai/v1/chat/completions", body,
-                     {"authorization": "Bearer " + os.environ["GROQ_API_KEY"]})
-    return data["choices"][0]["message"]["content"]
+    # Groq's agentic "compound" systems have built-in web search; GROQ_MODEL (comma-separated) overrides.
+    models = models_from("GROQ_MODEL", ["groq/compound", "groq/compound-mini", "compound-beta", "compound-beta-mini"])
+
+    def call(model):
+        body = {"model": model, "messages": [{"role": "user", "content": prompt}]}
+        data = post_json("https://api.groq.com/openai/v1/chat/completions", body,
+                         {"authorization": "Bearer " + os.environ["GROQ_API_KEY"]})
+        return data["choices"][0]["message"]["content"]
+    return first_working("groq", models, call)
 
 
 PROVIDERS = {"gemini": ("GEMINI_API_KEY", ask_gemini), "groq": ("GROQ_API_KEY", ask_groq)}
