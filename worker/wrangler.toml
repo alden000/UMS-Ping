@@ -5,8 +5,8 @@ compatibility_date = "2026-01-01"
 # KV namespace "ping-feedback-PING_KV" (already created).
 [[kv_namespaces]]
 binding = "PING_KV"
-id = "3bdac746255d472f9c9a6597d96fd154"
+id = "802bdefbe5b342c3b8f0a13a3a0bb3ed"
 
 [vars]
-# Site origins allowed to send feedback (comma-separated). GitHub Pages redirects to the custom domain.
-ALLOWED_ORIGIN = "https://app.wwweeeiii.com,https://alden000.github.io"
+# Site origin allowed to send feedback (comma-separate to allow several).
+ALLOWED_ORIGIN = "https://raus-ums.github.io"

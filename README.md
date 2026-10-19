@@ -26,7 +26,7 @@ python3 -m http.server 8000   # then open http://localhost:8000
 
 ## Publish with GitHub Pages
 
-Settings → Pages → *Deploy from a branch* → `main` / `(root)`. The site is then served at `https://app.wwweeeiii.com/UMS-Ping/` (the account's custom Pages domain).
+Settings → Pages → *Deploy from a branch* → `main` / `(root)`. The site is then served at `https://raus-ums.github.io/UMS-Ping/`.
 
 ## Reader feedback
 

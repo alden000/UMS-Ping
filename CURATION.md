@@ -12,7 +12,7 @@ Monday at about 08:00 Singapore time (SGT). A fresh agent session follows these 
 
 ## 1. Set up
 
-1. Get the repo `alden000/UMS-Ping` with push access. If it is not already in the session, attach it with `add_repo` and clone it.
+1. Get the repo `raus-ums/UMS-Ping` with push access. If it is not already in the session, attach it with `add_repo` and clone it.
 2. `git fetch origin main && git checkout -B main origin/main`
 3. Work out the dates in SGT. `END` is today, the Monday of the run (`YYYY-MM-DD`), and `START` is `END − 7 days`. The issue id is `END`.
 4. Read `data/index.json`. The new issue's `number` is the latest issue's number + 1. If an issue with id `END` already exists, update it instead of creating a duplicate.
@@ -120,5 +120,5 @@ and confirm there are no console errors.
 ## 7. Deliver
 
 Finish with a short summary: the number of entries per table, the regional status, and the site URL
-`https://app.wwweeeiii.com/UMS-Ping/#/<END>`. After that, paste the **complete** contents of `issues/<END>/email.html` in a single
+`https://raus-ums.github.io/UMS-Ping/#/<END>`. After that, paste the **complete** contents of `issues/<END>/email.html` in a single
 ```html code block.
