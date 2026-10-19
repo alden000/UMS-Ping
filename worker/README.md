@@ -1,0 +1,20 @@
+# Ping feedback service
+
+The site works without this service: votes and ratings are then kept in each reader's own browser.
+To collect feedback from **all** readers (so the weekly curation can learn from it), deploy this Worker once.
+It runs on Cloudflare's free tier.
+
+```bash
+cd worker
+npx wrangler login
+npx wrangler kv namespace create PING_KV        # copy the id into wrangler.toml
+npx wrangler secret put ADMIN_TOKEN             # any long random string, used to read free-text notes
+# Optionally set ALLOWED_ORIGIN in wrangler.toml to your Pages origin.
+npx wrangler deploy
+```
+
+Then put the Worker URL in `assets/config.js` (`feedbackEndpoint`) and push.
+
+What is stored: an anonymous random client id, per-entry 👍/👎, "why" reasons, the 1–5 issue rating,
+the "more of" topics and the optional note. No IP addresses, names or emails.
+`GET /summary` exposes only aggregate counts; free-text notes need the admin token.
