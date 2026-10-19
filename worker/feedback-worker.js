@@ -6,6 +6,10 @@
  *   GET  /summary            aggregate tallies for every issue (used by weekly curation)
  *   GET  /notes?issue=ID     free-text notes (requires  Authorization: Bearer <ADMIN_TOKEN>)
  *
+ *   POST /submit             candidate stories from a contributing AI (requires  Authorization: Bearer <contributor key>)
+ *   GET  /contributions?edition=YYYY-MM-DD   submissions queued for an edition (requires ADMIN_TOKEN)
+ *
+ * Contributor keys are stored hashed in KV as  k:<sha256 hex of key>  →  {"source": "gemini"}.
  * Bindings: KV namespace PING_KV; vars ALLOWED_ORIGIN (comma-separated origins); secret ADMIN_TOKEN.
  * Only an anonymous random client id is stored. No IPs, names or emails.
  */
@@ -45,6 +49,21 @@ export default {
         const notes = [];
         for (const k of list.keys) notes.push(await env.PING_KV.get(k.name, "json"));
         return json(notes);
+      }
+      if (req.method === "POST" && url.pathname === "/submit") {
+        const source = await contributorFor(req, env);
+        if (!source) return json({ error: "unauthorized" }, 401);
+        if (Number(req.headers.get("content-length") || 0) > MAX_BODY) return json({ error: "payload too large" }, 413);
+        return json(await handleSubmit(source, await req.json(), env));
+      }
+      if (req.method === "GET" && url.pathname === "/contributions") {
+        if (!env.ADMIN_TOKEN || req.headers.get("authorization") !== "Bearer " + env.ADMIN_TOKEN) return json({ error: "unauthorized" }, 401);
+        const edition = url.searchParams.get("edition") || editionFor(new Date());
+        if (!ISSUE.test(edition)) return json({ error: "bad edition" }, 400);
+        const list = await env.PING_KV.list({ prefix: "s:" + edition + ":" });
+        const subs = [];
+        for (const k of list.keys) subs.push(await env.PING_KV.get(k.name, "json"));
+        return json({ edition, submissions: subs });
       }
       return json({ error: "not found" }, 404);
     } catch (e) {
@@ -96,4 +115,88 @@ async function handleEvent(ev, env) {
   agg.updated = new Date().toISOString();
   await env.PING_KV.put("a:" + ev.issue, JSON.stringify(agg));
   return { ok: true };
+}
+
+/* ---------- Contributions from other AIs ---------- */
+const MAX_BODY = 200_000;
+const MAX_ENTRIES = 40;
+const MAX_SUBMISSIONS_PER_WEEK = 10;
+const SECTIONS = ["threats", "platforms", "tech", "comms"];
+const DOMAINS = ["surface", "subsurface", "cross-domain"];
+
+async function sha256(text) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function contributorFor(req, env) {
+  const m = (req.headers.get("authorization") || "").match(/^Bearer\s+(\S{20,200})$/);
+  if (!m) return null;
+  const rec = await env.PING_KV.get("k:" + (await sha256(m[1])), "json");
+  return rec && rec.source ? rec.source : null;
+}
+
+// The Monday edition a submission feeds: today if it is Monday before 07:00 SGT, else the next Monday.
+function editionFor(now) {
+  const sgt = new Date(now.getTime() + 8 * 3600e3);
+  const dow = sgt.getUTCDay();
+  let add = (8 - dow) % 7;
+  if (dow === 1 && sgt.getUTCHours() >= 7) add = 7;
+  return new Date(sgt.getTime() + add * 864e5).toISOString().slice(0, 10);
+}
+
+const str = (v, max) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+function httpsUrl(v) {
+  try { const u = new URL(String(v)); return u.protocol === "https:" && String(v).length <= 1000 ? u.toString() : ""; } catch { return ""; }
+}
+
+// Keep only known fields, bounded in size. Everything is still re-verified by the curator.
+function cleanEntry(e) {
+  if (!e || typeof e !== "object") return { error: "not an object" };
+  const section = str(e.section, 20);
+  if (!SECTIONS.includes(section)) return { error: "section must be one of " + SECTIONS.join("|") };
+  const date = str(e.date, 10);
+  if (!ISSUE.test(date)) return { error: "date must be YYYY-MM-DD" };
+  const url = httpsUrl(e.source && e.source.url);
+  if (!url) return { error: "source.url must be an https URL" };
+  const title = str(e.title, 200), details = str(e.details, 1500);
+  if (!title || !details) return { error: "title and details are required" };
+  const out = {
+    section, date, title, details,
+    summary: str(e.summary, 300),
+    source: { name: str(e.source.name, 100) || new URL(url).hostname, url },
+  };
+  if (section === "threats") out.location = str(e.location, 400); else out.tech = str(e.tech, 400);
+  const img = httpsUrl(e.image), vid = httpsUrl(e.video);
+  if (img) out.image = img;
+  if (vid) out.video = vid;
+  if (e.region) out.region = str(e.region, 40);
+  if (Number.isFinite(e.lat) && Number.isFinite(e.lng) && Math.abs(e.lat) <= 90 && Math.abs(e.lng) <= 180) { out.lat = e.lat; out.lng = e.lng; }
+  if (DOMAINS.includes(e.domain)) out.domain = e.domain;
+  if (Array.isArray(e.specs)) out.specs = e.specs.slice(0, 6).map((x) => ({ label: str(x && x.label, 40), value: str(x && x.value, 40) })).filter((x) => x.label && x.value);
+  if (Array.isArray(e.tags)) out.tags = e.tags.slice(0, 10).map((t) => str(t, 30)).filter(Boolean);
+  return { entry: out };
+}
+
+async function handleSubmit(source, body, env) {
+  const edition = editionFor(new Date());
+  const countKey = `q:${edition}:${source}`;
+  const count = Number(await env.PING_KV.get(countKey)) || 0;
+  if (count >= MAX_SUBMISSIONS_PER_WEEK) return { ok: false, error: "weekly submission limit reached", edition };
+  const raw = Array.isArray(body && body.entries) ? body.entries : [];
+  if (!raw.length) return { ok: false, error: "entries must be a non-empty array", edition };
+  const accepted = [], rejected = [];
+  raw.slice(0, MAX_ENTRIES).forEach((e, index) => {
+    const r = cleanEntry(e);
+    if (r.error) rejected.push({ index, error: r.error }); else accepted.push(r.entry);
+  });
+  if (raw.length > MAX_ENTRIES) rejected.push({ index: MAX_ENTRIES, error: `only the first ${MAX_ENTRIES} entries are read` });
+  if (accepted.length) {
+    const ts = new Date().toISOString();
+    await env.PING_KV.put(`s:${edition}:${source}:${Date.now()}`,
+      JSON.stringify({ source, received: ts, edition, entries: accepted }),
+      { expirationTtl: 60 * 60 * 24 * 60 });
+    await env.PING_KV.put(countKey, String(count + 1), { expirationTtl: 60 * 60 * 24 * 21 });
+  }
+  return { ok: accepted.length > 0, source, edition, accepted: accepted.length, rejected };
 }

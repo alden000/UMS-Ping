@@ -359,6 +359,13 @@ button { font: inherit; color: inherit; }
 .kicker { display: flex; flex-wrap: wrap; gap: 6px 12px; font: 500 11px/1 var(--f-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
 .kicker .sec { color: var(--c); display: inline-flex; gap: 6px; align-items: center; }
 .kicker .sec::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+.kicker .via { color: var(--ink-2); border: 1px solid var(--line-2); border-radius: 999px; padding: 2px 7px; margin: -3px 0; }
+.contrib { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line-2); }
+.contrib h4 { font: 600 11px/1 var(--f-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 10px; }
+.contrib ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; font-size: 13px; color: var(--ink-2); }
+.contrib li { display: flex; gap: 8px; align-items: baseline; }
+.contrib li b { color: var(--ink); font-family: var(--f-display); margin-left: auto; }
+.contrib li small { color: var(--ink-3); font-size: 11.5px; }
 .card h3 { font: 700 21px/1.2 var(--f-display); letter-spacing: -.01em; margin: 0; }
 .card .vendor { font-size: 13.5px; color: var(--ink-2); margin: -4px 0 0; }
 .card .meta { font-size: 13px; color: var(--ink-2); margin: 0; padding: 10px 12px; border-radius: 10px; background: var(--surface-2); border-left: 2px solid var(--c); }

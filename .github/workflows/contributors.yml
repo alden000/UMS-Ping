@@ -1,0 +1,22 @@
+name: Collect AI contributions
+# Sunday ~21:17 SGT, ahead of the Monday 07:50 SGT curation run. Can also be run by hand.
+on:
+  schedule:
+    - cron: "17 13 * * 0"
+  workflow_dispatch:
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Ask contributing AIs and submit to the Ping inbox
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PING_SUBMIT_KEY_GEMINI: ${{ secrets.PING_SUBMIT_KEY_GEMINI }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          PING_SUBMIT_KEY_GROQ: ${{ secrets.PING_SUBMIT_KEY_GROQ }}
+        run: python3 contributors/collect.py
