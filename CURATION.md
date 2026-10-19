@@ -120,5 +120,5 @@ and confirm there are no console errors.
 ## 7. Deliver
 
 Finish with a short summary: the number of entries per table, the regional status, and the site URL
-`https://alden000.github.io/UMS-Ping/#/<END>`. After that, paste the **complete** contents of `issues/<END>/email.html` in a single
+`https://app.wwweeeiii.com/UMS-Ping/#/<END>`. After that, paste the **complete** contents of `issues/<END>/email.html` in a single
 ```html code block.

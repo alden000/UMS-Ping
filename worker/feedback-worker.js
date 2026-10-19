@@ -6,7 +6,7 @@
  *   GET  /summary            aggregate tallies for every issue (used by weekly curation)
  *   GET  /notes?issue=ID     free-text notes (requires  Authorization: Bearer <ADMIN_TOKEN>)
  *
- * Bindings: KV namespace PING_KV; vars ALLOWED_ORIGIN (e.g. https://alden000.github.io); secret ADMIN_TOKEN.
+ * Bindings: KV namespace PING_KV; vars ALLOWED_ORIGIN (comma-separated origins); secret ADMIN_TOKEN.
  * Only an anonymous random client id is stored. No IPs, names or emails.
  */
 const ISSUE = /^\d{4}-\d{2}-\d{2}$/;
@@ -15,8 +15,11 @@ const CLIENT = /^[A-Za-z0-9]{8,40}$/;
 
 export default {
   async fetch(req, env) {
+    // ALLOWED_ORIGIN may list several comma-separated origins; echo back the one that matches.
+    const allowed = (env.ALLOWED_ORIGIN || "*").split(",").map((o) => o.trim());
+    const origin = req.headers.get("origin") || "";
     const cors = {
-      "access-control-allow-origin": env.ALLOWED_ORIGIN || "*",
+      "access-control-allow-origin": allowed.includes("*") ? "*" : allowed.includes(origin) ? origin : allowed[0],
       "access-control-allow-methods": "GET,POST,OPTIONS",
       "access-control-allow-headers": "content-type,authorization",
       "vary": "origin",
