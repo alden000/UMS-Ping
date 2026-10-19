@@ -270,12 +270,14 @@
     const extra = e.application || e.medium || (e.severity ? "Severity: " + e.severity : "");
     return `
     <article class="card rv" id="${esc(e.id)}" data-eid="${esc(e.id)}" style="--c:${sec.color};--d:${(i % 3) * 0.07}s" aria-labelledby="h-${esc(e.id)}">
-      <button type="button" class="media" data-media="${esc(e.id)}" aria-label="${vid ? "Play video" : "Enlarge image"}: ${esc(t)}">
+      ${vid
+        ? `<button type="button" class="media" data-media="${esc(e.id)}" aria-label="Play video: ${esc(t)}">`
+        : `<a class="media" href="${esc(e.source.url)}" target="_blank" rel="noopener noreferrer" aria-label="Read the article on ${esc(e.source.name)}: ${esc(t)}">`}
         ${media(e, sec)}
         <span class="date">${esc(long(e.date))}</span>
-        ${vid ? `<span class="play">${ICON.play}</span>` : ""}
+        ${vid ? `<span class="play">${ICON.play}</span>` : `<span class="open">Read article ${ICON.ext}</span>`}
         ${extra ? `<span class="badge">${esc(extra)}</span>` : ""}
-      </button>
+      ${vid ? "</button>" : "</a>"}
       <div class="body">
         <div class="kicker"><span class="sec">${esc(sec.short)}</span><span>${esc(e.region)}</span><span>${esc(DOMAIN[e.domain]?.label || "")}</span>${viaLabel(e) ? `<span class="via" title="First suggested by a contributing AI, verified by the Ping curator">via ${esc(viaLabel(e))}</span>` : ""}</div>
         <h3 id="h-${esc(e.id)}">${esc(t)}</h3>
@@ -460,7 +462,10 @@
         setTimeout(() => $(".reasons", c).classList.remove("show"), 500);
         toast("Noted. We'll steer away from that.");
       }));
-      $(".media", c).addEventListener("click", () => openMedia(c.dataset.eid));
+      // Images open the article in a new tab; only videos open the in-page player.
+      const play = $("button.media", c);
+      if (play) play.addEventListener("click", () => openMedia(c.dataset.eid));
+      else $("a.media", c).addEventListener("click", () => haptic("tap"));
     });
 
     // Jump links (map blips, week dots, picks, SEA list)
@@ -562,19 +567,15 @@
   function openMedia(id) {
     const e = state.entries.find((x) => x.id === id);
     const vid = ytId(e.video);
+    if (!vid) return;
     const frame = $("#lightboxFrame");
-    if (vid) {
-      frame.className = "frame video";
-      frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0" title="${esc(e.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-    } else {
-      frame.className = "frame";
-      const fig = e.image ? `<img src="${esc(e.image)}" alt="${esc(e.title)}" referrerpolicy="no-referrer">` : art(e, SECTIONS[e.section].hex);
-      frame.innerHTML = `${fig}<div class="cap">${esc(e.title)} · Image: ${esc(e.source.name)}</div>`;
-    }
+    frame.className = "frame video";
+    frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${vid}?autoplay=1&rel=0" title="${esc(e.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     lastFocus = document.activeElement;
-    $("#lightbox").classList.add("show"); $("#lightbox").setAttribute("aria-hidden", "false");
+    const lb = $("#lightbox");
+    lb.classList.add("show"); lb.setAttribute("aria-hidden", "false");
     $("#scrim").classList.add("show");
-    $("#lightbox [data-close]").focus();
+    lb.focus();
     haptic("tap");
   }
   function closeOverlays() {
@@ -840,6 +841,8 @@
   $("#archiveBtn").addEventListener("click", openArchive);
   $("#scrim").addEventListener("click", closeOverlays);
   $$("[data-close]").forEach((b) => b.addEventListener("click", closeOverlays));
+  // The video viewer closes with a tap anywhere around the player (taps on the video itself go to YouTube).
+  $("#lightbox").addEventListener("click", () => { closeOverlays(); haptic("tap"); });
   $("#archiveList").addEventListener("click", (ev) => { if (ev.target.closest("a")) closeOverlays(); });
   document.addEventListener("keydown", (ev) => {
     if (ev.key === "Escape") return closeOverlays();

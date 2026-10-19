@@ -1,0 +1,7 @@
+{
+  "_comment": "Sites readers cannot open (region blocks, corporate filters, login portals). The build rejects any story from these hosts or their subdomains. Add an entry whenever a reader reports one.",
+  "hosts": [
+    { "host": "arabnews.pk", "reason": "Shows SRMG's staff-only 'Internal Portal' instead of the article to readers in Singapore (reported 2026-10-19)" },
+    { "host": "arabnews.com", "reason": "Same publisher (SRMG) as arabnews.pk; assumed to have the same regional block until proven otherwise" }
+  ]
+}

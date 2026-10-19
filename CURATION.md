@@ -133,15 +133,36 @@ Entry `id`s are assigned by the build, and pick ids follow the chronological ord
 python3 scripts/build.py --check-links
 ```
 
-The build validates the schema, the window, deep links and gated hosts, sorts each table oldest to newest, assigns ids, rebuilds
-`data/index.json` and renders the email edition at `issues/<END>/email.html`.
+The build validates the schema, the window, deep links, gated hosts and the reader-reported blocklist
+(`data/blocked-sources.json`), sorts each table oldest to newest, assigns ids, rebuilds `data/index.json` and renders
+the email edition at `issues/<END>/email.html`.
 
 - Fix every error.
 - Replace or drop any source that returns 401, 402, 404 or 410.
-- A 403 is acceptable only when the page was confirmed readable during research, since some sites block scripts but not browsers.
 
-Then run `node --check assets/app.js`. If Playwright or Chromium is available, also load the site from `python3 -m http.server`
-and confirm there are no console errors.
+### 5b. Reader-view verification (mandatory, never skip)
+
+Open every source the way a reader would, in a real browser, before publishing:
+
+```bash
+npm install --no-save --prefix /tmp/pw playwright@1.56.1
+PLAYWRIGHT_MODULE=/tmp/pw/node_modules/playwright/index.mjs \
+CHROMIUM_PATH=$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome | head -1) \
+node scripts/verify_sources.mjs data/issues/<END>.json
+```
+
+- **FAIL** (login page, paywall, region or "internal portal" page, off-site redirect, error, empty page): replace the source
+  with a freely readable article from a mainstream publisher covering the same story, or drop the entry. Then rebuild and
+  re-run until there are **0 failing**.
+- **warn**: fix it. Update redirected links to the final URL, and re-check the date if the page date differs.
+- If a story's key claim, e.g. the uncrewed-vessel involvement that qualifies it for Table 1, appears in only one source and
+  that source fails, drop the story rather than keep a link readers can't open.
+- Readers are in Singapore. Prefer widely reachable international publishers (e.g. Naval News, Maritime Executive,
+  Baird Maritime, Reuters/AP syndications on open sites) over small regional domains that corporate or regional
+  filters often block. Never use a host listed in `data/blocked-sources.json`.
+- Mention in your final summary how many sources were checked and anything you replaced.
+
+Then run `node --check assets/app.js`, and load the site from `python3 -m http.server` to confirm there are no console errors.
 
 ## 6. Publish
 

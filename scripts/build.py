@@ -41,6 +41,10 @@ GATED_HOSTS = {"janes.com", "www.janes.com", "lloydslist.com", "www.lloydslist.c
                "wsj.com", "www.wsj.com", "bloomberg.com", "www.bloomberg.com", "techbriefs.com",
                "www.techbriefs.com"}
 
+BLOCKED_FILE = ROOT / "data" / "blocked-sources.json"
+BLOCKED = {h["host"].lower(): h.get("reason", "") for h in
+           (json.loads(BLOCKED_FILE.read_text(encoding="utf-8"))["hosts"] if BLOCKED_FILE.exists() else [])}
+
 errors, warnings = [], []
 
 
@@ -65,6 +69,10 @@ def validate_url(issue, where, url):
         err(issue, f"{where}: source URL looks like an index/homepage, need a deep link: {url}")
     if p.netloc.lower() in GATED_HOSTS:
         err(issue, f"{where}: source host is known to be gated: {p.netloc}")
+    host = p.netloc.lower().split(":")[0]
+    for blocked, reason in BLOCKED.items():
+        if host == blocked or host.endswith("." + blocked):
+            err(issue, f"{where}: source host {host} is on data/blocked-sources.json ({reason})")
 
 
 def validate_issue(data):

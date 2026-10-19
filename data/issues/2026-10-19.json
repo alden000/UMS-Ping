@@ -11,7 +11,7 @@
     "headline": "Sea drones go to war, and to sea with the fleet.",
     "lede": "Combined aerial and surface drone strikes sank merchant ships off NATO's Black Sea coast. A large USV deployed with a US carrier strike group for the first time. Close to home, Singapore-tested acoustic links and Malaysia's first private 5G port network show the region's digital waterfront filling in.",
     "picks": [
-      "t1-3",
+      "t1-2",
       "t2-6",
       "t4-1"
     ]
@@ -27,31 +27,6 @@
       "title": "Threats & Incidents (Past 7 Days)",
       "emptyNote": "No verified uncrewed waterborne threats or incidents were published within the 7-day window.",
       "entries": [
-        {
-          "date": "2026-10-14",
-          "title": "Aerial drone and two USVs reportedly sink HS Dignity / Western Black Sea",
-          "location": "Black Sea, about 15 nm east of Krapets, Bulgaria",
-          "details": "HS Dignity, a Guinea-Bissau-flagged cargo ship with 16 crew (14 of them Syrian), sank overnight on 12–13 Oct. Five crew were rescued and 11 were missing while six boats and two helicopters searched. The Syrian Sailors' Union said one aerial drone and two uncrewed surface vessels hit the ship; this is the union's account, not an official finding. In the same wave the Maltese-flagged Chelsea 3 was hit by three drones off Byala, and all 15 of its crew were rescued. Bulgaria summoned Russia's ambassador but did not formally attribute the attack.",
-          "summary": "Sailors' union says an aerial drone plus two USVs sank HS Dignity off Bulgaria; 11 crew missing.",
-          "source": {
-            "name": "Arab News Pakistan (AP)",
-            "url": "https://www.arabnews.pk/middle-east/14-syrians-aboard-hs-dignity-sunk-in-drone-attack-off-bulgaria-3004081"
-          },
-          "image": "https://assets.maestronewsroom.com/media/system/proxies/a7bb4e96-be9a-4dd4-ad5b-ed559f2916df.webp",
-          "video": null,
-          "region": "Black Sea",
-          "lat": 43.63,
-          "lng": 28.92,
-          "domain": "cross-domain",
-          "severity": "high",
-          "tags": [
-            "WBIED",
-            "USV",
-            "Bulgaria",
-            "merchant shipping"
-          ],
-          "id": "t1-1"
-        },
         {
           "date": "2026-10-15",
           "title": "UK-made Kraken K3 Scout drone boat linked to strike on Russian vessel / Ukraine",
@@ -89,7 +64,7 @@
               "value": "~650 nm"
             }
           ],
-          "id": "t1-2"
+          "id": "t1-1"
         },
         {
           "date": "2026-10-18",
@@ -129,7 +104,7 @@
               "value": "60+ since 2022"
             }
           ],
-          "id": "t1-3"
+          "id": "t1-2"
         }
       ]
     },
@@ -759,7 +734,7 @@
           "summary": "Penang Port goes live with Malaysia's first dedicated-spectrum private 5G port network: 2.5 sq km and sub-15 ms latency.",
           "source": {
             "name": "New Straits Times (Bernama)",
-            "url": "https://www.nst.com.my/news/nation/2026/10/1557479/malaysia-explores-5g-coverage-beyond-populated-areas"
+            "url": "https://www.nst.com.my/news/nation/2026/10/1557479/penang-port-becomes-malaysias-first-port-private-5g-network"
           },
           "image": "https://storage.googleapis.com/origin-awsassets.nst.com.my/images/listing-featured/7135B8DD0C1857D0296EBE58EDFB4DE3_data_0_1.jpg",
           "video": null,
