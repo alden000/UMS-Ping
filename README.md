@@ -12,6 +12,8 @@ It covers four tables: threats & incidents, platform news, enabling technology, 
 | Path | Purpose |
 | --- | --- |
 | `data/issues/<date>.json` | One issue. This is the only file curation writes by hand |
+| `scripts/verify_sources.mjs` | Opens every source in a real browser (Singapore locale) and fails on login walls, paywalls, region portals and dead links |
+| `data/blocked-sources.json` | Sites readers reported they can't open; the build refuses them |
 | `scripts/build.py` | Validates issues, sorts entries, rebuilds `data/index.json` and the email editions (`--check-links` fetches every source) |
 | `assets/` | Site code (`app.js`, `styles.css`), runtime config (`config.js`) and the map dot matrices |
 | `worker/` | Optional Cloudflare Worker that collects feedback from all readers |

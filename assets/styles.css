@@ -344,7 +344,11 @@ button { font: inherit; color: inherit; }
 .card:hover::before { opacity: 1; }
 .card.flash { animation: flash 1.6s var(--ease); }
 @keyframes flash { 0%, 100% { box-shadow: var(--shadow); } 30% { box-shadow: 0 0 0 2px var(--c), 0 0 50px -6px var(--c); } }
-.media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-2); cursor: zoom-in; border: 0; padding: 0; width: 100%; display: block; }
+.media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--bg-2); cursor: pointer; border: 0; padding: 0; width: 100%; display: block; color: inherit; text-decoration: none; }
+.media .open { position: absolute; z-index: 1; right: 12px; bottom: 12px; display: inline-flex; gap: 6px; align-items: center; font: 600 12px/1 var(--f-body); color: #fff; padding: 8px 12px; border-radius: 999px; background: rgba(3, 11, 23, .6); border: 1px solid rgba(255, 255, 255, .2); backdrop-filter: blur(6px); opacity: 0; transform: translateY(6px); transition: opacity .3s, transform .3s var(--ease); }
+.media .open svg { width: 13px; height: 13px; }
+.media:hover .open, .media:focus-visible .open { opacity: 1; transform: none; }
+@media (hover: none) { .media .open { opacity: 1; transform: none; } }
 .media img, .media .art { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease), opacity .6s; }
 .media img { opacity: 0; }
 .media img.loaded { opacity: 1; }
@@ -475,15 +479,15 @@ button { font: inherit; color: inherit; }
 .drawer li .dots span::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--c); margin-right: 5px; }
 .drawer .foot { margin-top: auto; padding: 16px 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
 
-.lightbox { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 20px; opacity: 0; pointer-events: none; transition: opacity .3s; }
+.lightbox { position: fixed; inset: 0; z-index: 90; display: grid; place-content: center; justify-items: center; gap: 14px; padding: 20px; cursor: zoom-out; outline: none; opacity: 0; pointer-events: none; transition: opacity .3s; }
 .lightbox.show { opacity: 1; pointer-events: auto; }
-.lightbox .frame { width: min(1100px, 100%); border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .9); transform: scale(.94) translateY(10px); transition: transform .5s var(--ease); position: relative; }
+.lightbox .frame { width: min(1100px, calc(100vw - 40px)); border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .9); transform: scale(.94) translateY(10px); transition: transform .5s var(--ease); position: relative; }
 .lightbox.show .frame { transform: none; }
 .lightbox .frame.video { aspect-ratio: 16 / 9; }
 .lightbox iframe { width: 100%; height: 100%; border: 0; display: block; }
 .lightbox img { width: 100%; max-height: 82vh; object-fit: contain; }
 .lightbox .cap { padding: 12px 16px; background: var(--surface-solid); font-size: 13px; color: var(--ink-2); }
-.lightbox .close { position: absolute; top: 16px; right: 16px; z-index: 2; }
+.lb-hint { margin: 0; font: 500 12px/1 var(--f-mono); letter-spacing: .1em; text-transform: uppercase; color: rgba(234, 243, 252, .7); }
 
 .toast { position: fixed; z-index: 95; left: 50%; bottom: 24px; transform: translate(-50%, calc(100% + 48px)); visibility: hidden; padding: 12px 18px; border-radius: 999px; background: var(--surface-solid); border: 1px solid var(--line-2); box-shadow: var(--shadow); font-size: 14px; display: flex; gap: 10px; align-items: center; transition: transform .5s var(--ease-spring); max-width: calc(100vw - 32px); }
 .toast.show { transform: translate(-50%, 0); visibility: visible; }
