@@ -37,9 +37,11 @@ DOMAINS = {"surface", "subsurface", "cross-domain"}
 # Paths that indicate an index / archive page rather than a standalone article.
 INDEX_PATH = re.compile(r"^/?$|/(news|blog|press|media|category|categories|tag|tags|topics?|search|archive)/?$", re.I)
 VIA = re.compile(r"^[a-z0-9-]{1,24}$")
-GATED_HOSTS = {"janes.com", "www.janes.com", "lloydslist.com", "www.lloydslist.com", "ft.com", "www.ft.com",
-               "wsj.com", "www.wsj.com", "bloomberg.com", "www.bloomberg.com", "techbriefs.com",
-               "www.techbriefs.com"}
+# Subscription sites (rechecked 2026-10-22: they also turn automated readers away, so a story can't be verified).
+GATED_HOSTS = {"lloydslist.com", "www.lloydslist.com", "ft.com", "www.ft.com",
+               "wsj.com", "www.wsj.com", "bloomberg.com", "www.bloomberg.com"}
+# Janes: the news articles are free to read; its intelligence products and databases are subscription-only.
+JANES_NEWS = re.compile(r"/defence-news/", re.I)
 
 BLOCKED_FILE = ROOT / "data" / "blocked-sources.json"
 BLOCKED = {h["host"].lower(): h.get("reason", "") for h in
@@ -69,6 +71,8 @@ def validate_url(issue, where, url):
         err(issue, f"{where}: source URL looks like an index/homepage, need a deep link: {url}")
     if p.netloc.lower() in GATED_HOSTS:
         err(issue, f"{where}: source host is known to be gated: {p.netloc}")
+    if p.netloc.lower() in ("janes.com", "www.janes.com") and not JANES_NEWS.search(p.path):
+        err(issue, f"{where}: only Janes news articles (/defence-news/) are free to read: {url}")
     host = p.netloc.lower().split(":")[0]
     for blocked, reason in BLOCKED.items():
         if host == blocked or host.endswith("." + blocked):

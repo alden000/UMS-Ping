@@ -45,8 +45,8 @@ Lookback: only items **published between START and END inclusive**.
 
 **Strict verification.** Fetch every candidate page before including it.
 
-- **No gated content.** No logins, registration, paywalls or member-only overviews. Known gated sites: Janes, Lloyd's List, FT, WSJ,
-  Bloomberg, Tech Briefs member pages.
+- **No gated content.** No logins, registration, paywalls or member-only overviews. Known gated sites: Lloyd's List, FT, WSJ,
+  Bloomberg, and Janes products and databases. Janes news articles (`janes.com/.../defence-news/...`) are free to read and allowed.
 - **Direct deep links only.** Never a `/news/` index, category, tag, search page or homepage.
 - **Tables 2–4: concrete hardware, software or vendor releases only.** No conference agendas, event programs, symposium schedules,
   exhibition directories or calls for papers.
