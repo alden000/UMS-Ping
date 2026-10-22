@@ -1,0 +1,28 @@
+name: Test AI contributors
+# Compares Gemini tiers on the Monday runbook's research brief. Dry run: prints results, submits nothing.
+# Started by editing contributors/test-now.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [contributors/test-now]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        tier: [flash, lite]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Gemini ${{ matrix.tier }} on the Monday brief (dry run)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_TIER: ${{ matrix.tier }}
+          PING_BRIEF: contributors/monday-brief.md
+          PING_PAUSE_SECONDS: "5"
+        run: python3 contributors/collect.py --dry-run

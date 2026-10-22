@@ -111,7 +111,7 @@ def gemini_models():
                         {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
     except ApiError as e:
         print(f"  gemini: could not list models ({e}); using defaults")
-        return ["gemini-3.8-pro", "gemini-3.8-flash"]
+        return ["gemini-3.8-flash", "gemini-3.5-flash-lite"]
     names = [m["name"].split("/", 1)[1] for m in data.get("models", [])
              if "generateContent" in m.get("supportedGenerationMethods", [])]
     skip = ("image", "tts", "audio", "live", "embedding", "thinking", "exp", "latest", "computer")
@@ -122,10 +122,10 @@ def gemini_models():
         # within that version a stable release beats a preview.
         ns = sorted(ns, key=lambda n: (version_key(n), "preview" in n))
         return ns[:1]
-    pro = [n for n in usable if "pro" in n]
-    flash = [n for n in usable if "flash" in n and "lite" not in n]
-    # Best first: Pro searches more thoroughly and picks better; Flash is the fallback.
-    picks = newest(pro) + newest(flash)
+    flash = newest([n for n in usable if "flash" in n and "lite" not in n])
+    lite = newest([n for n in usable if "flash-lite" in n])
+    # GEMINI_TIER=flash|lite tests one tier on its own; by default Flash, with Lite as the fallback.
+    picks = {"flash": flash, "lite": lite}.get(os.environ.get("GEMINI_TIER", ""), flash + lite)
     print(f"  gemini: models available to this key → trying {picks or 'none found'}")
     return picks
 
@@ -227,7 +227,16 @@ FOCUS = {
 }
 
 
+TABLES = {"threats": "Table 1: Threats & Incidents", "platforms": "Table 2: Unmanned Maritime Systems Product News",
+          "tech": "Table 3: Product & Technology of Interest", "comms": "Table 4: Maritime Comms"}
+
+
 def focused_prompts(base):
+    if os.environ.get("PING_BRIEF"):
+        # Test mode with the Monday runbook's own research brief: one request per table, like its sub-agents.
+        for key, table in TABLES.items():
+            yield key, f"{base}\n\nYou are the sub-agent for {table} only. Use section \"{key}\" for all entries."
+        return
     for key, (label, queries) in FOCUS.items():
         hints = "; ".join(f'"{q}"' for q in queries)
         yield key, (f"{base}\n\nFOCUS: {label} Search thoroughly before answering: as many targeted web "
@@ -341,7 +350,7 @@ def main():
     args = ap.parse_args()
 
     start, end = edition_window()
-    prompt = (HERE / "prompt.md").read_text().replace("{START}", start.isoformat()).replace("{END}", end.isoformat())
+    prompt = Path(os.environ.get("PING_BRIEF") or HERE / "prompt.md").read_text().replace("{START}", start.isoformat()).replace("{END}", end.isoformat())
     print(f"Edition {end} · window {start} → {end} · inbox {INBOX}")
 
     jobs = []
