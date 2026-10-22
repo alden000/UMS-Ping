@@ -233,6 +233,21 @@ def top_story(data):
     return ""
 
 
+def stamp_assets():
+    """Add ?v=<content hash> to index.html's script and style links, so browsers never mix a cached script with new data."""
+    import hashlib
+    page = ROOT / "index.html"
+    html_text = page.read_text(encoding="utf-8")
+    def repl(m):
+        f = ROOT / m.group(1)
+        if not f.exists():
+            return m.group(0)
+        return f'{m.group(1)}?v={hashlib.sha1(f.read_bytes()).hexdigest()[:10]}"'
+    new = re.sub(r'(assets/[\w-]+\.(?:js|css))(?:\?v=[0-9a-f]+)?"', repl, html_text)
+    if new != html_text:
+        page.write_text(new, encoding="utf-8")
+
+
 def check_learning_files():
     """data/learnings.json and contributors/focus.md are rewritten every Monday; keep them sane."""
     learn = ROOT / "data" / "learnings.json"
@@ -291,6 +306,7 @@ def main():
     index.sort(key=lambda x: x["id"], reverse=True)
     INDEX_FILE.write_text(json.dumps({"latest": index[0]["id"] if index else None, "issues": index},
                                      indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    stamp_assets()
     print(f"Built {len(index)} issue(s). Latest: {index[0]['id'] if index else '-'}")
 
 
