@@ -259,6 +259,10 @@ def main():
             failures += 1
             continue
         entries = extract_entries(reply)
+        if not entries:
+            # Show what the model actually said, so an empty or malformed answer can be diagnosed.
+            excerpt = " ".join((reply or "").split())[:700]
+            print(f"  {name}: no usable entries in the reply ({len(reply or '')} chars). Excerpt: {excerpt or '(empty)'}")
         kept, dropped = prefilter(entries, start, end)
         print(f"- {name}: {len(entries)} returned, {len(kept)} kept, {len(dropped)} dropped")
         for title, why in dropped:
