@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        tier: [flash]
+        tier: [flash, lite]
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6

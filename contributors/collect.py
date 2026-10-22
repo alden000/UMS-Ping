@@ -163,15 +163,18 @@ def _words(text):
 
 def grounded_replacement(entry, resolved):
     """Pick the page Gemini actually read that best matches this entry's title (and host, if possible)."""
-    want = _words(entry.get("title")) | _words(entry.get("summary"))
+    # Title words only: summaries share generic words ("uncrewed", "drones") with unrelated articles,
+    # which once swapped a Saab UUV story onto a Ghost Shark article.
+    want = _words(entry.get("title"))
     host = urllib.parse.urlparse((entry.get("source") or {}).get("url", "")).hostname or ""
     best, score = None, 0
     for final in resolved:
         p = urllib.parse.urlparse(final)
         overlap = len(want & _words(p.path))
-        bonus = 2 if p.hostname and p.hostname.replace("www.", "") == host.replace("www.", "") else 0
-        if overlap >= 2 and overlap + bonus > score:
-            best, score = final, overlap + bonus
+        same_site = bool(p.hostname) and p.hostname.replace("www.", "") == host.replace("www.", "")
+        # A product or vendor name on the same site is enough; elsewhere it takes three title words.
+        if overlap >= (1 if same_site else 3) and overlap + 2 * same_site > score:
+            best, score = final, overlap + 2 * same_site
     return best
 
 
