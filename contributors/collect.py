@@ -76,6 +76,7 @@ def first_working(name, models, call):
                 return text
             except ApiError as e:
                 errors.append(f"{model}: {e}")
+                print(f"    {name}/{model} failed: {str(e)[:200]}")
                 transient = any(f"HTTP {c}" in str(e) for c in (429, 500, 502, 503, 504, 524))
                 if transient and attempt == 1:
                     time.sleep(30)
@@ -115,11 +116,15 @@ def gemini_models():
              if "generateContent" in m.get("supportedGenerationMethods", [])]
     skip = ("image", "tts", "audio", "live", "embedding", "thinking", "exp", "latest", "computer")
     usable = [n for n in names if not any(x in n for x in skip)]
-    newest = lambda ns: sorted(ns, key=version_key)[:1]
-    stable = lambda ns: [n for n in ns if "preview" not in n] or ns
-    pro = stable([n for n in usable if "pro" in n])
-    flash = stable([n for n in usable if "flash" in n and "lite" not in n])
-    # Best first: Pro searches more thoroughly and picks better; Flash is the fallback. Still cents per run.
+
+    def newest(ns):
+        # Newest version wins, even as a preview (new accounts cannot call older models such as 2.5);
+        # within that version a stable release beats a preview.
+        ns = sorted(ns, key=lambda n: (version_key(n), "preview" in n))
+        return ns[:1]
+    pro = [n for n in usable if "pro" in n]
+    flash = [n for n in usable if "flash" in n and "lite" not in n]
+    # Best first: Pro searches more thoroughly and picks better; Flash is the fallback.
     picks = newest(pro) + newest(flash)
     print(f"  gemini: models available to this key → trying {picks or 'none found'}")
     return picks
