@@ -159,11 +159,39 @@ def ask_groq(prompt):
             body["tools"] = [{"type": "browser_search"}]  # gpt-oss models search the web through this tool
         data = post_json("https://api.groq.com/openai/v1/chat/completions", body,
                          {"authorization": "Bearer " + os.environ["GROQ_API_KEY"]})
-        return data["choices"][0]["message"]["content"]
+        msg = data["choices"][0]["message"]
+        print(f"    groq/{model}: ran {len(msg.get('executed_tools') or [])} web search/browse steps")
+        return msg.get("content") or ""
     return first_working("groq", models, call)
 
 
 PROVIDERS = {"gemini": ("GEMINI_API_KEY", ask_gemini), "groq": ("GROQ_API_KEY", ask_groq)}
+
+
+# One focused request per table works far better than one request for all four.
+FOCUS = {
+    "threats": ("Section \"threats\" only.", [
+        "sea drone attack ship", "unmanned surface vessel attack", "naval drone strike Black Sea",
+        "underwater drone found fishermen Indonesia OR Philippines", "narco semi-submersible seized",
+        "Singapore Strait OR Malacca Strait drone OR unmanned vessel"]),
+    "platforms": ("Section \"platforms\" only.", [
+        "unmanned surface vessel unveiled", "autonomous underwater vehicle contract", "USV navy order",
+        "UUV launched", "ROV new launch", "Singapore unmanned vessel", "China unmanned underwater vehicle"]),
+    "tech": ("Section \"tech\" only.", [
+        "USV launch and recovery system", "maritime machine vision unmanned", "shipborne VTOL drone",
+        "sonar payload AUV new", "firefighting unmanned boat", "search and rescue unmanned vessel"]),
+    "comms": ("Section \"comms\" only.", [
+        "underwater acoustic modem new", "maritime satellite terminal unmanned", "mesh radio USV",
+        "maritime 5G port network", "optical underwater communication"]),
+}
+
+
+def focused_prompts(base):
+    for key, (label, queries) in FOCUS.items():
+        hints = "; ".join(f'"{q}"' for q in queries)
+        yield key, (f"{base}\n\nFOCUS: {label} Run at least 5 separate web searches before answering, for example: "
+                    f"{hints}. Open the most promising news results to confirm the publication date. "
+                    "Return every qualifying item you can verify (aim for 2-6). Use section \"" + key + "\" for all entries.")
 
 
 def extract_entries(text):
@@ -252,17 +280,28 @@ def main():
 
     failures = 0
     for name, fn in jobs:
-        try:
-            reply = fn(prompt)
-        except Exception as e:  # one provider failing must not stop the others
-            print(f"! {name}: request failed: {e}")
+        prompts = [("all", prompt)] if args.from_file else list(focused_prompts(prompt))
+        entries, failed = [], False
+        for i, (section, p) in enumerate(prompts):
+            if i:
+                time.sleep(int(os.environ.get("PING_PAUSE_SECONDS", "20")))  # stay inside free-tier rate limits
+            try:
+                reply = fn(p)
+            except Exception as e:  # one provider failing must not stop the others
+                print(f"! {name}: request failed ({section}): {e}")
+                failed = True
+                break  # the same error would repeat for every section (e.g. quota or bad key)
+            got = extract_entries(reply)
+            if not got:
+                # Show what the model actually said, so an empty or malformed answer can be diagnosed.
+                excerpt = " ".join((reply or "").split())[:400]
+                print(f"  {name}/{section}: no usable entries ({len(reply or '')} chars). Excerpt: {excerpt or '(empty)'}")
+            else:
+                print(f"  {name}/{section}: {len(got)} candidate(s)")
+            entries += got
+        if failed and not entries:
             failures += 1
             continue
-        entries = extract_entries(reply)
-        if not entries:
-            # Show what the model actually said, so an empty or malformed answer can be diagnosed.
-            excerpt = " ".join((reply or "").split())[:700]
-            print(f"  {name}: no usable entries in the reply ({len(reply or '')} chars). Excerpt: {excerpt or '(empty)'}")
         kept, dropped = prefilter(entries, start, end)
         print(f"- {name}: {len(entries)} returned, {len(kept)} kept, {len(dropped)} dropped")
         for title, why in dropped:
