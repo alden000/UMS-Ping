@@ -5,7 +5,14 @@
     "weeks_with_feedback": 0,
     "preferences": [],
     "dislikes": [],
-    "notes_themes": []
+    "notes_themes": [],
+    "tips": {
+      "_how": "Per CURATION.md 3b/3c. weeks: last 8 editions of counts. themes: weeks (of the last 4) each theme appeared in tips. misses: last 10 in-scope tips our own scans missed, with the fix applied.",
+      "weeks": [],
+      "themes": {},
+      "misses": [],
+      "out_of_scope_requests": {}
+    }
   },
   "sources": {
     "claude": {
