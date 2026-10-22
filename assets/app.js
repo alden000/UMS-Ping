@@ -329,14 +329,11 @@
     const w = ["12%", "22%", "18%", "33%", "15%"];
     const rows = sec.entries.map((e) => `<tr><td>${esc(e.date)}</td><td>${esc(e.title)}</td><td>${esc(key === "threats" ? e.location : e.tech)}</td><td>${esc(e.details)}</td><td><a href="${esc(e.source.url)}" target="_blank" rel="noopener noreferrer">${esc(e.source.name)}</a></td></tr>`);
     if (!sec.entries.length) rows.push(`<tr><td class="n" colspan="5">${esc(sec.emptyNote)}</td></tr>`);
-    if (key === "threats" && state.issue.regionalWatch?.note) rows.push(`<tr><td class="n" colspan="5"><b>Regional Note (Singapore &amp; Surrounding Waterways):</b> ${esc(rwPoints(state.issue.regionalWatch).join(" · "))}</td></tr>`);
     return `<div class="tablewrap"><table class="classic"><caption class="sr-only">${esc(sec.title)}</caption><thead><tr>${cols.map((c, i) => `<th scope="col" style="width:${w[i]}">${esc(c)}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
   }
 
   function renderSection(sec) {
     const m = SECTIONS[sec.key];
-    const rw = state.issue.regionalWatch;
-    const st = STATUS[rw?.status] || STATUS.calm;
     const cards = sec.entries.length
       ? `<div class="cards">${sec.entries.map(card).join("")}</div>`
       : `<div class="empty rv"><b>Quiet waters</b>${esc(sec.emptyNote)}</div>`;
@@ -354,7 +351,6 @@
           </div>
         </div>
         <div class="view-cards" ${state.view === "table" ? "hidden" : ""}>${cards}
-          ${sec.key === "threats" && rw?.note ? `<div class="note rv" style="--s:${st.c}">${ICON.shield}<div><b>Regional note: Singapore &amp; surrounding waterways.</b> ${esc(rwPoints(rw).join(" · "))}</div></div>` : ""}
         </div>
         <div class="view-table" ${state.view === "cards" ? "hidden" : ""}>${table(sec, sec.key)}</div>
       </div>
