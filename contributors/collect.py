@@ -110,14 +110,14 @@ def gemini_models():
                         {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
     except ApiError as e:
         print(f"  gemini: could not list models ({e}); using defaults")
-        return ["gemini-3.8-flash", "gemini-3.5-flash-lite"]
+        return ["gemini-3.5-flash-lite", "gemini-3.8-flash"]
     names = [m["name"].split("/", 1)[1] for m in data.get("models", [])
              if "generateContent" in m.get("supportedGenerationMethods", [])]
     skip = ("image", "tts", "audio", "live", "embedding", "thinking", "exp", "preview", "latest")
     flash = sorted((n for n in names if "flash" in n and not any(x in n for x in skip)), key=version_key)
     full = [n for n in flash if "lite" not in n]
     lite = [n for n in flash if "lite" in n]
-    picks = full[:2] + lite[:1]
+    picks = lite[:1] + full[:1]  # cheapest first: this runs on a small prepaid credit
     print(f"  gemini: models available to this key → trying {picks or 'none found'}")
     return picks
 
@@ -128,8 +128,13 @@ def ask_gemini(prompt):
 
     def call(model):
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-        body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}], "tools": [{"google_search": {}}]}
+        body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}], "tools": [{"google_search": {}}],
+                # Cap each answer so a single run can only ever cost a few cents of the prepaid credit.
+                "generationConfig": {"maxOutputTokens": int(os.environ.get("GEMINI_MAX_OUTPUT_TOKENS", "4096"))}}
         data = post_json(url, body, {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+        usage = data.get("usageMetadata", {})
+        print(f"    gemini/{model}: {usage.get('promptTokenCount', '?')} tokens in, "
+              f"{usage.get('candidatesTokenCount', 0) + usage.get('thoughtsTokenCount', 0)} out")
         parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
         return "".join(p.get("text", "") for p in parts)
     return first_working("gemini", models, call)
