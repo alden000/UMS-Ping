@@ -54,6 +54,7 @@
     table: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 10v10"/></svg>',
     shield: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M9 12l2 2 4-4"/></svg>',
     mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+    star: `<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"><path d="M12 2.8l2.75 5.57 6.15.9-4.45 4.33 1.05 6.12L12 16.83 6.5 19.72l1.05-6.12L3.1 9.27l6.15-.9z"/></svg>`,
     signal: (n) => `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${[0, 1, 2, 3].map((i) => `<path d="M${16 - 4 - i * 3.2} ${22 - i * 3.2}a${4 + i * 3.2} ${4 + i * 3.2} 0 0 1 ${8 + i * 6.4} 0" opacity="${i < n ? 1 : 0.22}"/>`).join("")}<circle cx="16" cy="24" r="2" fill="currentColor" stroke="none"/></svg>`,
   };
 
@@ -116,6 +117,16 @@
       <text x="24" y="336" fill="${color}" fill-opacity=".55" font-family="JetBrains Mono, monospace" font-size="13" letter-spacing="3">${esc((DOMAIN[e.domain]?.label || "").toUpperCase())} · ${esc(e.region.toUpperCase())}</text></svg>`;
   }
 
+  // When a story has no usable picture: a small infographic of its key figures over the sonar artwork.
+  function infographic(e, color) {
+    const specs = (e.specs || []).slice(0, 3);
+    const [t, vendor] = splitTitle(e.title);
+    const body = specs.length
+      ? `<ul class="ig-specs">${specs.map((x) => `<li><b>${esc(x.value)}</b><small>${esc(x.label)}</small></li>`).join("")}</ul>`
+      : `<p class="ig-title">${esc(vendor || t)}</p>`;
+    return `<div class="infog" style="--ig:${color}">${art(e, color)}<div class="ig-in">${body}</div></div>`;
+  }
+
   // Contributing AIs credited on a story ("claude" is the curator itself, so it is not shown).
   const SOURCE_NAMES = { reader: "Reader tip", spark: "Gemini Spark" };
   const sourceName = (v) => SOURCE_NAMES[v] || v.charAt(0).toUpperCase() + v.slice(1);
@@ -131,23 +142,21 @@
     const thumb = vid ? `https://i.ytimg.com/vi/${vid}/hqdefault.jpg` : e.image;
     const img = thumb
       ? `<img src="${esc(thumb)}" alt="" loading="${big ? "eager" : "lazy"}" decoding="async" referrerpolicy="no-referrer" data-fallback="${esc(e.id)}">`
-      : art(e, sec.hex);
+      : infographic(e, sec.hex);
     return img;
   }
 
   /* ---------- Render: hero ---------- */
   function renderHero(issue) {
     const counts = issue.sections.map((s) => [s.key, s.entries.length]);
-    const ed = issue.editorial || {};
     return `
     <section class="hero" id="top" aria-labelledby="heroTitle">
       <canvas id="sonar" aria-label="Sonar display. Each contact is a story in this issue; click to ping." role="img"></canvas>
       <div class="wrap">
         <div class="eyebrow"><span class="live"></span>${issueNo(issue.number)} · Week of ${esc(long(issue.window.end))}</div>
         <div class="wordmark" aria-hidden="true"><span>P</span><span>I</span><span>N</span><span>G</span><span class="dot">.</span></div>
-        <h1 id="heroTitle">${esc(ed.headline || issue.title)}</h1>
-        <p class="window">${esc(issue.title)}<br>Coverage Window: Past 7 Days (<b>${esc(long(issue.window.start))} – ${esc(long(issue.window.end))}</b>) | Verified Global Defense &amp; Maritime Authorities</p>
-        ${ed.lede ? `<p class="lede">${esc(ed.lede)}</p>` : ""}
+        <h1 id="heroTitle">${esc(CFG.tagline || "Weekly intelligence on uncrewed maritime systems.")}</h1>
+        <p class="window">${esc(issue.title)}<br>Coverage Window: Past 7 Days (<b>${esc(long(issue.window.start))} – ${esc(long(issue.window.end))}</b>)</p>
         <div class="stats">
           ${counts.map(([k, n]) => `<a class="stat mag" href="#${k}" style="--c:${SECTIONS[k].color}"><b data-count="${n}">0</b><span>${esc(SECTIONS[k].short)}</span></a>`).join("")}
         </div>
@@ -286,12 +295,12 @@
         ${media(e, sec)}
         <span class="date">${esc(long(e.date))}</span>
         ${vid ? `<span class="play">${ICON.play}</span>` : `<span class="open">Read article ${ICON.ext}</span>`}
-        ${extra ? `<span class="badge">${esc(extra)}</span>` : ""}
       ${vid ? "</button>" : "</a>"}
       <div class="body">
         <div class="kicker"><span class="sec">${esc(sec.short)}</span><span>${esc(e.region)}</span><span>${esc(DOMAIN[e.domain]?.label || "")}</span>${viaLabel(e) ? `<span class="via" title="First suggested by a contributor (another AI or a reader), verified by the Ping curator">via ${esc(viaLabel(e))}</span>` : ""}</div>
         <h3 id="h-${esc(e.id)}">${esc(t)}</h3>
         ${vendor ? `<p class="vendor">${esc(vendor)}</p>` : ""}
+        ${extra ? `<p class="use">${esc(extra)}</p>` : ""}
         <p class="meta"><b>${esc(sec.third)}</b>${esc(third)}</p>
         <p class="summary">${esc(e.summary)}</p>
         <div class="details" id="d-${esc(e.id)}"><div><p>${esc(e.details)}</p></div></div>
@@ -360,33 +369,31 @@
             <div class="eyebrow"><span class="live"></span>Return signal</div>
             <h2>Shape next Monday's Ping.</h2>
             <p>Your 👍 / 👎 on each brief and this short check-in tune what gets curated next week. Feedback is anonymous, and we never ask for your name or email.</p>
-            <h4 id="rateLbl">How strong was this week's signal?</h4>
+            <h4 id="rateLbl">How was this week's newsletter?</h4>
             <div class="rating" role="radiogroup" aria-labelledby="rateLbl">
-              ${[1, 2, 3, 4, 5].map((n) => `<button type="button" role="radio" aria-checked="false" data-rate="${n}" aria-label="${n} of 5">${ICON.signal(Math.ceil(n * 0.8))}</button>`).join("")}
+              ${[1, 2, 3, 4, 5].map((n) => `<button type="button" role="radio" aria-checked="false" data-rate="${n}" aria-label="${n} of 5">${ICON.star}</button>`).join("")}
             </div>
             <div class="rating-label" id="rateText"></div>
             <h4>Give me more of</h4>
             <div class="topics" role="group" aria-label="Topics">${topics.map((t) => `<button type="button" class="chip" data-topic="${esc(t)}" aria-pressed="false">${esc(t)}</button>`).join("")}</div>
             <label for="fbNote"><h4>Anything we missed? (optional)</h4></label>
             <textarea id="fbNote" maxlength="1000" placeholder="A story, vendor or region you want covered. Please leave out personal details."></textarea>
-            <button type="button" class="btn primary mag" id="fbSend">Send return ping</button>
-            <p class="fine" id="fbFine">${Feedback.enabled ? "Sent anonymously to the Ping curation desk." : "Saved on this device. The shared feedback service isn't connected yet."}</p>
+            <button type="button" class="btn primary mag" id="fbSend">Send Feedback</button>
+            <p class="fine" id="fbFine">${Feedback.enabled ? "Feedback is collated automatically and used to improve the AI curation model. It's anonymous." : "Saved on this device. The shared feedback service isn't connected yet."}</p>
           </div>
           <div class="thanks" aria-live="polite">
             <svg viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="60" cy="60" r="54"/><circle cx="60" cy="60" r="54"/><circle cx="60" cy="60" r="54"/><circle cx="60" cy="60" r="6" fill="currentColor"/></svg>
-            <h3>Return ping received.</h3>
-            <p>Next Monday's issue will lean toward what you asked for.</p>
+            <h3>Feedback received.</h3>
+            <p>Thank you. Next Monday's issue will take it into account.</p>
             <p style="margin-top:14px"><button type="button" class="btn" id="fbAgain">Edit my feedback</button></p>
           </div>
           ${Feedback.enabled ? `
           <div class="tipbox">
             <label for="tipUrl"><h4>Spotted a story we should cover?</h4></label>
-            <div class="tipbox-row">
-              <input id="tipUrl" type="url" inputmode="url" maxlength="1000" placeholder="https:// link to the article" autocomplete="off">
-              <button type="button" class="btn mag" id="tipSend">Send tip</button>
-            </div>
-            <input id="tipNote" type="text" maxlength="300" placeholder="Why it matters (optional). Please leave out personal details." autocomplete="off">
-            <p class="fine">Tips are checked like every other source before they make it into Monday's issue.</p>
+            <input id="tipUrl" type="url" inputmode="url" maxlength="1000" placeholder="https:// link to the article" autocomplete="off">
+            <input id="tipNote" type="text" maxlength="300" placeholder="Why it matters (optional)" autocomplete="off">
+            <button type="button" class="btn primary mag" id="tipSend">Send Story Recommendation</button>
+            <p class="fine">Recommendations help the AI curation model prepare future issues. Please leave out personal details.</p>
           </div>` : ""}
         </div>
       </div>
@@ -411,7 +418,7 @@
     $("#archiveList").innerHTML = (state.index?.issues || []).map((it) => `
       <li><a href="#/${esc(it.id)}" ${it.id === state.issue.id ? 'aria-current="page"' : ""}>
         <small>${issueNo(it.number)} · ${esc(long(it.window.start))} – ${esc(long(it.window.end))}</small>
-        <b>${esc(it.headline || "Weekly update")}</b>
+        <b>${esc(it.top || it.headline || "Weekly update")}</b>
         <div class="dots">${Object.entries(it.counts).map(([k, n]) => `<span style="--c:${SECTIONS[k]?.color}">${n} ${esc(SECTIONS[k]?.short || k)}</span>`).join("")}</div>
       </a></li>`).join("");
   }
@@ -428,7 +435,7 @@
       img.addEventListener("load", done, { once: true });
       img.addEventListener("error", () => {
         const e = state.entries.find((x) => x.id === img.dataset.fallback);
-        if (e) img.outerHTML = art(e, SECTIONS[e.section].hex);
+        if (e) img.outerHTML = infographic(e, SECTIONS[e.section].hex);
       }, { once: true });
     });
 
@@ -664,7 +671,7 @@
   /* ---------- Issue feedback ---------- */
   function wireFeedback() {
     const fb = $("#fb"); if (!fb) return;
-    const labels = ["", "Faint: mostly noise", "Weak: a few useful bits", "Clear: solid week", "Strong: very useful", "Loud and clear: essential reading"];
+    const labels = ["", "Poor: mostly not useful", "Fair: a few useful bits", "Good: a solid week", "Very good: very useful", "Excellent: essential reading"];
     let rating = 0;
     const paint = (n) => $$("[data-rate]", fb).forEach((b) => { const on = +b.dataset.rate <= n; b.classList.toggle("lit", on); b.setAttribute("aria-checked", +b.dataset.rate === rating); });
     $$("[data-rate]", fb).forEach((b) => {
@@ -676,7 +683,7 @@
     $("#fbSend").addEventListener("click", async () => {
       const topics = $$('[data-topic][aria-pressed="true"]', fb).map((b) => b.dataset.topic);
       const note = $("#fbNote").value.trim();
-      if (!rating && !topics.length && !note) { toast("Pick a signal strength or a topic first"); haptic("down"); return; }
+      if (!rating && !topics.length && !note) { toast("Pick a rating or a topic first"); haptic("down"); return; }
       store.set("rating:" + state.issue.id, { rating, topics, note, ts: Date.now() });
       fb.classList.add("sent");
       haptic("success");
@@ -688,8 +695,8 @@
       $("#tipSend").disabled = true;
       const r = await Feedback.suggest(url, note);
       $("#tipSend").disabled = false;
-      if (r && r.ok) { $("#tipUrl").value = ""; $("#tipNote").value = ""; haptic("success"); toast("Tip received. It'll be checked for next Monday's issue."); }
-      else { haptic("down"); toast((r && r.error) || "Couldn't send the tip"); }
+      if (r && r.ok) { $("#tipUrl").value = ""; $("#tipNote").value = ""; haptic("success"); toast("Recommendation received. Thank you!"); }
+      else { haptic("down"); toast((r && r.error) || "Couldn't send the recommendation"); }
     });
     $("#fbAgain").addEventListener("click", () => {
       const prev = store.get("rating:" + state.issue.id) || {};

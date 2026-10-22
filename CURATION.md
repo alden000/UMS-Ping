@@ -26,6 +26,8 @@ Monday at about 08:00 Singapore time (SGT). A fresh agent session follows these 
   👍/👎 per entry, 👎 reasons, 👍/👎 per section, the 1–5 issue rating, and "more of" topic counts.
 - Use the last 4 issues to tune emphasis, but never relax the verification rules:
   - Topics and sections with high 👍 rates or many "more of" requests get extra search effort, with a target of more entries if they exist.
+    "More of" topics only ever apply **within Ping's scope**: uncrewed maritime systems in the four tables. For example,
+    "Counter-drone & threats" means maritime counter-drone systems and uncrewed waterborne threats, not general aviation news.
   - Entry types with repeated 👎 reasons ("Not relevant to me", "Too far from SEA", "Not new", "Weak source") are deprioritised accordingly.
 - Never cover a story whose source URL already appears in a previous issue (`data/issues/*.json`).
 - Read the readers' free-text notes for the last 4 issues straight from KV (the Cloudflare API secret authorises
@@ -118,7 +120,7 @@ Copy the structure of the most recent issue file exactly. The schema is:
   "title": "🛥 Weekly Maritime Systems Intelligence & Technology Update",
   "window": { "start": "YYYY-MM-DD", "end": "YYYY-MM-DD" },
   "published": "YYYY-MM-DDT08:00:00+08:00",
-  "editorial": { "headline": "≤ 60 chars, punchy", "lede": "2–3 sentences", "picks": ["t1-1", "t2-3", "t4-2"] },
+  "editorial": { "picks": ["t1-1", "t2-3", "t4-2"] },   // the 3 most important stories, shown first as "The Brief"
   "regionalWatch": { "status": "calm|elevated|alert", "label": "short phrase", "note": "explicit Singapore/SEA status" },
   "sections": [   // exactly these four keys, in this order
     { "key": "threats",   "title": "Threats & Incidents (Past 7 Days)", "emptyNote": "…", "entries": [ … ] },
@@ -161,6 +163,21 @@ the email edition at `issues/<END>/email.html`.
 
 - Fix every error.
 - Replace or drop any source that returns 401, 402, 404 or 410.
+
+### 5a. Save the pictures with the site
+
+Readers' phones and office networks often can't load pictures straight from news sites. Save a copy of each story's
+picture with the site (it also finds one in the article when the entry has no `image`):
+
+```bash
+PLAYWRIGHT_MODULE=/tmp/pw/node_modules/playwright/index.mjs \
+CHROMIUM_PATH=$(ls -d /opt/pw-browsers/chromium-*/chrome-linux/chrome | head -1) \
+node scripts/fetch_images.mjs data/issues/<END>.json
+```
+
+Check that each picture shows the story's subject (open a few of `assets/img/<END>/*.jpg`). If one doesn't, delete the
+file and set the entry's `image` to `null`; the site then draws an infographic from the entry's `specs`, so give every
+story 2–3 verified specs. Commit `assets/img/<END>/` with the issue.
 
 ### 5b. Reader-view verification (mandatory, never skip)
 
@@ -213,7 +230,7 @@ Then run `node --check assets/app.js`, and load the site from `python3 -m http.s
 
 ## 6. Publish
 
-1. Commit the issue together with `data/learnings.json` and `contributors/focus.md`, with the message `Ping Nº <number>: <START> – <END>`.
+1. Commit the issue together with `assets/img/<END>/`, `data/learnings.json` and `contributors/focus.md`, with the message `Ping Nº <number>: <START> – <END>`.
 2. Push to `main` with `git push -u origin main`. On a network error, retry up to 4 times with 2s, 4s, 8s and 16s backoff.
 
 ## 7. Deliver

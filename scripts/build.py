@@ -221,6 +221,16 @@ def check_links(data):
                 err(data["id"], f"{ent['id']}: source returned {status}: {url}")
 
 
+def top_story(data):
+    """Title of the first editor's pick, shown in the archive (e.g. "Ghost Shark XL-AUV payloads")."""
+    picks = data.get("editorial", {}).get("picks", [])
+    for s in data["sections"]:
+        for e in s.get("entries", []):
+            if picks and e.get("id") == picks[0]:
+                return e["title"].split(" / ")[0]
+    return ""
+
+
 def check_learning_files():
     """data/learnings.json and contributors/focus.md are rewritten every Monday; keep them sane."""
     learn = ROOT / "data" / "learnings.json"
@@ -273,6 +283,7 @@ def main():
         index.append({
             "id": data["id"], "number": data["number"], "window": data["window"],
             "headline": data.get("editorial", {}).get("headline", ""),
+            "top": top_story(data),
             "counts": {s["key"]: len(s.get("entries", [])) for s in data["sections"]},
         })
     index.sort(key=lambda x: x["id"], reverse=True)

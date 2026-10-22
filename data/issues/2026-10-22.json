@@ -8,8 +8,6 @@
   },
   "published": "2026-10-22T23:00:00+08:00",
   "editorial": {
-    "headline": "Ghost Shark bares its teeth; drone boats hunt drones.",
-    "lede": "Australia revealed Ghost Shark's mine-laying and drone-launching payloads, and a Ukrainian drone boat shot down a Russian strike drone in an all-uncrewed fight. Closer to home, Singapore showed how drones and USVs could fight oil spills in the straits, and Japan is funding a counter-drone system for Malaysia's navy.",
     "picks": [
       "t1-1",
       "t2-11",
@@ -38,10 +36,10 @@
             "url": "https://militarnyi.com/en/news/sargan-usv-uses-sting-interceptor-to-shoot-down-russian-geran-drone/"
           },
           "region": "Black Sea",
-          "lat": 44.0,
+          "lat": 44,
           "lng": 33.5,
           "domain": "cross-domain",
-          "image": "https://militarnyi.com/wp-content/uploads/2026/10/perehoplennya-1.jpg",
+          "image": "assets/img/2026-10-22/t1-1.jpg",
           "video": null,
           "specs": [
             {
@@ -69,7 +67,8 @@
             "gemini",
             "claude"
           ],
-          "id": "t1-1"
+          "id": "t1-1",
+          "imageSource": "https://militarnyi.com/wp-content/uploads/2026/10/perehoplennya-1.jpg"
         },
         {
           "date": "2026-10-22",
@@ -85,7 +84,7 @@
           "lat": 44.72,
           "lng": 37.77,
           "domain": "surface",
-          "image": "https://static.themoscowtimes.com/image/og/e9/94053__e9127508ffd40cce733020e20c2a6ab2.jpg",
+          "image": "assets/img/2026-10-22/t1-2.jpg",
           "video": null,
           "specs": [
             {
@@ -105,7 +104,8 @@
             "black sea"
           ],
           "severity": "medium",
-          "id": "t1-2"
+          "id": "t1-2",
+          "imageSource": "https://static.themoscowtimes.com/image/og/e9/94053__e9127508ffd40cce733020e20c2a6ab2.jpg"
         }
       ]
     },
@@ -128,7 +128,7 @@
           "lat": 35.86,
           "lng": 104.19,
           "domain": "surface",
-          "image": null,
+          "image": "assets/img/2026-10-22/t2-1.jpg",
           "video": null,
           "specs": [],
           "tags": [
@@ -137,7 +137,8 @@
             "china",
             "plan"
           ],
-          "id": "t2-1"
+          "id": "t2-1",
+          "imageSource": "https://www.hisutton.com/images/China-USV-MCM-front.jpg"
         },
         {
           "date": "2026-10-18",
@@ -149,7 +150,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/second-possible-chinese-uuv-mothership-appears-in-guangzhou/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/HU5Z86PaUAA5-Da.jpg",
+          "image": "assets/img/2026-10-22/t2-2.jpg",
           "video": null,
           "region": "East Asia",
           "lat": 22.94,
@@ -175,7 +176,8 @@
             "spark",
             "claude"
           ],
-          "id": "t2-2"
+          "id": "t2-2",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/HU5Z86PaUAA5-Da.jpg"
         },
         {
           "date": "2026-10-19",
@@ -187,7 +189,7 @@
             "name": "Baird Maritime",
             "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/saab-completes-underwater-vehicle-trials"
           },
-          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-19%2Fgcu4ramy%2F5fc41108_6cda_4bd1_b9bb_eca101ccaf64.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-22/t2-3.jpg",
           "video": null,
           "region": "Europe",
           "lat": 56.16,
@@ -209,7 +211,8 @@
             "sweden",
             "seabed"
           ],
-          "id": "t2-3"
+          "id": "t2-3",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2026-10-19%2Fgcu4ramy%2F5fc41108_6cda_4bd1_b9bb_eca101ccaf64.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-19",
@@ -221,7 +224,7 @@
             "name": "Defence Connect",
             "url": "https://www.defenceconnect.com.au/naval/19011-bluebottle-usvs-bringing-new-capability-and-cooperability-says-royal-new-zealand-navy"
           },
-          "image": "https://res.cloudinary.com/momentum-media-group-pty-ltd/image/upload/v1792388133/20261016_123103_csf94w.jpg",
+          "image": "assets/img/2026-10-22/t2-4.jpg",
           "video": null,
           "region": "Oceania",
           "lat": -17.76,
@@ -243,7 +246,8 @@
             "new zealand",
             "fiji"
           ],
-          "id": "t2-4"
+          "id": "t2-4",
+          "imageSource": "https://res.cloudinary.com/momentum-media-group-pty-ltd/image/upload/v1792388133/20261016_123103_csf94w.jpg"
         },
         {
           "date": "2026-10-19",
@@ -255,7 +259,7 @@
             "name": "Breaking Defense",
             "url": "https://breakingdefense.com/2026/10/diu-unveils-next-phase-in-unmanned-vessel-competition/"
           },
-          "image": null,
+          "image": "assets/img/2026-10-22/t2-5.jpg",
           "video": null,
           "region": "Americas",
           "lat": 38.87,
@@ -285,7 +289,8 @@
             "gemini",
             "claude"
           ],
-          "id": "t2-5"
+          "id": "t2-5",
+          "imageSource": "https://breakingdefense.com/wp-content/uploads/sites/13/2026/07/SAR_Corsair_Hero-1024x512.png"
         },
         {
           "date": "2026-10-19",
@@ -297,7 +302,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/taiwan-coast-guard-to-acquire-martac-devil-ray-t24-usvs/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2023/05/MARTAC-T24-USV.jpg",
+          "image": "assets/img/2026-10-22/t2-6.jpg",
           "video": null,
           "region": "East Asia",
           "lat": 25.03,
@@ -318,7 +323,8 @@
           "via": [
             "spark"
           ],
-          "id": "t2-6"
+          "id": "t2-6",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2023/05/MARTAC-T24-USV.jpg"
         },
         {
           "date": "2026-10-19",
@@ -334,7 +340,7 @@
           "lat": 33.77,
           "lng": -118.19,
           "domain": "surface",
-          "image": "https://image.koreajoongangdaily.com/12927075.jpg?imageId=12927075&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+          "image": "assets/img/2026-10-22/t2-7.jpg",
           "video": null,
           "specs": [
             {
@@ -357,7 +363,8 @@
             "gemini",
             "claude"
           ],
-          "id": "t2-7"
+          "id": "t2-7",
+          "imageSource": "https://image.koreajoongangdaily.com/12927075.jpg?imageId=12927075&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683"
         },
         {
           "date": "2026-10-20",
@@ -373,7 +380,7 @@
           "lat": 38.88,
           "lng": -77.1,
           "domain": "surface",
-          "image": "https://media.assettype.com/bairdmaritime%2F2025-06-30%2Fpa4o9eho%2Fexail_drix_isr_1200x1799.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-22/t2-8.jpg",
           "video": null,
           "specs": [
             {
@@ -400,7 +407,8 @@
             "us-navy",
             "us-coast-guard"
           ],
-          "id": "t2-8"
+          "id": "t2-8",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2025-06-30%2Fpa4o9eho%2Fexail_drix_isr_1200x1799.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-20",
@@ -416,7 +424,7 @@
           "lat": 61.52,
           "lng": 30.2,
           "domain": "surface",
-          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-20%2F9riux0sc%2F03cdcbc1_2cae_4f97_ad94_26a460becd2c.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-22/t2-9.jpg",
           "video": null,
           "specs": [
             {
@@ -442,7 +450,8 @@
             "russia",
             "multibeam"
           ],
-          "id": "t2-9"
+          "id": "t2-9",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2026-10-20%2F9riux0sc%2F03cdcbc1_2cae_4f97_ad94_26a460becd2c.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-20",
@@ -454,7 +463,7 @@
             "name": "Hydro International",
             "url": "https://www.hydro-international.com/news/oceanalpha-l42b-marine-survey-usv-receives-bureau-veritas-aip-certificate"
           },
-          "image": "https://cdn.hydro-international.com/4p7BvqZn.png",
+          "image": "assets/img/2026-10-22/t2-10.jpg",
           "video": null,
           "region": "East Asia",
           "lat": 22.54,
@@ -483,7 +492,8 @@
           "via": [
             "gemini"
           ],
-          "id": "t2-10"
+          "id": "t2-10",
+          "imageSource": "https://cdn.hydro-international.com/4p7BvqZn.png"
         },
         {
           "date": "2026-10-21",
@@ -499,7 +509,7 @@
           "lat": -33.87,
           "lng": 151.21,
           "domain": "cross-domain",
-          "image": "https://www.twz.com/wp-content/uploads/2026/10/Ghost-Shark-Drone-Firing.jpg?w=1200",
+          "image": "assets/img/2026-10-22/t2-11.jpg",
           "video": null,
           "specs": [
             {
@@ -527,7 +537,8 @@
             "gemini",
             "claude"
           ],
-          "id": "t2-11"
+          "id": "t2-11",
+          "imageSource": "https://www.twz.com/wp-content/uploads/2026/10/Ghost-Shark-Drone-Firing.jpg?w=1200"
         },
         {
           "date": "2026-10-21",
@@ -539,7 +550,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/ocius-new-bluebottle-hybrid-usv-demonstrates-capability-at-maritime-big-play-pacific/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Ocius-Bluebottle-Hybrid-BUTCH-2-scaled.jpg",
+          "image": "assets/img/2026-10-22/t2-12.jpg",
           "video": null,
           "region": "Americas",
           "lat": 32.7,
@@ -566,7 +577,8 @@
             "spark",
             "claude"
           ],
-          "id": "t2-12"
+          "id": "t2-12",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/Ocius-Bluebottle-Hybrid-BUTCH-2-scaled.jpg"
         },
         {
           "date": "2026-10-21",
@@ -578,7 +590,7 @@
             "name": "Nordic Defence Sector",
             "url": "https://nordicdefencesector.com/en/article/swedish-navy-to-show-saildrone-sea-drones-agreed-via-nordefco"
           },
-          "image": "https://imagedelivery.net/XO8UY-c6-LfWgEjQsN8IQw/91a74cca-6951-48ea-3f61-8d0de356e600/public",
+          "image": "assets/img/2026-10-22/t2-13.jpg",
           "video": null,
           "region": "Europe",
           "lat": 58.9,
@@ -600,7 +612,8 @@
             "sweden",
             "baltic"
           ],
-          "id": "t2-13"
+          "id": "t2-13",
+          "imageSource": "https://imagedelivery.net/XO8UY-c6-LfWgEjQsN8IQw/91a74cca-6951-48ea-3f61-8d0de356e600/public"
         },
         {
           "date": "2026-10-21",
@@ -612,7 +625,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/edge-leads-integration-of-sovereign-autonomous-systems-in-uae-navy-demonstration-with-allied-forces/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Press-Release-EDGE-Leads-Integration-of-Sovereign-Autonomous-Systems-in-UAE-Navy-Demonstration-with-Allied-Forces.jpg",
+          "image": "assets/img/2026-10-22/t2-14.jpg",
           "video": null,
           "region": "Middle East",
           "lat": 24.45,
@@ -630,7 +643,8 @@
             "spark",
             "claude"
           ],
-          "id": "t2-14"
+          "id": "t2-14",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/Press-Release-EDGE-Leads-Integration-of-Sovereign-Autonomous-Systems-in-UAE-Navy-Demonstration-with-Allied-Forces.jpg"
         },
         {
           "date": "2026-10-21",
@@ -646,7 +660,7 @@
           "lat": 49.26,
           "lng": -122.78,
           "domain": "subsurface",
-          "image": "https://breakingdefense.com/wp-content/uploads/sites/13/2026/10/ISE-1-e1792603672888.jpg",
+          "image": "assets/img/2026-10-22/t2-15.jpg",
           "video": null,
           "specs": [
             {
@@ -674,7 +688,8 @@
             "gemini",
             "claude"
           ],
-          "id": "t2-15"
+          "id": "t2-15",
+          "imageSource": "https://breakingdefense.com/wp-content/uploads/sites/13/2026/10/ISE-1-e1792603672888.jpg"
         }
       ]
     },
@@ -697,7 +712,7 @@
           "lat": 38.29,
           "lng": -76.41,
           "domain": "cross-domain",
-          "image": "https://www.naval-technology.com/wp-content/uploads/sites/15/2026/10/US-Navy-17.jpg",
+          "image": "assets/img/2026-10-22/t3-1.jpg",
           "video": null,
           "specs": [],
           "tags": [
@@ -712,7 +727,8 @@
             "gemini",
             "claude"
           ],
-          "id": "t3-1"
+          "id": "t3-1",
+          "imageSource": "https://www.naval-technology.com/wp-content/uploads/sites/15/2026/10/US-Navy-17.jpg"
         },
         {
           "date": "2026-10-16",
@@ -767,7 +783,7 @@
           "lat": 41.69,
           "lng": -70.62,
           "domain": "subsurface",
-          "image": "https://oceannews.com/wp-content/uploads/2026/10/2026-10-19-UPDATED_SEA_LAUNCHER_PR_5a4d3482f1_badccfacee-img01-1200x630-1.jpg",
+          "image": "assets/img/2026-10-22/t3-3.jpg",
           "video": null,
           "specs": [
             {
@@ -792,7 +808,8 @@
             "groq",
             "claude"
           ],
-          "id": "t3-3"
+          "id": "t3-3",
+          "imageSource": "https://oceannews.com/wp-content/uploads/2026/10/2026-10-19-UPDATED_SEA_LAUNCHER_PR_5a4d3482f1_badccfacee-img01-1200x630-1.jpg"
         },
         {
           "date": "2026-10-19",
@@ -804,7 +821,7 @@
             "name": "Splash247",
             "url": "https://splash247.com/british-autonomous-vessel-tests-navigation-without-gps/"
           },
-          "image": "https://splash247.com/wp-content/uploads/2026/10/Kraken.jpeg",
+          "image": "assets/img/2026-10-22/t3-4.jpg",
           "video": null,
           "region": "Europe",
           "lat": 50.78,
@@ -818,7 +835,8 @@
             "usv"
           ],
           "application": "GNSS-free navigation for autonomous vessels",
-          "id": "t3-4"
+          "id": "t3-4",
+          "imageSource": "https://splash247.com/wp-content/uploads/2026/10/Kraken.jpeg"
         },
         {
           "date": "2026-10-20",
@@ -834,7 +852,7 @@
           "lat": 39.93,
           "lng": 32.86,
           "domain": "cross-domain",
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/havelsan-1024x617.png",
+          "image": "assets/img/2026-10-22/t3-5.jpg",
           "video": null,
           "specs": [
             {
@@ -855,7 +873,8 @@
             "spark",
             "claude"
           ],
-          "id": "t3-5"
+          "id": "t3-5",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/havelsan-1024x617.png"
         },
         {
           "date": "2026-10-21",
@@ -867,7 +886,7 @@
             "name": "Defence Security Asia",
             "url": "https://defencesecurityasia.com/en/japan-malaysia-navy-counter-drone-osa-2026-sea-lanes/"
           },
-          "image": "https://defencesecurityasia.com/wp-content/uploads/2026/10/858973294_1662076675286990_3937843333958404694_n.jpg",
+          "image": "assets/img/2026-10-22/t3-6.jpg",
           "video": null,
           "region": "Southeast Asia",
           "lat": 3.14,
@@ -890,7 +909,8 @@
             "sea lanes"
           ],
           "application": "Naval force protection against drones",
-          "id": "t3-6"
+          "id": "t3-6",
+          "imageSource": "https://defencesecurityasia.com/wp-content/uploads/2026/10/858973294_1662076675286990_3937843333958404694_n.jpg"
         },
         {
           "date": "2026-10-21",
@@ -902,7 +922,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/leading-navy-selects-exail-navigation-systems-for-usv-fleet/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Marins-Series-©Exail_1.jpg",
+          "image": "assets/img/2026-10-22/t3-7.jpg",
           "video": null,
           "region": "Europe",
           "lat": 48.9,
@@ -921,7 +941,8 @@
             "claude"
           ],
           "application": "Resilient USV navigation",
-          "id": "t3-7"
+          "id": "t3-7",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/Marins-Series-©Exail_1.jpg"
         }
       ]
     },
@@ -940,7 +961,7 @@
             "name": "Seapower Magazine",
             "url": "https://seapowermagazine.org/l3harris-rock-lobster-acoustic-communications-system-advances-aukus-undersea-warfare-capabilities-at-rimpac-2026/"
           },
-          "image": null,
+          "image": "assets/img/2026-10-22/t4-1.jpg",
           "video": null,
           "region": "Americas",
           "lat": 21.3,
@@ -958,7 +979,8 @@
             "claude"
           ],
           "medium": "acoustic",
-          "id": "t4-1"
+          "id": "t4-1",
+          "imageSource": "https://seapowermagazine.org/wp-content/uploads/sites/2/2026/10/L3Harris-lightfish.avif"
         },
         {
           "date": "2026-10-21",
@@ -970,7 +992,7 @@
             "name": "SatNews",
             "url": "https://satnews.com/2026/10/21/speedcast-and-soya-it-complete-hybrid-dual-leo-connectivity-rollout-on-41-wallenius-wilhelmsen-vessels/"
           },
-          "image": null,
+          "image": "assets/img/2026-10-22/t4-2.jpg",
           "video": null,
           "region": "Global",
           "lat": 59.91,
@@ -992,7 +1014,8 @@
             "remote commissioning"
           ],
           "medium": "satcom",
-          "id": "t4-2"
+          "id": "t4-2",
+          "imageSource": "https://satnews.com/wp-content/uploads/2026/10/Speedcast-Commercial-Maritime-1-1024x683-1.jpg"
         },
         {
           "date": "2026-10-21",
@@ -1008,7 +1031,7 @@
           "lat": 38.49,
           "lng": -89.79,
           "domain": "cross-domain",
-          "image": null,
+          "image": "assets/img/2026-10-22/t4-3.jpg",
           "video": null,
           "specs": [
             {
@@ -1032,7 +1055,8 @@
             "carrier"
           ],
           "medium": "satcom",
-          "id": "t4-3"
+          "id": "t4-3",
+          "imageSource": "https://www.naval-technology.com/wp-content/uploads/sites/15/2026/10/US-Navy-18.jpg"
         },
         {
           "date": "2026-10-22",
@@ -1044,7 +1068,7 @@
             "name": "Riviera Maritime Media",
             "url": "https://www.rivieramm.com/news-content-hub/satellites-edge-cloud-computing-unlock-ai-for-shipping-offshore-90329"
           },
-          "image": "https://dvzpv6x5302g1.cloudfront.net/AcuCustom/Sitename/DAM/185/LEO_satellite_illustration_of_Eutelsat_OneWeb1_Thumb.png",
+          "image": "assets/img/2026-10-22/t4-4.jpg",
           "video": null,
           "region": "Global",
           "lat": 51.5,
@@ -1058,7 +1082,8 @@
             "ai"
           ],
           "medium": "satcom",
-          "id": "t4-4"
+          "id": "t4-4",
+          "imageSource": "https://dvzpv6x5302g1.cloudfront.net/AcuCustom/Sitename/DAM/185/LEO_satellite_illustration_of_Eutelsat_OneWeb1_Thumb.png"
         }
       ]
     }

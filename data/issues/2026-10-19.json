@@ -8,8 +8,6 @@
   },
   "published": "2026-10-19T08:00:00+08:00",
   "editorial": {
-    "headline": "Sea drones go to war, and to sea with the fleet.",
-    "lede": "Combined aerial and surface drone strikes sank merchant ships off NATO's Black Sea coast. A large USV deployed with a US carrier strike group for the first time. Close to home, Singapore-tested acoustic links and Malaysia's first private 5G port network show the region's digital waterfront filling in.",
     "picks": [
       "t1-2",
       "t2-6",
@@ -37,7 +35,7 @@
             "name": "The Maritime Executive",
             "url": "https://maritime-executive.com/article/uk-made-drone-boat-was-used-in-strike-on-russian-supply-ship"
           },
-          "image": "https://maritime-executive.com/media/images/article/1792108128_6ad16660f23c4.jpg",
+          "image": "assets/img/2026-10-19/t1-1.jpg",
           "video": null,
           "region": "Black Sea",
           "lat": 43.58,
@@ -64,7 +62,8 @@
               "value": "~650 nm"
             }
           ],
-          "id": "t1-1"
+          "id": "t1-1",
+          "imageSource": "https://maritime-executive.com/media/images/article/1792108128_6ad16660f23c4.jpg"
         },
         {
           "date": "2026-10-18",
@@ -76,7 +75,7 @@
             "name": "The Guardian",
             "url": "https://www.theguardian.com/business/2026/oct/18/drone-attacks-ships-black-sea-russia-ukraine-war"
           },
-          "image": "https://i.guim.co.uk/img/media/e886f1a13a50a50476946b3452987388831e52f9/73_0_2249_1800/master/2249.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=e4b4403b6c83eb7a09d3eed721692921",
+          "image": "assets/img/2026-10-19/t1-2.jpg",
           "video": null,
           "region": "Black Sea",
           "lat": 44.6,
@@ -104,7 +103,8 @@
               "value": "60+ since 2022"
             }
           ],
-          "id": "t1-2"
+          "id": "t1-2",
+          "imageSource": "https://i.guim.co.uk/img/media/e886f1a13a50a50476946b3452987388831e52f9/73_0_2249_1800/master/2249.jpg?width=1200&height=630&quality=85&auto=format&fit=crop&precrop=40:21,offset-x50,offset-y0&overlay-align=bottom%2Cleft&overlay-width=100p&overlay-base64=L2ltZy9zdGF0aWMvb3ZlcmxheXMvdGctZGVmYXVsdC5wbmc&enable=upscale&s=e4b4403b6c83eb7a09d3eed721692921"
         }
       ]
     },
@@ -123,7 +123,7 @@
             "name": "Baird Maritime",
             "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/taiwan-devil-ray-t24-usv"
           },
-          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fvy5bryp2%2FT24-idle-02-1-1.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-19/t2-1.jpg",
           "video": null,
           "region": "East Asia",
           "lat": 25.03,
@@ -154,7 +154,8 @@
             "co-production",
             "MARTAC"
           ],
-          "id": "t2-1"
+          "id": "t2-1",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fvy5bryp2%2FT24-idle-02-1-1.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-13",
@@ -166,7 +167,7 @@
             "name": "Baird Maritime",
             "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/france-danae-armed-usv-prototypes"
           },
-          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fgzb5m5sc%2F7e0858a1_6a44_42a4_a0e4_06caae9274c9.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-19/t2-2.jpg",
           "video": null,
           "region": "Europe",
           "lat": 43.12,
@@ -194,7 +195,8 @@
             "MBDA",
             "prototype"
           ],
-          "id": "t2-2"
+          "id": "t2-2",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fgzb5m5sc%2F7e0858a1_6a44_42a4_a0e4_06caae9274c9.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-13",
@@ -206,7 +208,7 @@
             "name": "Baird Maritime",
             "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/exail-begins-indonesian-mcm-production"
           },
-          "image": "https://media.assettype.com/bairdmaritime%2F2025-06-24%2Ft1pzdkcp%2Fexail-inspector-90-usv-021200x663.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-19/t2-3.jpg",
           "video": null,
           "region": "Southeast Asia",
           "lat": -6.1,
@@ -238,7 +240,8 @@
             "Exail",
             "production"
           ],
-          "id": "t2-3"
+          "id": "t2-3",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2025-06-24%2Ft1pzdkcp%2Fexail-inspector-90-usv-021200x663.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-14",
@@ -250,10 +253,10 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/hellenic-navy-tests-saronics-corsair-usv-ahead-of-major-order/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Saronic-Corsair-USV-on-the-open-deck-of-Perseus.jpg",
+          "image": "assets/img/2026-10-19/t2-4.jpg",
           "video": null,
           "region": "Europe",
-          "lat": 38.0,
+          "lat": 38,
           "lng": 23.58,
           "domain": "surface",
           "specs": [
@@ -281,7 +284,8 @@
             "FMS",
             "swarming"
           ],
-          "id": "t2-4"
+          "id": "t2-4",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/Saronic-Corsair-USV-on-the-open-deck-of-Perseus.jpg"
         },
         {
           "date": "2026-10-14",
@@ -293,7 +297,7 @@
             "name": "Greek City Times",
             "url": "https://greekcitytimes.com/2026/10/14/pyrpolitis-usv/"
           },
-          "image": null,
+          "image": "assets/img/2026-10-19/t2-5.jpg",
           "video": null,
           "region": "Europe",
           "lat": 37.99,
@@ -320,7 +324,8 @@
             "indigenous",
             "unveiling"
           ],
-          "id": "t2-5"
+          "id": "t2-5",
+          "imageSource": "https://greekcitytimes.com/wp-content/uploads/2026/10/hellenic-navy-frigate-kimon-piraeus.jpg"
         },
         {
           "date": "2026-10-15",
@@ -332,7 +337,7 @@
             "name": "The Maritime Executive",
             "url": "https://maritime-executive.com/article/unmanned-vessel-deploys-with-carrier-strike-group-for-the-first-time"
           },
-          "image": "https://maritime-executive.com/media/images/article/1792122287_6ad19daf73167.jpg",
+          "image": "assets/img/2026-10-19/t2-6.jpg",
           "video": null,
           "region": "Americas",
           "lat": 32.7,
@@ -355,7 +360,8 @@
             "carrier strike group",
             "deployment"
           ],
-          "id": "t2-6"
+          "id": "t2-6",
+          "imageSource": "https://maritime-executive.com/media/images/article/1792122287_6ad19daf73167.jpg"
         },
         {
           "date": "2026-10-16",
@@ -367,7 +373,7 @@
             "name": "Naval Today",
             "url": "https://www.navaltoday.com/2026/10/16/large-uncrewed-underwater-vehicle-launched-in-sweden"
           },
-          "image": "https://navaltoday.com/api/media/file/a535b8ae17e18e54_org.jpg?prefix=media",
+          "image": "assets/img/2026-10-19/t2-7.jpg",
           "video": null,
           "region": "Europe",
           "lat": 56.16,
@@ -386,7 +392,8 @@
             "FMV",
             "sea trials"
           ],
-          "id": "t2-7"
+          "id": "t2-7",
+          "imageSource": "https://navaltoday.com/api/media/file/a535b8ae17e18e54_org.jpg?prefix=media"
         },
         {
           "date": "2026-10-18",
@@ -398,7 +405,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/second-possible-chinese-uuv-mothership-appears-in-guangzhou/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/HU5Z86PaUAA5-Da.jpg",
+          "image": "assets/img/2026-10-19/t2-8.jpg",
           "video": null,
           "region": "East Asia",
           "lat": 22.94,
@@ -425,7 +432,8 @@
             "mothership",
             "OSINT"
           ],
-          "id": "t2-8"
+          "id": "t2-8",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/HU5Z86PaUAA5-Da.jpg"
         }
       ]
     },
@@ -444,7 +452,7 @@
             "name": "Baird Maritime",
             "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/ranger-torpedo-tube-usv-review"
           },
-          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fsf2e0cep%2FRanger-Gabler-main1.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "image": "assets/img/2026-10-19/t3-1.jpg",
           "video": null,
           "region": "Europe",
           "lat": 53.87,
@@ -474,7 +482,8 @@
             "ISR",
             "edge autonomy"
           ],
-          "id": "t3-1"
+          "id": "t3-1",
+          "imageSource": "https://media.assettype.com/bairdmaritime%2F2026-10-13%2Fsf2e0cep%2FRanger-Gabler-main1.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
         },
         {
           "date": "2026-10-14",
@@ -486,7 +495,7 @@
             "name": "SEA.AI",
             "url": "https://www.sea.ai/martac-partnership/"
           },
-          "image": "https://www.sea.ai/uploads/2026/10/Martac_socialpreview.png",
+          "image": "assets/img/2026-10-19/t3-2.jpg",
           "video": null,
           "region": "Americas",
           "lat": 28.08,
@@ -512,7 +521,8 @@
             "target classification",
             "dark vessels"
           ],
-          "id": "t3-2"
+          "id": "t3-2",
+          "imageSource": "https://www.sea.ai/uploads/2026/10/Martac_socialpreview.png"
         },
         {
           "date": "2026-10-15",
@@ -524,7 +534,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/shield-ai-delivers-first-v-bat-to-taiwan-coast-guard/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Shield-AI-Delivers-First-V-BAT-to-Taiwan-Coast-Guard.jpg",
+          "image": "assets/img/2026-10-19/t3-3.jpg",
           "video": null,
           "region": "East Asia",
           "lat": 24.2,
@@ -554,7 +564,8 @@
             "shipborne UAS",
             "coast guard"
           ],
-          "id": "t3-3"
+          "id": "t3-3",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/Shield-AI-Delivers-First-V-BAT-to-Taiwan-Coast-Guard.jpg"
         },
         {
           "date": "2026-10-17",
@@ -566,7 +577,7 @@
             "name": "Naval News",
             "url": "https://www.navalnews.com/naval-news/2026/10/indian-navy-first-multi-purpose-vessel-ins-samarthak/"
           },
-          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Samarthak.png",
+          "image": "assets/img/2026-10-19/t3-4.jpg",
           "video": null,
           "region": "South Asia",
           "lat": 14.81,
@@ -596,7 +607,8 @@
             "MCM",
             "India"
           ],
-          "id": "t3-4"
+          "id": "t3-4",
+          "imageSource": "https://www.navalnews.com/wp-content/uploads/2026/10/Samarthak.png"
         }
       ]
     },
@@ -615,7 +627,7 @@
             "name": "Hydro International",
             "url": "https://www.hydro-international.com/news/oceanscan-msts-lauv-adds-native-support-for-subnero-acoustic-modems"
           },
-          "image": "https://cdn.hydro-international.com/DR3WML9R.jpg",
+          "image": "assets/img/2026-10-19/t4-1.jpg",
           "video": null,
           "region": "Southeast Asia",
           "lat": 1.2966,
@@ -642,7 +654,8 @@
             "UnetStack",
             "Singapore"
           ],
-          "id": "t4-1"
+          "id": "t4-1",
+          "imageSource": "https://cdn.hydro-international.com/DR3WML9R.jpg"
         },
         {
           "date": "2026-10-13",
@@ -654,10 +667,10 @@
             "name": "MarineLink",
             "url": "https://www.marinelink.com/news/marlink-delivers-iridium-safety-543635"
           },
-          "image": "https://images.marinelink.com/images/maritime/w800/credit-marlink-174281.jpg",
+          "image": "assets/img/2026-10-19/t4-2.jpg",
           "video": null,
           "region": "Europe",
-          "lat": 52.0,
+          "lat": 52,
           "lng": 4.4,
           "domain": "surface",
           "medium": "Satellite",
@@ -681,7 +694,8 @@
             "L-band",
             "retrofit"
           ],
-          "id": "t4-2"
+          "id": "t4-2",
+          "imageSource": "https://images.marinelink.com/images/maritime/w800/credit-marlink-174281.jpg"
         },
         {
           "date": "2026-10-14",
@@ -693,7 +707,7 @@
             "name": "Space & Defense",
             "url": "https://spaceanddefense.io/all-space-terminals-selected-by-viasat-for-multi-orbit-satcom-requirements/"
           },
-          "image": "https://spaceanddefense.io/wp-content/uploads/2026/10/ALL.SPACE_.jpg",
+          "image": "assets/img/2026-10-19/t4-3.jpg",
           "video": null,
           "region": "Global",
           "lat": 51.51,
@@ -724,7 +738,8 @@
             "COTM",
             "beamforming"
           ],
-          "id": "t4-3"
+          "id": "t4-3",
+          "imageSource": "https://spaceanddefense.io/wp-content/uploads/2026/10/ALL.SPACE_.jpg"
         },
         {
           "date": "2026-10-17",
@@ -736,7 +751,7 @@
             "name": "New Straits Times (Bernama)",
             "url": "https://www.nst.com.my/news/nation/2026/10/1557479/penang-port-becomes-malaysias-first-port-private-5g-network"
           },
-          "image": "https://storage.googleapis.com/origin-awsassets.nst.com.my/images/listing-featured/7135B8DD0C1857D0296EBE58EDFB4DE3_data_0_1.jpg",
+          "image": "assets/img/2026-10-19/t4-4.jpg",
           "video": null,
           "region": "Southeast Asia",
           "lat": 5.41,
@@ -762,7 +777,8 @@
             "smart port",
             "Malaysia"
           ],
-          "id": "t4-4"
+          "id": "t4-4",
+          "imageSource": "https://storage.googleapis.com/origin-awsassets.nst.com.my/images/listing-featured/7135B8DD0C1857D0296EBE58EDFB4DE3_data_0_1.jpg"
         }
       ]
     }
