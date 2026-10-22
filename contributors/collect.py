@@ -104,20 +104,23 @@ def models_from(env, discovered):
 
 
 def gemini_models():
-    """Ask the API which Flash models this key may call (new accounts lose access to older ones)."""
+    """Ask the API which models this key may call (new accounts lose access to older ones)."""
     try:
         data = get_json("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",
                         {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
     except ApiError as e:
         print(f"  gemini: could not list models ({e}); using defaults")
-        return ["gemini-3.5-flash-lite", "gemini-3.8-flash"]
+        return ["gemini-3.8-pro", "gemini-3.8-flash"]
     names = [m["name"].split("/", 1)[1] for m in data.get("models", [])
              if "generateContent" in m.get("supportedGenerationMethods", [])]
-    skip = ("image", "tts", "audio", "live", "embedding", "thinking", "exp", "preview", "latest")
-    flash = sorted((n for n in names if "flash" in n and not any(x in n for x in skip)), key=version_key)
-    full = [n for n in flash if "lite" not in n]
-    lite = [n for n in flash if "lite" in n]
-    picks = lite[:1] + full[:1]  # cheapest first: this runs on a small prepaid credit
+    skip = ("image", "tts", "audio", "live", "embedding", "thinking", "exp", "latest", "computer")
+    usable = [n for n in names if not any(x in n for x in skip)]
+    newest = lambda ns: sorted(ns, key=version_key)[:1]
+    stable = lambda ns: [n for n in ns if "preview" not in n] or ns
+    pro = stable([n for n in usable if "pro" in n])
+    flash = stable([n for n in usable if "flash" in n and "lite" not in n])
+    # Best first: Pro searches more thoroughly and picks better; Flash is the fallback. Still cents per run.
+    picks = newest(pro) + newest(flash)
     print(f"  gemini: models available to this key → trying {picks or 'none found'}")
     return picks
 
@@ -129,9 +132,9 @@ def ask_gemini(prompt):
     def call(model):
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
         body = {"contents": [{"role": "user", "parts": [{"text": prompt}]}], "tools": [{"google_search": {}}],
-                # Cap each answer so a single run can only ever cost a few cents of the prepaid credit.
-                "generationConfig": {"maxOutputTokens": int(os.environ.get("GEMINI_MAX_OUTPUT_TOKENS", "4096"))}}
-        data = post_json(url, body, {"x-goog-api-key": os.environ["GEMINI_API_KEY"]})
+                # Cap each answer (thinking included) so a single run stays at a few cents of the prepaid credit.
+                "generationConfig": {"maxOutputTokens": int(os.environ.get("GEMINI_MAX_OUTPUT_TOKENS", "16384"))}}
+        data = post_json(url, body, {"x-goog-api-key": os.environ["GEMINI_API_KEY"]}, timeout=600)
         usage = data.get("usageMetadata", {})
         print(f"    gemini/{model}: {usage.get('promptTokenCount', '?')} tokens in, "
               f"{usage.get('candidatesTokenCount', 0) + usage.get('thoughtsTokenCount', 0)} out")
@@ -222,9 +225,10 @@ FOCUS = {
 def focused_prompts(base):
     for key, (label, queries) in FOCUS.items():
         hints = "; ".join(f'"{q}"' for q in queries)
-        yield key, (f"{base}\n\nFOCUS: {label} Run 2-3 targeted web searches before answering (choose from, e.g.: "
-                    f"{hints}). Confirm each item's publication date from the result or the article. "
-                    "Return every qualifying item you can verify (aim for 2-6). Use section \"" + key + "\" for all entries.")
+        yield key, (f"{base}\n\nFOCUS: {label} Search thoroughly before answering: as many targeted web "
+                    f"searches as it takes to cover the week (start from, e.g.: {hints}, then follow leads). "
+                    "Confirm each item's publication date from the result or the article. Return every relevant item "
+                    "you can verify; there is no minimum or maximum. Use section \"" + key + "\" for all entries.")
 
 
 def _objects(text, start=0):
