@@ -12,6 +12,11 @@
       "themes": {},
       "misses": [],
       "out_of_scope_requests": {}
+    },
+    "engagement": {
+      "_how": "Per CURATION.md step 2 and 5c: reading analytics per issue (last 8) and short insights. Aggregates only.",
+      "issues": [],
+      "insights": []
     }
   },
   "sources": {

@@ -6,6 +6,9 @@
  *   GET  /summary            aggregate tallies for every issue (used by weekly curation)
  *   GET  /notes?issue=ID     free-text notes (requires  Authorization: Bearer <ADMIN_TOKEN>)
  *   POST /suggest            { client, url, note? }  a reader's story tip, queued for the next edition
+ *   POST /track              one visit's reading analytics from assets/analytics.js (site origin only)
+ *   GET  /analytics?issue=ID visit records, newest first (requires ADMIN_TOKEN; issue=all for every issue)
+ *   GET  /tips               all reader story tips still stored (requires ADMIN_TOKEN)
  *
  *   POST /submit             candidate stories from a contributing AI (requires  Authorization: Bearer <contributor key>)
  *   GET  /contributions?edition=YYYY-MM-DD   submissions queued for an edition (requires ADMIN_TOKEN)
@@ -50,6 +53,23 @@ export default {
         const notes = [];
         for (const k of list.keys) notes.push(await env.PING_KV.get(k.name, "json"));
         return json(notes);
+      }
+      if (req.method === "POST" && url.pathname === "/track") {
+        if (!allowed.includes(origin) && !allowed.includes("*")) return json({ error: "forbidden" }, 403);
+        if (Number(req.headers.get("content-length") || 0) > 30000) return json({ error: "payload too large" }, 413);
+        return json(await handleTrack(JSON.parse(await req.text()), req, env));
+      }
+      const admin = env.ADMIN_TOKEN && req.headers.get("authorization") === "Bearer " + env.ADMIN_TOKEN;
+      if (req.method === "GET" && url.pathname === "/analytics") {
+        if (!admin) return json({ error: "unauthorized" }, 401);
+        const issue = url.searchParams.get("issue") || "all";
+        if (issue !== "all" && !ISSUE.test(issue)) return json({ error: "bad issue" }, 400);
+        return json(await listValues(env, issue === "all" ? "v:" : `v:${issue}:`, 900));
+      }
+      if (req.method === "GET" && url.pathname === "/tips") {
+        if (!admin) return json({ error: "unauthorized" }, 401);
+        const subs = await listValues(env, "s:", 500);
+        return json(subs.filter((x) => x && x.source === "reader"));
       }
       if (req.method === "POST" && url.pathname === "/suggest") {
         if (Number(req.headers.get("content-length") || 0) > 4000) return json({ error: "payload too large" }, 413);
@@ -114,7 +134,7 @@ async function handleEvent(ev, env) {
     for (const t of topics) agg.topics[t] = (agg.topics[t] || 0) + 1;
     await env.PING_KV.put(key, JSON.stringify({ rating, topics }));
     const note = typeof ev.note === "string" ? ev.note.trim().slice(0, 1000) : "";
-    if (note) await env.PING_KV.put(`n:${ev.issue}:${Date.now()}:${ev.client}`, JSON.stringify({ note, rating, topics, ts: new Date().toISOString() }));
+    if (note) await env.PING_KV.put(`n:${ev.issue}:${Date.now()}:${ev.client}`, JSON.stringify({ issue: ev.issue, note, rating, topics, ts: new Date().toISOString() }));
   } else throw new Error("invalid");
 
   agg.updated = new Date().toISOString();
@@ -227,4 +247,49 @@ async function handleSuggest(body, env) {
   await env.PING_KV.put(mine, String(m + 1), ttl);
   await env.PING_KV.put(all, String(a + 1), ttl);
   return { ok: true, edition };
+}
+
+/* ---------- Reading analytics ---------- */
+const SID = /^[a-z0-9]{8,24}$/;
+const SECTION_KEY = /^[a-z0-9-]{1,20}$/;
+const num = (v, max) => (Number.isFinite(v) ? Math.max(0, Math.min(max, Math.round(v * 10) / 10)) : 0);
+
+// One record per visit, overwritten by later sends from the same visit. No IP is stored.
+async function handleTrack(b, req, env) {
+  if (!b || !SID.test(b.sid) || !CLIENT.test(b.client) || !ISSUE.test(b.issue)) throw new Error("invalid");
+  const cf = req.cf || {};
+  const ua = req.headers.get("user-agent") || "";
+  if (/bot|crawl|spider|headless|lighthouse|preview/i.test(ua)) return { ok: true, skipped: "bot" };
+  const sections = {}, cards = {}, ev = {};
+  for (const [k, val] of Object.entries(b.sections || {}).slice(0, 20)) if (SECTION_KEY.test(k)) sections[k] = num(val, 86400);
+  for (const [k, c] of Object.entries(b.cards || {}).slice(0, 80)) if (ENTRY.test(k) && c) {
+    cards[k] = { s: num(c.s, 86400), o: num(c.o, 99), m: num(c.m, 99), p: num(c.p, 99), u: num(c.u, 99) };
+  }
+  for (const [k, val] of Object.entries(b.ev || {}).slice(0, 40)) if (SECTION_KEY.test(k.replace(/_/g, "-"))) ev[k] = num(val, 999);
+  const rec = {
+    sid: b.sid, client: b.client, issue: b.issue,
+    start: str(b.start, 30), last: new Date().toISOString(),
+    device: ["mobile", "tablet", "desktop"].includes(b.device) ? b.device : "other",
+    vw: num(b.vw, 10000), vh: num(b.vh, 10000), ref: str(b.ref, 60), returning: !!b.returning, entry: ENTRY.test(b.entry) ? b.entry : "",
+    active: num(b.active, 86400), total: num(b.total, 86400), depth: num(b.depth, 100), bottom: !!b.bottom,
+    pauses: num(b.pauses, 9999), scrolled: num(b.scrolled, 1e7), fast: num(b.fast, 1e7),
+    sections, cards, ev,
+    country: cf.country || "", city: cf.city || "", region: cf.region || "", network: cf.asOrganization || "", tz: cf.timezone || "",
+  };
+  await env.PING_KV.put(`v:${b.issue}:${b.sid}`, JSON.stringify(rec), { expirationTtl: 60 * 60 * 24 * 400 });
+  return { ok: true };
+}
+
+async function listValues(env, prefix, max) {
+  const out = [];
+  let cursor;
+  do {
+    const page = await env.PING_KV.list({ prefix, cursor });
+    for (const k of page.keys) {
+      if (out.length >= max) break;
+      out.push(await env.PING_KV.get(k.name, "json"));
+    }
+    cursor = page.list_complete || out.length >= max ? null : page.cursor;
+  } while (cursor);
+  return out.filter(Boolean).sort((a, b) => String(b.last || b.received || "").localeCompare(String(a.last || a.received || "")));
 }

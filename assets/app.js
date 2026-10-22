@@ -412,6 +412,8 @@
     document.title = `Ping ${issueNo(issue.number)} · ${long(issue.window.end)}`;
     renderArchive();
     wire();
+    // Lets assets/analytics.js know which issue is on screen.
+    window.dispatchEvent(new CustomEvent("ping:render", { detail: { issue: issue.id, client: clientId } }));
   }
 
   function renderArchive() {

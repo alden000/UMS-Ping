@@ -19,6 +19,10 @@ What is stored: an anonymous random client id, per-entry 👍/👎, "why" reason
 the "more of" topics and the optional note. No IP addresses, names or emails.
 `GET /summary` exposes only aggregate counts; free-text notes need the admin token.
 
+`POST /track` stores one reading-analytics record per visit from `assets/analytics.js` (only from the site's own
+origin; country, city and network come from Cloudflare, no IPs are kept), and `GET /analytics` and `GET /tips` serve
+the private dashboard at `/desk/` (admin token).
+
 `POST /suggest` takes a reader's story tip (`{client, url, note?}`), at most 5 per reader and 200 in total per
 edition, and queues it in the contributions inbox as `source: "reader"`.
 

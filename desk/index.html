@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Ping Desk</title>
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg: #030B17; --surface: #0A1A2E; --surface-2: #0F2440; --line: rgba(160, 200, 240, .12); --ink: #EAF3FC; --ink-2: #A9BCD0; --ink-3: #6E849B;
+            --accent: #5CE1E6; --bar: #4CC9F0; --good: #43D9A3; --warn: #FFC857; --bad: #FF6B6B;
+            --f: "Inter", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace; --display: "Space Grotesk", var(--f); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 var(--f); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px 64px; }
+    header { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 20px; }
+    header h1 { font: 700 26px/1 var(--display); margin: 0; }
+    header h1 span { color: var(--accent); }
+    header .sub { color: var(--ink-3); font: 12px/1.4 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-left: auto; }
+    select, input[type=password], button { font: inherit; color: var(--ink); background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 8px 12px; }
+    button { cursor: pointer; } button.primary { background: var(--accent); color: #04131c; border-color: var(--accent); font-weight: 600; }
+    label.chk { display: flex; gap: 8px; align-items: center; color: var(--ink-2); font-size: 13px; }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(12, 1fr); }
+    .card { grid-column: span 12; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; min-width: 0; }
+    .c6 { grid-column: span 6; } .c4 { grid-column: span 4; } .c8 { grid-column: span 8; }
+    @media (max-width: 900px) { .c6, .c4, .c8 { grid-column: span 12; } }
+    .card h2 { font: 600 13px/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2); margin: 0 0 4px; }
+    .card .hint { color: var(--ink-3); font-size: 12.5px; margin: 0 0 14px; }
+    .kpis { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+    .kpi b { display: block; font: 700 28px/1.1 var(--display); }
+    .kpi span { color: var(--ink-3); font-size: 12.5px; }
+    .bars { display: grid; gap: 8px; }
+    .bar { display: grid; grid-template-columns: minmax(90px, 34%) 1fr auto; gap: 10px; align-items: center; font-size: 13.5px; }
+    .bar .lbl { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .bar .track { height: 12px; border-radius: 4px; background: rgba(160, 200, 240, .06); position: relative; }
+    .bar .fill { position: absolute; inset: 0 auto 0 0; border-radius: 0 4px 4px 0; background: var(--bar); min-width: 2px; }
+    .bar .val { font: 500 12.5px/1 var(--mono); color: var(--ink); min-width: 5ch; text-align: right; }
+    .cols { display: flex; align-items: flex-end; gap: 2px; height: 160px; border-bottom: 1px solid var(--line); padding-top: 8px; }
+    .cols div { flex: 1; background: var(--bar); border-radius: 4px 4px 0 0; min-height: 2px; position: relative; }
+    .cols div:hover { background: var(--accent); }
+    .axis { display: flex; justify-content: space-between; color: var(--ink-3); font: 11px/1 var(--mono); margin-top: 6px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; color: var(--ink-3); font: 500 11px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 8px 8px; border-bottom: 1px solid var(--line); cursor: pointer; white-space: nowrap; }
+    td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    td.n { font-family: var(--mono); text-align: right; white-space: nowrap; }
+    .scroll { overflow-x: auto; }
+    .tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font: 500 11px/1.5 var(--mono); border: 1px solid var(--line); }
+    .tag.read { color: var(--good); border-color: color-mix(in srgb, var(--good) 50%, transparent); }
+    .tag.skim { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 50%, transparent); }
+    .tag.bounce { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 50%, transparent); }
+    .note { padding: 10px 12px; border-radius: 10px; background: var(--surface-2); margin-bottom: 8px; font-size: 14px; }
+    .note small { display: block; color: var(--ink-3); font: 11px/1.4 var(--mono); margin-bottom: 4px; }
+    .empty { color: var(--ink-3); font-size: 13.5px; }
+    #login { max-width: 460px; margin: 12vh auto; }
+    #login p { color: var(--ink-2); }
+    #login input { width: 100%; margin: 8px 0 12px; }
+    .muted { color: var(--ink-3); } a { color: var(--accent); }
+    #tip { position: fixed; pointer-events: none; background: #061428; border: 1px solid var(--line); border-radius: 8px; padding: 6px 9px; font: 12px/1.4 var(--mono); display: none; z-index: 9; }
+  </style>
+</head>
+<body>
+<div id="tip"></div>
+<div class="wrap">
+  <section id="login" class="card" hidden>
+    <h1 style="font:700 26px/1 var(--display);margin:0 0 6px">Ping <span style="color:var(--accent)">Desk</span></h1>
+    <p>Readership, feedback and recommendations for the Ping newsletter. Enter the desk key.</p>
+    <input id="key" type="password" autocomplete="current-password" placeholder="Desk key">
+    <button class="primary" id="go">Open dashboard</button>
+    <p class="muted" id="loginMsg"></p>
+  </section>
+
+  <main id="app" hidden>
+    <header>
+      <div><h1>Ping <span>Desk</span></h1><div class="sub" id="asof"></div></div>
+      <div class="filters">
+        <select id="issue" aria-label="Issue"></select>
+        <label class="chk"><input type="checkbox" id="notrack"> Don't count my visits on this device</label>
+        <button id="reload">Refresh</button>
+        <button id="logout">Lock</button>
+      </div>
+    </header>
+
+    <div class="kpis" id="kpis"></div>
+
+    <div class="grid" style="margin-top:14px">
+      <section class="card c8"><h2>Visits per day</h2><p class="hint">Last 30 days, Singapore time. Hover a bar for the count.</p><div id="daily"></div></section>
+      <section class="card c4"><h2>How they read</h2><p class="hint">Read: steady scrolling with pauses. Skimmed: fast scrolling or little time per screen. Bounced: under 15 s.</p><div id="behaviour"></div></section>
+
+      <section class="card c6"><h2>Time per section</h2><p class="hint">Average active seconds per visit, and the share of visits that reached it.</p><div id="sections"></div></section>
+      <section class="card c6"><h2>What readers do</h2><p class="hint">Total interactions in the selected visits.</p><div id="events"></div></section>
+
+      <section class="card"><h2>Stories</h2><p class="hint" id="storiesHint">How long each story held attention. Read = at least 8 s of attention. Click a column to sort.</p><div class="scroll" id="stories"></div></section>
+
+      <section class="card c4"><h2>Countries</h2><div id="countries"></div></section>
+      <section class="card c4"><h2>Networks (ISP)</h2><div id="networks"></div></section>
+      <section class="card c4"><h2>Devices &amp; arrival</h2><div id="devices"></div></section>
+
+      <section class="card"><h2>Recent visits</h2><p class="hint">Newest first, up to 100. Times in Singapore time.</p><div class="scroll" id="visits"></div></section>
+
+      <section class="card c6"><h2>Ratings &amp; topics</h2><div id="ratings"></div></section>
+      <section class="card c6"><h2>Written feedback</h2><div id="notes"></div></section>
+      <section class="card c6"><h2>Story recommendations</h2><div id="tips"></div></section>
+      <section class="card c6"><h2>What the curator learned</h2><div id="learned"></div></section>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/config.js"></script>
+<script>
+(() => {
+  const API = (window.PING_CONFIG?.feedbackEndpoint || "").replace(/\/+$/, "");
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = { get: (k) => { try { return localStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch {} } };
+  const sgt = (iso) => iso ? new Date(iso).toLocaleString("en-SG", { timeZone: "Asia/Singapore", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
+  const sgtDay = (iso) => new Date(iso).toLocaleDateString("en-CA", { timeZone: "Asia/Singapore" });
+  const secs = (n) => n >= 60 ? `${Math.floor(n / 60)}m ${String(Math.round(n % 60)).padStart(2, "0")}s` : `${Math.round(n)}s`;
+  const pct = (a, b) => b ? Math.round((a / b) * 100) + "%" : "–";
+  const avg = (xs) => xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : 0;
+  const SECTION_NAMES = { hero: "Top of page", brief: "The Brief", intel: "Map & signal mix", threats: "Threats & Incidents", platforms: "Product News", tech: "Tech of Interest", comms: "Maritime Comms", feedback: "Feedback" };
+  const EVENT_NAMES = { outbound: "Opened an article", full_brief: "Expanded a full brief", video: "Played a video", vote: "Voted 👍/👎", vote_reason: "Gave a 👎 reason", share: "Shared a story", brief_pick: "Opened a Brief pick", map: "Used the map", archive: "Opened the archive", theme: "Switched theme", nav: "Used the section menu", hero_cta: "Used a top-of-page button", feedback_sent: "Sent feedback", recommendation_sent: "Sent a recommendation", view_table: "Switched to table view", view_cards: "Switched to card view", email_or_json: "Opened email / data" };
+
+  let key = store.get("ping:desk-key"), index = null, sessions = [], issueData = {}, summary = {};
+  const auth = () => ({ authorization: "Bearer " + key });
+
+  // Reading behaviour of one visit.
+  function behaviour(v) {
+    if (v.active < 15) return "bounce";
+    const fastShare = v.scrolled ? v.fast / v.scrolled : 0;
+    const screens = Math.max(1, v.scrolled / Math.max(400, v.vh || 800));
+    if (fastShare > 0.4 || v.active / screens < 4) return "skim";
+    return "read";
+  }
+
+  function bars(rows, { fmt = (x) => x, max } = {}) {
+    if (!rows.length) return `<p class="empty">No data yet.</p>`;
+    const m = max ?? Math.max(...rows.map((r) => r[1]), 1);
+    return `<div class="bars">${rows.map(([l, v, title]) => `<div class="bar" data-tip="${esc(title || `${l}: ${fmt(v)}`)}"><span class="lbl">${esc(l)}</span><span class="track"><span class="fill" style="width:${(v / m) * 100}%"></span></span><span class="val">${esc(fmt(v))}</span></div>`).join("")}</div>`;
+  }
+  const countBy = (xs, f) => { const o = {}; xs.forEach((x) => { const k = f(x) || "Unknown"; o[k] = (o[k] || 0) + 1; }); return Object.entries(o).sort((a, b) => b[1] - a[1]); };
+
+  async function api(path) {
+    const r = await fetch(API + path, { headers: auth() });
+    if (r.status === 401) throw new Error("unauthorized");
+    return r.json();
+  }
+
+  async function load() {
+    $("#asof").textContent = "Loading…";
+    const issue = $("#issue").value || "all";
+    const [vis, notes, tips, sum, learned] = await Promise.all([
+      api("/analytics?issue=" + issue), api("/notes").catch(() => []), api("/tips").catch(() => []),
+      fetch(API + "/summary").then((r) => r.json()).catch(() => ({})), fetch("../data/learnings.json").then((r) => r.json()).catch(() => null),
+    ]);
+    sessions = vis; summary = sum;
+    if (issue !== "all" && !issueData[issue]) issueData[issue] = await fetch(`../data/issues/${issue}.json`).then((r) => r.json()).catch(() => null);
+    render(issue, notes.filter((n) => issue === "all" || n.issue === issue || !n.issue), tips, learned);
+    $("#asof").textContent = `${sessions.length} visits loaded · updated ${sgt(new Date().toISOString())} SGT`;
+  }
+
+  function render(issue, notes, tips, learned) {
+    const S = sessions, readers = new Set(S.map((v) => v.client)).size;
+    const kinds = S.map(behaviour), n = S.length || 1;
+    const k = (label, value, sub) => `<div class="kpi"><b>${value}</b><span>${label}${sub ? ` · ${sub}` : ""}</span></div>`;
+    $("#kpis").innerHTML = [
+      k("Visits", S.length), k("Unique readers", readers, `${S.filter((v) => v.returning).length} returning visits`),
+      k("Avg reading time", secs(avg(S.map((v) => v.active)))), k("Reached the end", pct(S.filter((v) => v.bottom).length, S.length)),
+      k("Read thoroughly", pct(kinds.filter((x) => x === "read").length, S.length), `${pct(kinds.filter((x) => x === "skim").length, S.length)} skimmed`),
+      k("Articles opened", S.reduce((a, v) => a + (v.ev?.outbound || 0), 0)),
+    ].join("");
+
+    // Visits per day, last 30 days.
+    const days = [...Array(30)].map((_, i) => sgtDay(Date.now() - (29 - i) * 864e5));
+    const perDay = Object.fromEntries(days.map((d) => [d, 0]));
+    S.forEach((v) => { const d = sgtDay(v.start || v.last); if (d in perDay) perDay[d] += 1; });
+    const mx = Math.max(1, ...Object.values(perDay));
+    $("#daily").innerHTML = `<div class="cols">${days.map((d) => `<div style="height:${(perDay[d] / mx) * 100}%" data-tip="${d}: ${perDay[d]} visit${perDay[d] === 1 ? "" : "s"}"></div>`).join("")}</div><div class="axis"><span>${days[0]}</span><span>${days[29]}</span></div>`;
+
+    const kc = { read: 0, skim: 0, bounce: 0 }; kinds.forEach((x) => kc[x]++);
+    $("#behaviour").innerHTML = bars([["Read thoroughly", kc.read], ["Skimmed", kc.skim], ["Bounced", kc.bounce]], { fmt: (x) => `${x} · ${pct(x, S.length)}`, max: n });
+
+    const secKeys = Object.keys(SECTION_NAMES);
+    $("#sections").innerHTML = bars(secKeys.map((s) => {
+      const t = S.map((v) => v.sections?.[s] || 0), reached = t.filter((x) => x > 0).length;
+      return [SECTION_NAMES[s], avg(t), `${SECTION_NAMES[s]}: ${secs(avg(t))} per visit, reached by ${pct(reached, S.length)}`];
+    }).filter((r) => r[1] > 0), { fmt: secs });
+
+    const ev = {}; S.forEach((v) => Object.entries(v.ev || {}).forEach(([e, c]) => { ev[e] = (ev[e] || 0) + c; }));
+    $("#events").innerHTML = bars(Object.entries(ev).sort((a, b) => b[1] - a[1]).map(([e, c]) => [EVENT_NAMES[e] || e, c]));
+
+    // Stories (one issue at a time).
+    const data = issueData[issue];
+    if (!data) { $("#stories").innerHTML = `<p class="empty">Pick an issue at the top to see story-level reading.</p>`; }
+    else {
+      const votes = summary[issue]?.entries || {};
+      const rows = data.sections.flatMap((s) => s.entries.map((e) => {
+        const c = S.map((v) => v.cards?.[e.id]).filter(Boolean), seen = c.filter((x) => x.s >= 1);
+        return { id: e.id, title: e.title, section: s.key, seen: seen.length, dwell: avg(seen.map((x) => x.s)), read: seen.filter((x) => x.s >= 8).length,
+                 clicks: c.reduce((a, x) => a + x.o, 0), more: c.reduce((a, x) => a + x.m, 0), up: votes[e.id]?.up || 0, down: votes[e.id]?.down || 0 };
+      }));
+      let sortKey = "dwell";
+      const draw = () => {
+        rows.sort((a, b) => (typeof a[sortKey] === "string" ? a[sortKey].localeCompare(b[sortKey]) : b[sortKey] - a[sortKey]));
+        const mxd = Math.max(1, ...rows.map((r) => r.dwell));
+        $("#stories").innerHTML = `<table><thead><tr>${[["id", "#"], ["title", "Story"], ["seen", "Seen by"], ["dwell", "Avg attention"], ["read", "Read"], ["clicks", "Opened article"], ["more", "Full brief"], ["up", "👍"], ["down", "👎"]].map(([k2, l]) => `<th data-k="${k2}">${l}${k2 === sortKey ? " ▾" : ""}</th>`).join("")}</tr></thead><tbody>${rows.map((r) => `<tr><td class="n">${r.id}</td><td>${esc(r.title)}</td><td class="n">${r.seen}</td><td class="n"><span style="display:inline-block;width:60px;height:8px;border-radius:0 4px 4px 0;background:rgba(160,200,240,.08);vertical-align:middle;margin-right:6px"><span style="display:block;height:100%;width:${(r.dwell / mxd) * 100}%;background:var(--bar);border-radius:0 4px 4px 0"></span></span>${secs(r.dwell)}</td><td class="n">${pct(r.read, r.seen)}</td><td class="n">${r.clicks}</td><td class="n">${r.more}</td><td class="n">${r.up}</td><td class="n">${r.down}</td></tr>`).join("")}</tbody></table>`;
+        document.querySelectorAll("#stories th").forEach((th) => th.onclick = () => { sortKey = th.dataset.k; draw(); });
+      };
+      draw();
+    }
+
+    const top = (rows, nmax = 8) => rows.slice(0, nmax).concat(rows.length > nmax ? [["Other", rows.slice(nmax).reduce((a, r) => a + r[1], 0)]] : []);
+    $("#countries").innerHTML = bars(top(countBy(S, (v) => [v.country, v.city].filter(Boolean).join(" · "))));
+    $("#networks").innerHTML = bars(top(countBy(S, (v) => v.network)));
+    $("#devices").innerHTML = bars([...countBy(S, (v) => v.device), ...countBy(S, (v) => "via " + (v.ref || "direct"))]);
+
+    $("#visits").innerHTML = S.length ? `<table><thead><tr><th>When (SGT)</th><th>Issue</th><th>Where</th><th>Network</th><th>Device</th><th>Reading time</th><th>Scrolled</th><th>Behaviour</th></tr></thead><tbody>${S.slice(0, 100).map((v) => {
+      const b = behaviour(v);
+      return `<tr><td>${sgt(v.start || v.last)}</td><td class="n">${esc(v.issue)}</td><td>${esc([v.city, v.country].filter(Boolean).join(", "))}</td><td>${esc(v.network)}</td><td>${esc(v.device)}${v.returning ? ' <span class="muted">· returning</span>' : ""}</td><td class="n">${secs(v.active)}</td><td class="n">${v.depth}%</td><td><span class="tag ${b}">${{ read: "Read", skim: "Skimmed", bounce: "Bounced" }[b]}</span></td></tr>`;
+    }).join("")}</tbody></table>` : `<p class="empty">No visits recorded yet. They appear here within a minute of someone reading.</p>`;
+
+    // Feedback.
+    const aggs = issue === "all" ? Object.values(summary) : [summary[issue]].filter(Boolean);
+    const dist = [0, 0, 0, 0, 0], topics = {};
+    aggs.forEach((a) => { (a.rating?.dist || []).forEach((c, i) => dist[i] += c); Object.entries(a.topics || {}).forEach(([t, c]) => topics[t] = (topics[t] || 0) + c); });
+    const ratings = dist.reduce((a, b) => a + b, 0), mean = ratings ? dist.reduce((a, c, i) => a + c * (i + 1), 0) / ratings : 0;
+    $("#ratings").innerHTML = `<p class="hint">${ratings ? `${ratings} rating${ratings === 1 ? "" : "s"}, average ${mean.toFixed(1)} ★` : "No ratings yet."}</p>` +
+      bars([5, 4, 3, 2, 1].map((s) => [`${"★".repeat(s)}`, dist[s - 1]])) +
+      `<h2 style="margin-top:18px">"Give me more of"</h2>` + bars(Object.entries(topics).sort((a, b) => b[1] - a[1]));
+    $("#notes").innerHTML = notes.length ? notes.sort((a, b) => String(b.ts).localeCompare(String(a.ts))).map((x) => `<div class="note"><small>${sgt(x.ts)}${x.rating ? ` · ${"★".repeat(x.rating)}` : ""}</small>${esc(x.note)}</div>`).join("") : `<p class="empty">No written feedback yet.</p>`;
+    $("#tips").innerHTML = tips.length ? tips.map((t) => (t.entries || []).map((e) => `<div class="note"><small>${sgt(t.received)} · for the ${esc(t.edition)} issue</small><a href="${esc(e.source?.url)}" target="_blank" rel="noopener noreferrer">${esc(e.source?.name || e.source?.url)}</a>${e.note ? `<br>${esc(e.note)}` : ""}</div>`).join("")).join("") : `<p class="empty">No recommendations waiting. Monday's run checks each one against Ping's objectives.</p>`;
+
+    if (learned) {
+      const src = Object.entries(learned.sources || {}).map(([k2, s]) => `<tr><td>${esc(k2)}</td><td>${esc(s.status)}</td><td class="n">${s.published ?? 0} / ${s.submitted ?? s.found ?? 0}</td></tr>`).join("");
+      $("#learned").innerHTML = `<table><thead><tr><th>Source</th><th>Status</th><th>Published / found</th></tr></thead><tbody>${src}</tbody></table>` +
+        (learned.history || []).slice(0, 3).map((h) => `<div class="note" style="margin-top:10px"><small>Edition ${esc(h.edition)}</small>${(h.changes || []).map(esc).join("<br>")}</div>`).join("");
+    }
+  }
+
+  // Tooltips for bars and columns.
+  const tip = $("#tip");
+  document.addEventListener("mousemove", (e) => {
+    const t = e.target.closest("[data-tip]");
+    if (!t) { tip.style.display = "none"; return; }
+    tip.textContent = t.dataset.tip; tip.style.display = "block";
+    tip.style.left = Math.min(innerWidth - tip.offsetWidth - 8, e.clientX + 12) + "px"; tip.style.top = (e.clientY + 14) + "px";
+  });
+
+  async function enter() {
+    $("#login").hidden = true; $("#app").hidden = false;
+    $("#notrack").checked = store.get("ping:notrack") === "1";
+    index = await fetch("../data/index.json").then((r) => r.json()).catch(() => ({ issues: [] }));
+    $("#issue").innerHTML = `<option value="all">All issues</option>` + index.issues.map((i) => `<option value="${esc(i.id)}">Nº ${String(i.number).replace(/^(\d+)/, (m) => m.padStart(3, "0"))} · ${esc(i.id)}</option>`).join("");
+    if (index.latest) $("#issue").value = index.latest;
+    try { await load(); } catch (e) { if (String(e.message) === "unauthorized") { store.set("ping:desk-key", null); key = null; showLogin("That key didn't work."); } else $("#asof").textContent = "Couldn't load data. Try Refresh."; }
+  }
+  function showLogin(msg) { $("#app").hidden = true; $("#login").hidden = false; $("#loginMsg").textContent = msg || ""; }
+
+  $("#go").onclick = () => { key = $("#key").value.trim(); if (!key) return; store.set("ping:desk-key", key); store.set("ping:notrack", "1"); enter(); };
+  $("#key").addEventListener("keydown", (e) => { if (e.key === "Enter") $("#go").click(); });
+  $("#issue").onchange = () => load();
+  $("#reload").onclick = () => load();
+  $("#logout").onclick = () => { store.set("ping:desk-key", null); key = null; showLogin("Locked."); };
+  $("#notrack").onchange = (e) => store.set("ping:notrack", e.target.checked ? "1" : null);
+  key ? enter() : showLogin();
+})();
+</script>
+</body>
+</html>
