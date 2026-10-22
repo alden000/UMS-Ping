@@ -128,7 +128,7 @@
   }
 
   // Contributing AIs credited on a story ("claude" is the curator itself, so it is not shown).
-  const SOURCE_NAMES = { reader: "Reader tip", spark: "Gemini Spark" };
+  const SOURCE_NAMES = { reader: "Reader tip", spark: "Gemini Spark", gemini: "Gemini API" };
   const sourceName = (v) => SOURCE_NAMES[v] || v.charAt(0).toUpperCase() + v.slice(1);
   const viaLabel = (e) => (e.via || []).filter((v) => v !== "claude").map(sourceName).join(", ");
 

@@ -146,7 +146,7 @@ def via_note(ent):
     via = [v for v in ent.get("via", []) if v != "claude"]
     if not via:
         return ""
-    names = {"reader": "Reader tip", "spark": "Gemini Spark"}
+    names = {"reader": "Reader tip", "spark": "Gemini Spark", "gemini": "Gemini API"}
     return f'<br><span style="font-size: 11px; color: #888888;">via {html.escape(", ".join(names.get(v, v.title()) for v in via))}</span>'
 
 
