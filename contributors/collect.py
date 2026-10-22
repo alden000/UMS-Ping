@@ -96,7 +96,8 @@ def get_json(url, headers):
 
 def version_key(name):
     """Sort key so newer model versions come first (gemini-3.8-flash before gemini-3.5-flash)."""
-    return [-int(n) for n in re.findall(r"\d+", name)] or [0]
+    nums = [-int(n) for n in re.findall(r"\d+", name)][:3]
+    return nums + [0] * (3 - len(nums))  # pad, so "3" sorts after "3.8" rather than before it
 
 
 def models_from(env, discovered):
