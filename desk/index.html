@@ -156,7 +156,8 @@
       fetch(API + "/summary").then((r) => r.json()).catch(() => ({})), fetch("../data/learnings.json").then((r) => r.json()).catch(() => null),
     ]);
     sessions = vis; summary = sum;
-    if (issue !== "all" && !issueData[issue]) issueData[issue] = await fetch(`../data/issues/${issue}.json`).then((r) => r.json()).catch(() => null);
+    const ids = issue === "all" ? (index?.issues || []).map((i) => i.id) : [issue];
+    await Promise.all(ids.filter((id) => !issueData[id]).map(async (id) => { issueData[id] = await fetch(`../data/issues/${id}.json`).then((r) => r.json()).catch(() => null); }));
     render(issue, notes.filter((n) => issue === "all" || n.issue === issue || !n.issue), tips, learned);
     $("#asof").textContent = `${sessions.length} visits loaded · updated ${sgt(new Date().toISOString())} SGT`;
   }
@@ -232,11 +233,24 @@
     $("#notes").innerHTML = notes.length ? notes.sort((a, b) => String(b.ts).localeCompare(String(a.ts))).map((x) => `<div class="note"><small>${sgt(x.ts)}${x.rating ? ` · ${"★".repeat(x.rating)}` : ""}</small>${esc(x.note)}</div>`).join("") : `<p class="empty">No written feedback yet.</p>`;
     $("#tips").innerHTML = tips.length ? tips.map((t) => (t.entries || []).map((e) => `<div class="note"><small>${sgt(t.received)} · for the ${esc(t.edition)} issue</small><a href="${esc(e.source?.url)}" target="_blank" rel="noopener noreferrer">${esc(e.source?.name || e.source?.url)}</a>${e.note ? `<br>${esc(e.note)}` : ""}</div>`).join("")).join("") : `<p class="empty">No recommendations waiting. Monday's run checks each one against Ping's objectives.</p>`;
 
-    if (learned) {
-      const src = Object.entries(learned.sources || {}).map(([k2, s]) => `<tr><td>${esc({ claude: "Claude (curator)", spark: "Gemini Spark", gemini: "Gemini API", groq: "Groq", reader: "Reader recommendations" }[k2] || k2)}</td><td>${esc(s.status)}</td><td class="n">${s.published ?? 0} / ${s.submitted ?? s.found ?? 0}</td></tr>`).join("");
-      $("#learned").innerHTML = `<table><thead><tr><th>Source</th><th>Status</th><th>Published / submitted</th></tr></thead><tbody>${src}</tbody></table>` +
-        (learned.history || []).slice(0, 3).map((h) => `<div class="note" style="margin-top:10px"><small>Edition ${esc(h.edition)}</small>${(h.changes || []).map(esc).join("<br>")}</div>`).join("");
-    }
+    // Source scorecard for the selected issue(s), from each issue's own "contributors" record.
+    const NAMES = { claude: "Claude (curator)", spark: "Gemini Spark", gemini: "Gemini API", groq: "Groq", reader: "Reader recommendations" };
+    const ids = issue === "all" ? (index?.issues || []).map((i) => i.id) : [issue];
+    const totals = {};
+    ids.map((id) => issueData[id]).filter(Boolean).forEach((d) => {
+      const c = d.contributors || {}, entries = d.sections.flatMap((x) => x.entries);
+      const own = c.claude?.published ?? entries.filter((e) => !e.via || e.via.includes("claude")).length;
+      const add = (k2, pub, sub) => { const t = (totals[k2] ||= { published: 0, submitted: 0 }); t.published += pub; t.submitted += sub; };
+      add("claude", own, own);
+      Object.entries(c).filter(([k2]) => k2 !== "claude").forEach(([k2, v]) => add(k2, v.published || 0, v.submitted || 0));
+    });
+    const order = Object.keys(NAMES).filter((k2) => totals[k2]).concat(Object.keys(totals).filter((k2) => !NAMES[k2]));
+    const scope = issue === "all" ? `All ${ids.length} issues` : `Issue ${esc(issue)} only`;
+    const rows = order.map((k2) => `<tr><td>${esc(NAMES[k2] || k2)}</td><td>${esc(learned?.sources?.[k2]?.status || "–")}</td><td class="n">${totals[k2].published} / ${totals[k2].submitted}</td></tr>`).join("");
+    const hist = (learned?.history || []).filter((h) => issue === "all" || h.edition === issue).slice(0, 3);
+    $("#learned").innerHTML = `<p class="hint">${scope}. For Claude, "submitted" means stories it found itself. Status is each source's overall standing over the last 4 weeks.</p>` +
+      (rows ? `<table><thead><tr><th>Source</th><th>Status</th><th>Published / submitted</th></tr></thead><tbody>${rows}</tbody></table>` : `<p class="empty">No issues loaded.</p>`) +
+      (hist.length ? hist.map((h) => `<div class="note" style="margin-top:10px"><small>Edition ${esc(h.edition)}</small>${(h.changes || []).map(esc).join("<br>")}</div>`).join("") : `<p class="empty" style="margin-top:10px">No curation changes recorded for this issue.</p>`);
   }
 
   // Tooltips for bars and columns.
