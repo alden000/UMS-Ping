@@ -355,6 +355,9 @@ def main():
 
     start, end = edition_window()
     prompt = Path(os.environ.get("PING_BRIEF") or HERE / "prompt.md").read_text().replace("{START}", start.isoformat()).replace("{END}", end.isoformat())
+    focus = HERE / "focus.md"  # rewritten by the Monday run from reader feedback and last week's gaps
+    if focus.exists():
+        prompt += "\n\nThis week's focus notes from the editor (they never relax the rules above):\n\n" + focus.read_text()
     print(f"Edition {end} · window {start} → {end} · inbox {INBOX}")
 
     jobs = []

@@ -5,6 +5,7 @@
  *   GET  /summary?issue=ID   aggregate tallies for one issue (public, no free text)
  *   GET  /summary            aggregate tallies for every issue (used by weekly curation)
  *   GET  /notes?issue=ID     free-text notes (requires  Authorization: Bearer <ADMIN_TOKEN>)
+ *   POST /suggest            { client, url, note? }  a reader's story tip, queued for the next edition
  *
  *   POST /submit             candidate stories from a contributing AI (requires  Authorization: Bearer <contributor key>)
  *   GET  /contributions?edition=YYYY-MM-DD   submissions queued for an edition (requires ADMIN_TOKEN)
@@ -49,6 +50,10 @@ export default {
         const notes = [];
         for (const k of list.keys) notes.push(await env.PING_KV.get(k.name, "json"));
         return json(notes);
+      }
+      if (req.method === "POST" && url.pathname === "/suggest") {
+        if (Number(req.headers.get("content-length") || 0) > 4000) return json({ error: "payload too large" }, 413);
+        return json(await handleSuggest(await req.json(), env));
       }
       if (req.method === "POST" && url.pathname === "/submit") {
         const source = await contributorFor(req, env);
@@ -199,4 +204,27 @@ async function handleSubmit(source, body, env) {
     await env.PING_KV.put(countKey, String(count + 1), { expirationTtl: 60 * 60 * 24 * 21 });
   }
   return { ok: accepted.length > 0, source, edition, accepted: accepted.length, rejected };
+}
+
+/* ---------- Story tips from readers ---------- */
+const MAX_TIPS_PER_READER = 5;     // per edition
+const MAX_TIPS_PER_EDITION = 200;
+
+// Stored in the same queue as AI contributions (source "reader"), so the curator verifies them the same way.
+async function handleSuggest(body, env) {
+  if (!body || !CLIENT.test(body.client)) throw new Error("invalid");
+  const url = httpsUrl(body.url);
+  if (!url) return { ok: false, error: "Paste the article's full https:// link" };
+  const edition = editionFor(new Date());
+  const mine = `t:${edition}:${body.client}`, all = `t:${edition}:all`;
+  const [m, a] = [Number(await env.PING_KV.get(mine)) || 0, Number(await env.PING_KV.get(all)) || 0];
+  if (m >= MAX_TIPS_PER_READER || a >= MAX_TIPS_PER_EDITION) return { ok: false, error: "Tip limit reached for this week" };
+  const ttl = { expirationTtl: 60 * 60 * 24 * 21 };
+  await env.PING_KV.put(`s:${edition}:reader:${Date.now()}:${body.client}`, JSON.stringify({
+    source: "reader", received: new Date().toISOString(), edition,
+    entries: [{ tip: true, source: { name: new URL(url).hostname, url }, note: str(body.note, 300) }],
+  }), { expirationTtl: 60 * 60 * 24 * 60 });
+  await env.PING_KV.put(mine, String(m + 1), ttl);
+  await env.PING_KV.put(all, String(a + 1), ttl);
+  return { ok: true, edition };
 }

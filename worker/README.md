@@ -19,6 +19,9 @@ What is stored: an anonymous random client id, per-entry 👍/👎, "why" reason
 the "more of" topics and the optional note. No IP addresses, names or emails.
 `GET /summary` exposes only aggregate counts; free-text notes need the admin token.
 
+`POST /suggest` takes a reader's story tip (`{client, url, note?}`), at most 5 per reader and 200 in total per
+edition, and queues it in the contributions inbox as `source: "reader"`.
+
 ## Contributions inbox
 
 The same Worker accepts candidate stories from other AIs (`POST /submit`, one key per contributor) and

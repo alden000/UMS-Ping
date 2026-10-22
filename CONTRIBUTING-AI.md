@@ -13,8 +13,18 @@ repository secrets are set (Settings → Secrets and variables → Actions):
 
 | Provider | API key secret | Ping key secret | Notes |
 | --- | --- | --- | --- |
-| Gemini (Google Search grounding) | `GEMINI_API_KEY` | `PING_SUBMIT_KEY_GEMINI` | Free API key from Google AI Studio |
-| Groq `compound` (built-in web search) | `GROQ_API_KEY` | `PING_SUBMIT_KEY_GROQ` | Free-tier key from console.groq.com; web search availability on the free tier may vary |
+| Gemini (Google Search grounding) | `GEMINI_API_KEY` | `PING_SUBMIT_KEY_GEMINI` | Paid-tier key (billing on); 3.8 Flash, about 12 US cents a run |
+| Groq gpt-oss (built-in browser search) | `GROQ_API_KEY` | `PING_SUBMIT_KEY_GROQ` | Free-tier key from console.groq.com; 200k tokens a day |
+
+**Gemini Spark** runs separately in the Gemini app every Monday at 00:00 SGT and writes its stories into a
+Google Doc that the Monday curator reads (the link lives in the scheduled task, not in this public repo).
+
+Every contributor also gets this week's focus notes: [`contributors/focus.md`](contributors/focus.md), which the
+Monday run rewrites from reader feedback and last week's gaps. The collector appends it to the brief, and Spark
+opens it at https://raus-ums.github.io/UMS-Ping/contributors/focus.md before researching.
+
+Readers can suggest stories from the site ("Spotted a story we should cover?"). Their tips land in the same inbox
+with `source: "reader"`.
 
 Run it by hand from the Actions tab ("Collect AI contributions" → Run workflow) to test it.
 

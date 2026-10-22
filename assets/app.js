@@ -79,6 +79,13 @@
         return r.ok;
       } catch { return false; }
     },
+    async suggest(url, note) {
+      if (!this.enabled) return { ok: false, error: "The feedback service isn't connected yet" };
+      try {
+        const r = await fetch(this.url("/suggest"), { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ client: clientId, url, note }) });
+        return await r.json();
+      } catch { return { ok: false, error: "Couldn't reach the Ping desk. Try again later." }; }
+    },
     async summary(issue) {
       if (!this.enabled) return null;
       try { const r = await fetch(this.url("/summary?issue=" + encodeURIComponent(issue))); return r.ok ? r.json() : null; } catch { return null; }
@@ -109,7 +116,9 @@
   }
 
   // Contributing AIs credited on a story ("claude" is the curator itself, so it is not shown).
-  const viaLabel = (e) => (e.via || []).filter((v) => v !== "claude").map((v) => v.charAt(0).toUpperCase() + v.slice(1)).join(", ");
+  const SOURCE_NAMES = { reader: "Reader tip", spark: "Gemini Spark" };
+  const sourceName = (v) => SOURCE_NAMES[v] || v.charAt(0).toUpperCase() + v.slice(1);
+  const viaLabel = (e) => (e.via || []).filter((v) => v !== "claude").map(sourceName).join(", ");
 
   function ytId(url) {
     const m = String(url || "").match(/(?:youtu\.be\/|v=|embed\/|shorts\/)([\w-]{11})/);
@@ -252,7 +261,7 @@
     const c = issue.contributors;
     if (!c || Object.keys(c).length < 2) return "";
     const rows = Object.entries(c).map(([name, v]) => {
-      const label = name === "claude" ? "Ping curator" : name.charAt(0).toUpperCase() + name.slice(1);
+      const label = name === "claude" ? "Ping curator" : sourceName(name);
       const of = v.submitted != null ? ` <small>of ${v.submitted} suggested</small>` : "";
       return `<li><span>${esc(label)}</span><b>${v.published ?? 0}</b>${of}</li>`;
     }).join("");
@@ -279,7 +288,7 @@
         ${extra ? `<span class="badge">${esc(extra)}</span>` : ""}
       ${vid ? "</button>" : "</a>"}
       <div class="body">
-        <div class="kicker"><span class="sec">${esc(sec.short)}</span><span>${esc(e.region)}</span><span>${esc(DOMAIN[e.domain]?.label || "")}</span>${viaLabel(e) ? `<span class="via" title="First suggested by a contributing AI, verified by the Ping curator">via ${esc(viaLabel(e))}</span>` : ""}</div>
+        <div class="kicker"><span class="sec">${esc(sec.short)}</span><span>${esc(e.region)}</span><span>${esc(DOMAIN[e.domain]?.label || "")}</span>${viaLabel(e) ? `<span class="via" title="First suggested by a contributor (another AI or a reader), verified by the Ping curator">via ${esc(viaLabel(e))}</span>` : ""}</div>
         <h3 id="h-${esc(e.id)}">${esc(t)}</h3>
         ${vendor ? `<p class="vendor">${esc(vendor)}</p>` : ""}
         <p class="meta"><b>${esc(sec.third)}</b>${esc(third)}</p>
@@ -368,6 +377,16 @@
             <p>Next Monday's issue will lean toward what you asked for.</p>
             <p style="margin-top:14px"><button type="button" class="btn" id="fbAgain">Edit my feedback</button></p>
           </div>
+          ${Feedback.enabled ? `
+          <div class="tipbox">
+            <label for="tipUrl"><h4>Spotted a story we should cover?</h4></label>
+            <div class="tipbox-row">
+              <input id="tipUrl" type="url" inputmode="url" maxlength="1000" placeholder="https:// link to the article" autocomplete="off">
+              <button type="button" class="btn mag" id="tipSend">Send tip</button>
+            </div>
+            <input id="tipNote" type="text" maxlength="300" placeholder="Why it matters (optional). Please leave out personal details." autocomplete="off">
+            <p class="fine">Tips are checked like every other source before they make it into Monday's issue.</p>
+          </div>` : ""}
         </div>
       </div>
     </section>`;
@@ -661,6 +680,15 @@
       fb.classList.add("sent");
       haptic("success");
       await Feedback.send("issue", { rating, topics, note });
+    });
+    $("#tipSend")?.addEventListener("click", async () => {
+      const url = $("#tipUrl").value.trim(), note = $("#tipNote").value.trim();
+      if (!/^https:\/\/[^\s/]+\.[^\s]+$/i.test(url)) { toast("Paste the article's full https:// link"); haptic("down"); $("#tipUrl").focus(); return; }
+      $("#tipSend").disabled = true;
+      const r = await Feedback.suggest(url, note);
+      $("#tipSend").disabled = false;
+      if (r && r.ok) { $("#tipUrl").value = ""; $("#tipNote").value = ""; haptic("success"); toast("Tip received. It'll be checked for next Monday's issue."); }
+      else { haptic("down"); toast((r && r.error) || "Couldn't send the tip"); }
     });
     $("#fbAgain").addEventListener("click", () => {
       const prev = store.get("rating:" + state.issue.id) || {};

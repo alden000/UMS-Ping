@@ -446,6 +446,12 @@ button { font: inherit; color: inherit; }
 .fb textarea { width: 100%; min-height: 96px; resize: vertical; border-radius: 14px; border: 1px solid var(--line-2); background: var(--surface-2); color: var(--ink); padding: 14px; font: inherit; font-size: 15px; margin-bottom: 18px; }
 .fb textarea:focus { outline: none; border-color: var(--ping); box-shadow: var(--glow); }
 .fb .fine { font-size: 12px; color: var(--ink-3); margin: 14px 0 0; }
+.fb .tipbox { position: relative; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
+.fb .tipbox-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.fb .tipbox input { width: 100%; min-width: 0; border-radius: 14px; border: 1px solid var(--line-2); background: var(--surface-2); color: var(--ink); padding: 12px 14px; font: inherit; font-size: 15px; }
+.fb .tipbox input:focus { outline: none; border-color: var(--ping); box-shadow: var(--glow); }
+.fb .tipbox .btn { flex: none; }
+@media (max-width: 520px) { .fb .tipbox-row { flex-direction: column; } }
 .fb.sent .form { display: none; }
 .thanks { display: none; text-align: center; padding: 30px 0; }
 .fb.sent .thanks { display: block; animation: rise .6s var(--ease); }

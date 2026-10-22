@@ -146,7 +146,8 @@ def via_note(ent):
     via = [v for v in ent.get("via", []) if v != "claude"]
     if not via:
         return ""
-    return f'<br><span style="font-size: 11px; color: #888888;">via {html.escape(", ".join(v.title() for v in via))}</span>'
+    names = {"reader": "Reader tip", "spark": "Gemini Spark"}
+    return f'<br><span style="font-size: 11px; color: #888888;">via {html.escape(", ".join(names.get(v, v.title()) for v in via))}</span>'
 
 
 def render_email(data):
@@ -220,6 +221,26 @@ def check_links(data):
                 err(data["id"], f"{ent['id']}: source returned {status}: {url}")
 
 
+def check_learning_files():
+    """data/learnings.json and contributors/focus.md are rewritten every Monday; keep them sane."""
+    learn = ROOT / "data" / "learnings.json"
+    if learn.exists():
+        try:
+            data = json.loads(learn.read_text(encoding="utf-8"))
+            for key in ("readers", "sources", "search", "sites", "history"):
+                if key not in data:
+                    errors.append(f"data/learnings.json: missing \"{key}\"")
+        except json.JSONDecodeError as ex:
+            errors.append(f"data/learnings.json is not valid JSON: {ex}")
+    focus = ROOT / "contributors" / "focus.md"
+    if focus.exists():
+        text = focus.read_text(encoding="utf-8")
+        if len(text.splitlines()) > 45:
+            warnings.append("contributors/focus.md is over 40 lines; keep it short so contributors read all of it")
+        if re.search(r"docs\.google\.com|@[a-z0-9-]+\.[a-z]{2,}", text, re.I):
+            errors.append("contributors/focus.md is public: remove private document links and email addresses")
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check-links", action="store_true")
@@ -233,6 +254,8 @@ def main():
             print(f"Checking links for {data.get('id')}:")
             check_links(data)
         issues.append((path, data))
+
+    check_learning_files()
 
     for w in warnings:
         print("warning:", w)
