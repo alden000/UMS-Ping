@@ -29,7 +29,9 @@ Monday at about 08:00 Singapore time (SGT). A fresh agent session follows these 
     "More of" topics only ever apply **within Ping's scope**: uncrewed maritime systems in the four tables. For example,
     "Counter-drone & threats" means maritime counter-drone systems and uncrewed waterborne threats, not general aviation news.
   - Entry types with repeated 👎 reasons ("Not relevant to me", "Too far from SEA", "Not new", "Weak source") are deprioritised accordingly.
-- Never cover a story whose source URL already appears in a previous issue (`data/issues/*.json`).
+- Never cover a story whose source URL already appears in a previous **regular** issue (`data/issues/*.json` with a whole
+  `number`). Special editions with a decimal number (e.g. Nº 001.5, a one-off trial) don't count: their stories may
+  appear again in the next regular issue.
 - Read the readers' free-text notes for the last 4 issues straight from KV (the Cloudflare API secret authorises
   these calls; `KV` is defined in step 3b):
   ```bash
@@ -122,7 +124,7 @@ the editor: you compile, collate and filter them together with your own findings
    | 2 | **Substance** | It isn't concrete news (incident, product, contract, test, deployment): opinion, marketing, event listings, job ads. |
    | 3 | **Access** | Paywalled, login, blocked host, or it fails the reader-view check (step 5b). Look for a free article on the same story first. |
    | 4 | **Credibility** | The key claim can't be verified: an unknown site with no second source, or the facts don't match the article. |
-   | 5 | **Novelty** | Already published in an earlier issue, or already in this issue from another source. |
+   | 5 | **Novelty** | Already published in an earlier regular issue, or already in this issue from another source. |
    | 6 | **Window** | Published outside START–END. |
    | 7 | **Value** | It passes 1–6 but adds little for a maritime-security team working on uncrewed systems (e.g. a minor reseller deal in a week with many stronger stories). Use sparingly and say why. |
 
@@ -180,7 +182,8 @@ Copy the structure of the most recent issue file exactly. The schema is:
   "window": { "start": "YYYY-MM-DD", "end": "YYYY-MM-DD" },
   "published": "YYYY-MM-DDT08:00:00+08:00",
   "editorial": { "picks": ["t1-1", "t2-3", "t4-2"] },   // the 3 most important stories, shown first as "The Brief"
-  "regionalWatch": { "status": "calm|elevated|alert", "label": "short phrase", "note": "explicit Singapore/SEA status" },
+  "regionalWatch": { "status": "calm|elevated|alert", "label": "short phrase",
+                     "note": ["2–4 short points, ≤ 20 words each: the Singapore / SEA status, what was searched, any regional context"] },
   "sections": [   // exactly these four keys, in this order
     { "key": "threats",   "title": "Threats & Incidents (Past 7 Days)", "emptyNote": "…", "entries": [ … ] },
     { "key": "platforms", "title": "Unmanned Maritime Systems Product News (Past 7 Days)", "emptyNote": "…", "entries": [ … ] },

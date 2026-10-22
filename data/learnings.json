@@ -1,6 +1,6 @@
 {
   "_comment": "Ping's memory between Monday runs. Read it before researching and update it before publishing (CURATION.md step 5c). Public file: no personal details, no reader text verbatim.",
-  "updated": "2026-10-22",
+  "updated": "2026-10-23",
   "readers": {
     "weeks_with_feedback": 0,
     "preferences": [],
@@ -22,9 +22,9 @@
   "sources": {
     "claude": {
       "role": "Main researcher (Monday run)",
-      "weeks": 1,
-      "found": 18,
-      "published": 18,
+      "weeks": 2,
+      "found": 43,
+      "published": 43,
       "rejections": {},
       "unique_finds": [
         "Navis Sardina survey USV",
@@ -34,45 +34,50 @@
         "China second UUV mothership"
       ],
       "status": "active",
-      "notes": "Benchmark 2026-10-22 on the Monday brief: 13/13 working links; the only source that also reported on the Singapore/SEA watch."
+      "notes": "Nº001: 18 of 18 published (no contributors yet). Nº001.5: found 25 of the 28 published stories itself."
     },
     "spark": {
       "role": "Gemini Spark agent, Monday 00:00 SGT, writes to a Google Doc",
-      "weeks": 0,
-      "submitted": 8,
-      "published": 0,
-      "rejections": {},
-      "unique_finds": [
-        "Taiwan Coast Guard MARTAC Devil Ray T24 USVs"
-      ],
-      "status": "active",
-      "notes": "Benchmark 2026-10-22: 8/8 working links; empty for threats and comms."
-    },
-    "gemini": {
-      "role": "Gemini API (3.8 Flash), Sunday ~21:17 SGT, ~12 US cents per run",
-      "weeks": 0,
+      "weeks": 1,
       "submitted": 11,
-      "published": 0,
+      "published": 9,
       "rejections": {
-        "wrong or dead link": 2
+        "already in an earlier issue": 1,
+        "not new / covered elsewhere": 1
       },
       "unique_finds": [
-        "Navantia / Multiverse naval edge AI"
+        "Taiwan Coast Guard MARTAC Devil Ray T24 USVs",
+        "Singapore MPA USV/UAV oil-spill response concepts (JOSE 2026)"
       ],
-      "status": "watch",
-      "notes": "Benchmark 2026-10-22: 9/11 correct links. Writes URLs from memory; the collector repairs or drops dead ones. Lite tier is not usable (0 working links)."
+      "status": "active",
+      "notes": "Nº001.5: 9 of 11 published; 2 of them were stories only Spark found (Taiwan Devil Ray USVs, Singapore MPA oil-spill USVs). All links worked."
+    },
+    "gemini": {
+      "role": "Gemini API (3.8 Flash + Google Search), Sunday ~21:17 SGT, ~12 US cents per run",
+      "weeks": 1,
+      "submitted": 31,
+      "published": 13,
+      "rejections": {
+        "duplicate across its own runs": 9,
+        "wrong or dead link": 3,
+        "off-topic (aerial / not uncrewed maritime)": 4,
+        "already in an earlier issue": 2
+      },
+      "unique_finds": [
+        "OceanAlpha L42B survey USV (Bureau Veritas AiP)"
+      ],
+      "status": "active",
+      "notes": "Nº001.5: 31 submissions over 3 test runs (many repeats), 13 stories published; 1 only it found (OceanAlpha L42B). Some links written from memory; collector repairs or drops dead ones."
     },
     "groq": {
       "role": "Groq free tier (gpt-oss), Sunday ~21:17 SGT",
-      "weeks": 0,
-      "submitted": 2,
-      "published": 0,
-      "rejections": {
-        "outside window": 2
-      },
+      "weeks": 1,
+      "submitted": 1,
+      "published": 1,
+      "rejections": {},
       "unique_finds": [],
-      "status": "watch",
-      "notes": "Often hits the free daily token limit during testing; judge it on normal Sunday runs."
+      "status": "active",
+      "notes": "Nº001.5: 1 of 1 published (HII Sea Launcher, also found by others). Hit its free daily limit during testing."
     },
     "reader": {
       "role": "Story tips from readers via the site",
@@ -123,7 +128,7 @@
     {
       "edition": "2026-10-22",
       "changes": [
-        "Special edition Nº 001.5 (15–22 Oct) published from a trial run; Monday's Nº 002 skips its stories as already covered"
+        "Special edition Nº 001.5 (15–22 Oct) published from a one-off trial run. Regular issues don't treat its stories as already covered."
       ]
     },
     {

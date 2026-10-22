@@ -146,6 +146,9 @@
     return img;
   }
 
+  // The regional note is a list of short points (older issues have a single paragraph).
+  const rwPoints = (rw) => (Array.isArray(rw?.note) ? rw.note : rw?.note ? [rw.note] : []).filter(Boolean);
+
   /* ---------- Render: hero ---------- */
   function renderHero(issue) {
     const counts = issue.sections.map((s) => [s.key, s.entries.length]);
@@ -197,6 +200,7 @@
   /* ---------- Render: intel / infographics ---------- */
   function renderIntel(issue) {
     const rw = issue.regionalWatch || { status: "calm", note: "" };
+    const pts = rwPoints(rw);
     const st = STATUS[rw.status] || STATUS.calm;
     const sea = state.entries.filter((e) => e.region === "Southeast Asia");
     const days = [];
@@ -234,7 +238,7 @@
           <div class="panel watch rv" style="--s:${st.c};--d:.08s">
             <h3>Regional watch · Singapore &amp; SEA</h3>
             <div class="status"><div class="orb" aria-hidden="true"></div><div><small>Threat status</small><b>${esc(st.label)}${rw.label ? " · " + esc(rw.label) : ""}</b></div></div>
-            <p>${esc(rw.note)}</p>
+            ${pts.length > 1 ? `<ul class="rw-points">${pts.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p>${esc(pts[0] || "")}</p>`}
             ${sea.length ? `<h3 style="margin-top:6px">SEA-linked this week · ${sea.length}</h3><ul>${sea.map((e) => `<li><a href="#/${esc(issue.id)}/${esc(e.id)}" data-jump="${esc(e.id)}" style="--c:${SECTIONS[e.section].color}"><i></i><span>${esc(splitTitle(e.title)[0])}</span></a></li>`).join("")}</ul>` : ""}
           </div>
           <div class="panel week rv">
@@ -325,7 +329,7 @@
     const w = ["12%", "22%", "18%", "33%", "15%"];
     const rows = sec.entries.map((e) => `<tr><td>${esc(e.date)}</td><td>${esc(e.title)}</td><td>${esc(key === "threats" ? e.location : e.tech)}</td><td>${esc(e.details)}</td><td><a href="${esc(e.source.url)}" target="_blank" rel="noopener noreferrer">${esc(e.source.name)}</a></td></tr>`);
     if (!sec.entries.length) rows.push(`<tr><td class="n" colspan="5">${esc(sec.emptyNote)}</td></tr>`);
-    if (key === "threats" && state.issue.regionalWatch?.note) rows.push(`<tr><td class="n" colspan="5"><b>Regional Note (Singapore &amp; Surrounding Waterways):</b> ${esc(state.issue.regionalWatch.note)}</td></tr>`);
+    if (key === "threats" && state.issue.regionalWatch?.note) rows.push(`<tr><td class="n" colspan="5"><b>Regional Note (Singapore &amp; Surrounding Waterways):</b> ${esc(rwPoints(state.issue.regionalWatch).join(" · "))}</td></tr>`);
     return `<div class="tablewrap"><table class="classic"><caption class="sr-only">${esc(sec.title)}</caption><thead><tr>${cols.map((c, i) => `<th scope="col" style="width:${w[i]}">${esc(c)}</th>`).join("")}</tr></thead><tbody>${rows.join("")}</tbody></table></div>`;
   }
 
@@ -350,7 +354,7 @@
           </div>
         </div>
         <div class="view-cards" ${state.view === "table" ? "hidden" : ""}>${cards}
-          ${sec.key === "threats" && rw?.note ? `<div class="note rv" style="--s:${st.c}">${ICON.shield}<div><b>Regional note: Singapore &amp; surrounding waterways.</b> ${esc(rw.note)}</div></div>` : ""}
+          ${sec.key === "threats" && rw?.note ? `<div class="note rv" style="--s:${st.c}">${ICON.shield}<div><b>Regional note: Singapore &amp; surrounding waterways.</b> ${esc(rwPoints(rw).join(" · "))}</div></div>` : ""}
         </div>
         <div class="view-table" ${state.view === "cards" ? "hidden" : ""}>${table(sec, sec.key)}</div>
       </div>

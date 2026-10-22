@@ -525,3 +525,7 @@ button { font: inherit; color: inherit; }
   body { background: #fff; color: #000; }
   .card { break-inside: avoid; box-shadow: none; }
 }
+
+.rw-points { margin: 0 0 20px; padding: 0; list-style: none; display: grid; gap: 8px; }
+.rw-points li { position: relative; padding-left: 18px; color: var(--ink-2); line-height: 1.5; }
+.rw-points li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--ping); opacity: .8; }

@@ -234,7 +234,7 @@
 
     if (learned) {
       const src = Object.entries(learned.sources || {}).map(([k2, s]) => `<tr><td>${esc({ claude: "Claude (curator)", spark: "Gemini Spark", gemini: "Gemini API", groq: "Groq", reader: "Reader recommendations" }[k2] || k2)}</td><td>${esc(s.status)}</td><td class="n">${s.published ?? 0} / ${s.submitted ?? s.found ?? 0}</td></tr>`).join("");
-      $("#learned").innerHTML = `<table><thead><tr><th>Source</th><th>Status</th><th>Published / found</th></tr></thead><tbody>${src}</tbody></table>` +
+      $("#learned").innerHTML = `<table><thead><tr><th>Source</th><th>Status</th><th>Published / submitted</th></tr></thead><tbody>${src}</tbody></table>` +
         (learned.history || []).slice(0, 3).map((h) => `<div class="note" style="margin-top:10px"><small>Edition ${esc(h.edition)}</small>${(h.changes || []).map(esc).join("<br>")}</div>`).join("");
     }
   }

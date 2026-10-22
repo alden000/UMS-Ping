@@ -191,7 +191,9 @@ def render_email(data):
         if not rows:
             notes.append(sec.get("emptyNote") or "No verified updates were published in this category within the 7-day window.")
         if key == "threats" and data.get("regionalWatch", {}).get("note"):
-            notes.append("Regional Note (Singapore &amp; Surrounding Waterways): " + e(data["regionalWatch"]["note"]))
+            note = data["regionalWatch"]["note"]
+            note = "<br>".join("• " + e(x) for x in note) if isinstance(note, list) else e(note)
+            notes.append("Regional Note (Singapore &amp; Surrounding Waterways):<br>" + note)
         for j, note in enumerate(notes):
             bg = "#ffffff" if (len(rows) + j) % 2 == 0 else "#fcfcfc"
             text = note if note.startswith("Regional Note") else e(note)

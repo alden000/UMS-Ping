@@ -17,7 +17,12 @@
   "regionalWatch": {
     "status": "calm",
     "label": "No uncrewed incidents",
-    "note": "15-22 Oct 2026: I found no verified incident involving USVs, UUVs or gliders, ROVs, seabed cables, narco semi-submersibles or WBIEDs in Singapore, the Singapore Strait, the Malacca Strait, the South China Sea or wider Southeast Asia. Targeted searches turned up no new recovered Chinese underwater drones or gliders in Indonesia, the Philippines, Vietnam or Malaysia; the latest finds are Indonesia (Lombok Strait, April 2026) and Palawan (2025). They also turned up no Malacca/Singapore Strait cable or drone incidents. Background concern continues over China's suspected UUV motherships, but no regional event fell in the window. Uncrewed threat activity this week was concentrated in the Black Sea; Gulf and Hormuz tanker attacks were reported as projectiles or aerial drones, with no confirmed USV involvement."
+    "note": [
+      "No verified uncrewed incidents in Singapore, the Malacca Strait, the South China Sea or wider SEA (15–22 Oct).",
+      "No new underwater drones or gliders recovered in Indonesia, the Philippines, Vietnam or Malaysia; latest was Lombok Strait, April 2026.",
+      "No cable or drone incidents in the Malacca or Singapore straits.",
+      "Watch: China's suspected UUV motherships (see Product News)."
+    ]
   },
   "sections": [
     {

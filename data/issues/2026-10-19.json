@@ -17,7 +17,12 @@
   "regionalWatch": {
     "status": "calm",
     "label": "No uncrewed incidents",
-    "note": "No verified hostile incidents involving uncrewed waterborne systems or WBIEDs occurred in Singapore, the Singapore and Malacca Straits, the South China Sea or wider Southeast Asia from 12 to 19 Oct 2026. Targeted searches found no USV or WBIED attacks, no recovered UUVs or gliders, and no ROV-linked seabed-cable incidents in the region. One Singapore link outside the region: the Singapore-registered GFS Pride sank in the Strait of Hormuz after being hit on 13 Oct (all 21 crew safe), and GFS Giselle was damaged on 14 Oct. Singapore's MPA attributed both to 'unidentified projectiles', and no source ties either incident to an uncrewed surface vessel."
+    "note": [
+      "No verified uncrewed incidents in Singapore, the Singapore and Malacca straits, the South China Sea or wider SEA (12–19 Oct).",
+      "No USV or WBIED attacks, recovered UUVs or gliders, or ROV-linked cable incidents found in the region.",
+      "Singapore link abroad: Singapore-flagged GFS Pride sank in the Strait of Hormuz (13 Oct, all 21 crew safe); GFS Giselle damaged (14 Oct).",
+      "MPA attributed both to unidentified projectiles; no source links either to an uncrewed vessel."
+    ]
   },
   "sections": [
     {
