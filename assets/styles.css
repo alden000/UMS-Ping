@@ -306,9 +306,10 @@ button { font: inherit; color: inherit; }
 .watch li a:hover { border-color: var(--c); transform: translateX(3px); }
 .watch li i { width: 8px; height: 8px; border-radius: 50%; background: var(--c); flex: none; margin-top: 5px; }
 
-.weekgrid { display: grid; grid-template-columns: repeat(var(--days), 1fr); gap: 8px; align-items: end; height: 190px; }
+/* The grid grows with the busiest day, so a heavy news day never pushes the date labels out of the card. */
+.weekgrid { display: grid; grid-template-columns: repeat(var(--days), 1fr); gap: 8px; align-items: end; min-height: 190px; }
 .day { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; height: 100%; }
-.day .stack { display: flex; flex-direction: column-reverse; gap: 5px; align-items: center; flex: 1; justify-content: flex-start; width: 100%; padding-top: 6px; }
+.day .stack { display: flex; flex-direction: column-reverse; gap: 5px; align-items: center; justify-content: flex-start; width: 100%; padding-top: 6px; }
 .day .stack button { width: min(26px, 100%); aspect-ratio: 1; border-radius: 8px; border: 0; background: var(--c); cursor: pointer; box-shadow: 0 0 12px -2px var(--c); transform: scale(0); transition: transform .5s var(--ease-spring); transition-delay: var(--d, 0s); }
 .weekgrid.in .stack button { transform: scale(1); }
 .day .stack button:hover, .day .stack button:focus-visible { transform: scale(1.18); }
