@@ -4,6 +4,10 @@ on:
   schedule:
     - cron: "17 13 * * 0"
   workflow_dispatch:
+  # Editing contributors/run-now also starts a run (lets the curator trigger a test by pushing).
+  push:
+    branches: [main]
+    paths: [contributors/run-now]
 jobs:
   collect:
     runs-on: ubuntu-latest
