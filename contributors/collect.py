@@ -135,9 +135,35 @@ def ask_gemini(prompt):
         usage = data.get("usageMetadata", {})
         print(f"    gemini/{model}: {usage.get('promptTokenCount', '?')} tokens in, "
               f"{usage.get('candidatesTokenCount', 0) + usage.get('thoughtsTokenCount', 0)} out")
-        parts = data.get("candidates", [{}])[0].get("content", {}).get("parts", [])
-        return "".join(p.get("text", "") for p in parts)
+        cand = data.get("candidates", [{}])[0]
+        # The pages Google actually returned for this answer. Gemini often writes article URLs from memory;
+        # these grounding links (Google redirect URLs) point to what it really read.
+        chunks = (cand.get("groundingMetadata") or {}).get("groundingChunks") or []
+        GROUNDING.extend(c["web"]["uri"] for c in chunks if c.get("web", {}).get("uri"))
+        return "".join(p.get("text", "") for p in cand.get("content", {}).get("parts", []))
     return first_working("gemini", models, call)
+
+
+GROUNDING = []  # grounding redirect URLs collected from Gemini answers during this run
+
+
+def _words(text):
+    return {w for w in re.findall(r"[a-z0-9]{3,}", (text or "").lower())
+            if w not in {"the", "and", "for", "with", "from", "news", "naval", "www", "com", "html"}}
+
+
+def grounded_replacement(entry, resolved):
+    """Pick the page Gemini actually read that best matches this entry's title (and host, if possible)."""
+    want = _words(entry.get("title")) | _words(entry.get("summary"))
+    host = urllib.parse.urlparse((entry.get("source") or {}).get("url", "")).hostname or ""
+    best, score = None, 0
+    for final in resolved:
+        p = urllib.parse.urlparse(final)
+        overlap = len(want & _words(p.path))
+        bonus = 2 if p.hostname and p.hostname.replace("www.", "") == host.replace("www.", "") else 0
+        if overlap >= 2 and overlap + bonus > score:
+            best, score = final, overlap + bonus
+    return best
 
 
 def groq_models():
@@ -265,6 +291,12 @@ def resolve(url):
 
 def prefilter(entries, start, end):
     kept, dropped = [], []
+    resolved = []  # real article URLs behind Gemini's grounding links, resolved once per run
+    for g in dict.fromkeys(GROUNDING):
+        final, status = resolve(g)
+        if status == 200 and "vertexaisearch" not in final:
+            resolved.append(final)
+    GROUNDING.clear()
     for e in entries:
         url = (e.get("source") or {}).get("url", "")
         try:
@@ -279,6 +311,11 @@ def prefilter(entries, start, end):
             dropped.append((e.get("title"), "no https url"))
             continue
         final, status = resolve(url)
+        if status in (404, 410, None) and resolved:
+            fix = grounded_replacement(e, resolved)
+            if fix:
+                print(f"    repaired link for '{e.get('title')}': {url} -> {fix}")
+                final, status = fix, 200
         if status in (404, 410):
             dropped.append((e.get("title"), f"dead link {status}"))
             continue
