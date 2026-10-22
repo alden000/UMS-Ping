@@ -239,7 +239,7 @@
             <h3>Regional watch · Singapore &amp; SEA</h3>
             <div class="status"><div class="orb" aria-hidden="true"></div><div><small>Threat status</small><b>${esc(st.label)}${rw.label ? " · " + esc(rw.label) : ""}</b></div></div>
             ${pts.length > 1 ? `<ul class="rw-points">${pts.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : `<p>${esc(pts[0] || "")}</p>`}
-            ${sea.length ? `<h3 style="margin-top:30px">South East Asia linked this week · ${sea.length}</h3><ul>${sea.map((e) => `<li><a href="#/${esc(issue.id)}/${esc(e.id)}" data-jump="${esc(e.id)}" style="--c:${SECTIONS[e.section].color}"><i></i><span>${esc(splitTitle(e.title)[0])}</span></a></li>`).join("")}</ul>` : ""}
+            ${sea.length ? `<h3 style="margin-top:30px;line-height:1.5">South East Asia linked this&nbsp;week&nbsp;·&nbsp;${sea.length}</h3><ul>${sea.map((e) => `<li><a href="#/${esc(issue.id)}/${esc(e.id)}" data-jump="${esc(e.id)}" style="--c:${SECTIONS[e.section].color}"><i></i><span>${esc(splitTitle(e.title)[0])}</span></a></li>`).join("")}</ul>` : ""}
           </div>
           <div class="panel week rv">
             <h3>Week pulse · stories by publish date</h3>
