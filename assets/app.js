@@ -65,7 +65,8 @@
   const short = (s) => fmt(s, { day: "numeric", month: "short" });
   const long = (s) => fmt(s, { day: "numeric", month: "short", year: "numeric" });
   const splitTitle = (t) => { const i = t.indexOf(" / "); return i < 0 ? [t, ""] : [t.slice(0, i), t.slice(i + 3)]; };
-  const issueNo = (n) => "Nº " + String(n).padStart(3, "0");
+  // Special editions carry a decimal number, e.g. 1.5 → "Nº 001.5".
+  const issueNo = (n) => { const [whole, part] = String(n).split("."); return "Nº " + whole.padStart(3, "0") + (part ? "." + part : ""); };
 
   /* ---------- Feedback transport ---------- */
   const Feedback = {

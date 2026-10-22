@@ -1,6 +1,21 @@
 {
-  "latest": "2026-10-19",
+  "latest": "2026-10-22",
   "issues": [
+    {
+      "id": "2026-10-22",
+      "number": 1.5,
+      "window": {
+        "start": "2026-10-15",
+        "end": "2026-10-22"
+      },
+      "headline": "Ghost Shark bares its teeth; drone boats hunt drones.",
+      "counts": {
+        "threats": 2,
+        "platforms": 15,
+        "tech": 7,
+        "comms": 4
+      }
+    },
     {
       "id": "2026-10-19",
       "number": 1,

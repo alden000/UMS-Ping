@@ -1,0 +1,1083 @@
+{
+  "id": "2026-10-22",
+  "number": 1.5,
+  "title": "🛥 Weekly Maritime Systems Intelligence & Technology Update",
+  "window": {
+    "start": "2026-10-15",
+    "end": "2026-10-22"
+  },
+  "published": "2026-10-22T23:00:00+08:00",
+  "editorial": {
+    "headline": "Ghost Shark bares its teeth; drone boats hunt drones.",
+    "lede": "Australia revealed Ghost Shark's mine-laying and drone-launching payloads, and a Ukrainian drone boat shot down a Russian strike drone in an all-uncrewed fight. Closer to home, Singapore showed how drones and USVs could fight oil spills in the straits, and Japan is funding a counter-drone system for Malaysia's navy.",
+    "picks": [
+      "t1-1",
+      "t2-11",
+      "t3-2"
+    ]
+  },
+  "regionalWatch": {
+    "status": "calm",
+    "label": "No uncrewed incidents",
+    "note": "15-22 Oct 2026: I found no verified incident involving USVs, UUVs or gliders, ROVs, seabed cables, narco semi-submersibles or WBIEDs in Singapore, the Singapore Strait, the Malacca Strait, the South China Sea or wider Southeast Asia. Targeted searches turned up no new recovered Chinese underwater drones or gliders in Indonesia, the Philippines, Vietnam or Malaysia; the latest finds are Indonesia (Lombok Strait, April 2026) and Palawan (2025). They also turned up no Malacca/Singapore Strait cable or drone incidents. Background concern continues over China's suspected UUV motherships, but no regional event fell in the window. Uncrewed threat activity this week was concentrated in the Black Sea; Gulf and Hormuz tanker attacks were reported as projectiles or aerial drones, with no confirmed USV involvement."
+  },
+  "sections": [
+    {
+      "key": "threats",
+      "title": "Threats & Incidents (Past 7 Days)",
+      "emptyNote": "No verified uncrewed waterborne threats or incidents were published within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-21",
+          "title": "Ukrainian Sargan-3000 USV launches Sting interceptor to down Russian Geran drone / Black Sea",
+          "location": "Black Sea (exact position not disclosed)",
+          "details": "The Ukrainian Navy published footage of its Sargan-3000 uncrewed surface vessel destroying a Russian Geran strike drone with a Wild Hornets Sting interceptor drone launched from a container platform on the boat. The Sargan-3000 was commissioned in April 2026. It has an operational radius of up to 1,600 km, a speed of 40-55 knots and a payload of up to 450 kg. Earlier claims by the same type are a Russian USV sunk with machine-gun fire in September and a Geran shot down in early October with a 12.7 mm Protector remote weapon station.",
+          "summary": "A Ukrainian Sargan-3000 drone boat launched a Sting interceptor that shot down a Russian Geran: an all-uncrewed engagement at sea.",
+          "source": {
+            "name": "Militarnyi",
+            "url": "https://militarnyi.com/en/news/sargan-usv-uses-sting-interceptor-to-shoot-down-russian-geran-drone/"
+          },
+          "region": "Black Sea",
+          "lat": 44.0,
+          "lng": 33.5,
+          "domain": "cross-domain",
+          "image": "https://militarnyi.com/wp-content/uploads/2026/10/perehoplennya-1.jpg",
+          "video": null,
+          "specs": [
+            {
+              "label": "Radius",
+              "value": "1,600 km"
+            },
+            {
+              "label": "Speed",
+              "value": "40-55 kn"
+            },
+            {
+              "label": "Payload",
+              "value": "450 kg"
+            }
+          ],
+          "tags": [
+            "usv",
+            "ukraine",
+            "counter-uas",
+            "sargan-3000",
+            "black sea"
+          ],
+          "severity": "medium",
+          "via": [
+            "gemini",
+            "claude"
+          ],
+          "id": "t1-1"
+        },
+        {
+          "date": "2026-10-22",
+          "title": "Oil spill follows naval-drone strike on tanker Aframax Rio / Russian Black Sea coast",
+          "location": "Off Sochi and Novorossiysk, Krasnodar region, Russia",
+          "details": "The 247 m Liberian-flagged tanker Aframax Rio was hit off Sochi on 6 Oct in an attack the article links to Ukrainian naval drones, and was towed to Novorossiysk. Greenpeace satellite images showed a slick of about 25 sq km by 8 Oct. Prozrachny Mir identified a slick about 70 km south of Novorossiysk in images dated 10 Oct. Krasnodar Governor Veniamin Kondratyev warned of a possible emergency in Gelendzhik and Novorossiysk and blamed 'accidents'. The regional emergencies ministry denied any link to the tanker.",
+          "summary": "Questions grow over a Black Sea oil slick after the naval-drone strike on the tanker Aframax Rio off Sochi; officials deny any link.",
+          "source": {
+            "name": "The Moscow Times",
+            "url": "https://www.themoscowtimes.com/2026/10/22/regions-calling-more-questions-than-answers-after-latest-black-sea-oil-spill-a94053"
+          },
+          "region": "Black Sea",
+          "lat": 44.72,
+          "lng": 37.77,
+          "domain": "surface",
+          "image": "https://static.themoscowtimes.com/image/og/e9/94053__e9127508ffd40cce733020e20c2a6ab2.jpg",
+          "video": null,
+          "specs": [
+            {
+              "label": "Tanker length",
+              "value": "247 m"
+            },
+            {
+              "label": "Slick (8 Oct)",
+              "value": "~25 sq km"
+            }
+          ],
+          "tags": [
+            "usv",
+            "tanker",
+            "oil spill",
+            "russia",
+            "black sea"
+          ],
+          "severity": "medium",
+          "id": "t1-2"
+        }
+      ]
+    },
+    {
+      "key": "platforms",
+      "title": "Unmanned Maritime Systems Product News (Past 7 Days)",
+      "emptyNote": "No new unmanned maritime platforms were announced within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-16",
+          "title": "New PLAN mine-warfare USV / Chinese Navy",
+          "tech": "A new mine countermeasures USV with optional crewing, a remote weapon station and a transom A-frame for launching towed sonar, sweeps or AUVs.",
+          "details": "Better images have emerged of a new Chinese Navy uncrewed surface vessel, somewhat smaller than the MCM USV paraded in Beijing in September 2025. It has been seen exercising with Type-529 Wonang-class minesweeping craft and appears to be a one-for-one replacement for them. Features include an optional crewing cockpit, a remote weapon station and a transom A-frame. No dimensions have been published.",
+          "summary": "New images show a PLAN mine-countermeasures USV that appears set to replace Type-529 minesweeping craft one-for-one.",
+          "source": {
+            "name": "Covert Shores (H I Sutton)",
+            "url": "https://www.hisutton.com/Chinese-MCM-USV.html"
+          },
+          "region": "East Asia",
+          "lat": 35.86,
+          "lng": 104.19,
+          "domain": "surface",
+          "image": null,
+          "video": null,
+          "specs": [],
+          "tags": [
+            "usv",
+            "mcm",
+            "china",
+            "plan"
+          ],
+          "id": "t2-1"
+        },
+        {
+          "date": "2026-10-18",
+          "title": "Second suspected UUV mothership / PLA Navy (China)",
+          "tech": "A new naval auxiliary that observers believe is built to launch and recover very large uncrewed underwater vehicles.",
+          "details": "Video stills shared on Weibo show tugs towing an unfinished auxiliary down the Pearl River near Guangzhou's Panyu district, still covered in scaffolding and without sensors. The builder may be COMEC (Huangpu Wenchong) on Longxue Island, but that is not confirmed. It follows a first suspected UUV mothership at Hudong, Shanghai: just over 200 m long, with twelve lifting masts and a stern cradle that could carry vehicles up to about 50 m long.",
+          "summary": "A second suspected Chinese UUV mothership has appeared in Guangzhou, following the 200 m vessel spotted in Shanghai.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/second-possible-chinese-uuv-mothership-appears-in-guangzhou/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/HU5Z86PaUAA5-Da.jpg",
+          "video": null,
+          "region": "East Asia",
+          "lat": 22.94,
+          "lng": 113.45,
+          "domain": "subsurface",
+          "specs": [
+            {
+              "label": "First ship",
+              "value": "~200 m"
+            },
+            {
+              "label": "Cradle",
+              "value": "up to ~50 m"
+            }
+          ],
+          "tags": [
+            "china",
+            "plan",
+            "xluuv",
+            "mothership"
+          ],
+          "via": [
+            "spark",
+            "claude"
+          ],
+          "id": "t2-2"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "Large UUV demonstrator / Saab, FMV",
+          "tech": "A large uncrewed underwater vehicle demonstrator for seabed-infrastructure monitoring, planned to operate alongside submarines.",
+          "details": "Saab, Sweden's defence procurement agency FMV and the Swedish Armed Forces have completed sea trials of the demonstrator, which was developed, built and launched less than a year after contract award. FMV awarded Saab the SEK60 million (US$6 million) contract in August 2025. The first phase has ended; the next will focus on more advanced capabilities, and the results will inform whether Sweden acquires autonomous underwater systems.",
+          "summary": "Saab finishes sea trials of a large UUV demonstrator built in under a year for Sweden.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/saab-completes-underwater-vehicle-trials"
+          },
+          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-19%2Fgcu4ramy%2F5fc41108_6cda_4bd1_b9bb_eca101ccaf64.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "region": "Europe",
+          "lat": 56.16,
+          "lng": 15.59,
+          "domain": "subsurface",
+          "specs": [
+            {
+              "label": "Contract",
+              "value": "SEK60M"
+            },
+            {
+              "label": "Build time",
+              "value": "< 1 year"
+            }
+          ],
+          "tags": [
+            "luuv",
+            "saab",
+            "sweden",
+            "seabed"
+          ],
+          "id": "t2-3"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "Bluebottle USVs on Fiji EEZ patrol / Royal New Zealand Navy, Ocius",
+          "tech": "Wind, solar and wave-powered uncrewed surface vessels used for persistent maritime surveillance.",
+          "details": "Two Royal New Zealand Navy Bluebottles ran a four-week, round-the-clock operation with New Zealand Customs and Fijian authorities in Fiji's EEZ and flagged 137 vessels of interest for closer scrutiny. They were flown to Nadi by RNZAF C-130J. Ocius has opened a maintenance facility in Auckland for the RNZN fleet, which was bought in April 2025 after a seven-month trial.",
+          "summary": "Two RNZN Bluebottle USVs flagged 137 vessels of interest in a four-week Fiji EEZ surveillance operation.",
+          "source": {
+            "name": "Defence Connect",
+            "url": "https://www.defenceconnect.com.au/naval/19011-bluebottle-usvs-bringing-new-capability-and-cooperability-says-royal-new-zealand-navy"
+          },
+          "image": "https://res.cloudinary.com/momentum-media-group-pty-ltd/image/upload/v1792388133/20261016_123103_csf94w.jpg",
+          "video": null,
+          "region": "Oceania",
+          "lat": -17.76,
+          "lng": 177.44,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Vessels flagged",
+              "value": "137"
+            },
+            {
+              "label": "Operation",
+              "value": "4 weeks, 24/7"
+            }
+          ],
+          "tags": [
+            "usv",
+            "eez",
+            "new zealand",
+            "fiji"
+          ],
+          "id": "t2-4"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "SWAP-USV Sprint 2 counter-air USV challenge / Defense Innovation Unit",
+          "tech": "A prize challenge for mature USVs fitted with hard-kill counter-air effectors and clutter-resilient sensors.",
+          "details": "DIU's second sprint offers up to $40 million in prizes for USVs the Pentagon can field within 120 days. Entries must detect, track and defeat small drones and other low-cost threats, with at least 200 nm range and a sustained 10 knots. DIU says current force packages lack persistent, distributed and affordable capability against explosive USVs and small UAS.",
+          "summary": "DIU offers up to $40M for counter-drone USVs that can be fielded within 120 days.",
+          "source": {
+            "name": "Breaking Defense",
+            "url": "https://breakingdefense.com/2026/10/diu-unveils-next-phase-in-unmanned-vessel-competition/"
+          },
+          "image": null,
+          "video": null,
+          "region": "Americas",
+          "lat": 38.87,
+          "lng": -77.06,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Prize pool",
+              "value": "up to $40M"
+            },
+            {
+              "label": "Range",
+              "value": "≥ 200 nm"
+            },
+            {
+              "label": "Fielding",
+              "value": "120 days"
+            }
+          ],
+          "tags": [
+            "usv",
+            "counter-uas",
+            "diu",
+            "us navy"
+          ],
+          "via": [
+            "gemini",
+            "claude"
+          ],
+          "id": "t2-5"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "Devil Ray T24 USVs for Taiwan Coast Guard / MARTAC",
+          "tech": "High-speed autonomous surface vessels, co-produced in the US and Taiwan.",
+          "details": "Taiwan's Coast Guard Administration is buying an undisclosed number of MARTAC Devil Ray T24 USVs, its first USV programme. The deal grew out of a memorandum between MARTAC, Taiwan's NCSIST and local partner Confucian Co. Some vessels will be built in Edgewater, Florida and the rest by Confucian in Taiwan.",
+          "summary": "Taiwan's Coast Guard buys MARTAC Devil Ray T24 USVs in its first uncrewed-vessel programme, co-produced in Taiwan.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/taiwan-coast-guard-to-acquire-martac-devil-ray-t24-usvs/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2023/05/MARTAC-T24-USV.jpg",
+          "video": null,
+          "region": "East Asia",
+          "lat": 25.03,
+          "lng": 121.56,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Programme",
+              "value": "CGA's first USV buy"
+            }
+          ],
+          "tags": [
+            "usv",
+            "taiwan",
+            "coast guard",
+            "co-production"
+          ],
+          "via": [
+            "spark"
+          ],
+          "id": "t2-6"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "VAone + Lattice USV autonomy demo / HD Hyundai & Anduril",
+          "tech": "HD KSOE's VAone autonomy package, built on Avikus HiNAS Prime, was paired with Anduril's Lattice mission software on a former US Navy unmanned test ship.",
+          "details": "HD Hyundai and Anduril demonstrated an unmanned surface vessel off Long Beach, California, using a 368-ton test ship formerly operated by the US Navy. The test covered autonomous navigation, mission changes, formation sailing and an emergency response to an engine failure. About 40 officials attended, including from the US Navy, US Coast Guard, ABS, the Korean Navy and DAPA. The partners plan to pursue the US unmanned surface vessel programme.",
+          "summary": "HD Hyundai and Anduril put a 368-ton ex-US Navy test ship through autonomous navigation, formation and failure-response trials off Long Beach.",
+          "source": {
+            "name": "Korea JoongAng Daily",
+            "url": "https://www.koreajoongangdaily.com/business/hd-hyundai-shows-off-unmanned-warship-technology-in-us-with-anduril/12926670"
+          },
+          "region": "Americas",
+          "lat": 33.77,
+          "lng": -118.19,
+          "domain": "surface",
+          "image": "https://image.koreajoongangdaily.com/12927075.jpg?imageId=12927075&x=0&y=0&cropw=100&croph=100&panox=0&panoy=0&panow=100&panoh=100&width=1200&height=683",
+          "video": null,
+          "specs": [
+            {
+              "label": "Displacement",
+              "value": "368 tons"
+            },
+            {
+              "label": "Attendees",
+              "value": "~40 officials"
+            }
+          ],
+          "tags": [
+            "usv",
+            "autonomy",
+            "hd-hyundai",
+            "anduril",
+            "south-korea"
+          ],
+          "via": [
+            "gemini",
+            "claude"
+          ],
+          "id": "t2-7"
+        },
+        {
+          "date": "2026-10-20",
+          "title": "Exail nine-metre USV for ONR counter-drone research and USCG testing / Exail",
+          "tech": "A containerised nine-metre long-range USV will carry a third-party counter-UAS payload adapted from land systems for US Navy research, and a second craft goes to the US Coast Guard for evaluation.",
+          "details": "Exail will supply a nine-metre USV to the Office of Naval Research through an integrator that will fit an unspecified C-UAS payload. The contract was first announced in April. A second Exail USV is slated for US Coast Guard evaluation, and Exail plans to sail one across the Atlantic first. The craft displaces 2.1 tonnes, fits a 40-foot high-cube container, and has a 2,000 nm range and up to 20 days' endurance.",
+          "summary": "Exail USVs head to ONR for counter-drone payload research and to the US Coast Guard for trials, after a planned Atlantic crossing.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/security/naval/unmanned-naval-systems/exail-navy-counter-drone-research"
+          },
+          "region": "Americas",
+          "lat": 38.88,
+          "lng": -77.1,
+          "domain": "surface",
+          "image": "https://media.assettype.com/bairdmaritime%2F2025-06-30%2Fpa4o9eho%2Fexail_drix_isr_1200x1799.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "specs": [
+            {
+              "label": "Length",
+              "value": "9 m"
+            },
+            {
+              "label": "Displacement",
+              "value": "2.1 t"
+            },
+            {
+              "label": "Range",
+              "value": "2,000 nm"
+            },
+            {
+              "label": "Endurance",
+              "value": "up to 20 days"
+            }
+          ],
+          "tags": [
+            "usv",
+            "exail",
+            "counter-uas",
+            "us-navy",
+            "us-coast-guard"
+          ],
+          "id": "t2-8"
+        },
+        {
+          "date": "2026-10-20",
+          "title": "Sardina survey USV prototype / Navis",
+          "tech": "A six-metre wave-piercing composite USV carries its multibeam and side-scan sonar payload in a retractable bulb keel for autonomous seabed surveys.",
+          "details": "Navis trialled the Sardina prototype at Lahdenpokhya, Karelia, earlier in October. It held within 3 m of its track at 4-6 knots with a HydroTech MS400U 400 kHz multibeam echosounder. Full displacement is 1,300 kg, payload up to 200 kg, top speed 7 knots and endurance up to 48 hours at cruising speed. It has been switched from a petrol waterjet to diesel propeller propulsion.",
+          "summary": "Russian maker Navis shows its six-metre Sardina USV running autonomous multibeam seabed surveys in Karelia.",
+          "source": {
+            "name": "Baird Maritime",
+            "url": "https://www.bairdmaritime.com/unmanned/unmanned-survey/navis-sardina-demonstrates-seabed-surveying"
+          },
+          "region": "Europe",
+          "lat": 61.52,
+          "lng": 30.2,
+          "domain": "surface",
+          "image": "https://media.assettype.com/bairdmaritime%2F2026-10-20%2F9riux0sc%2F03cdcbc1_2cae_4f97_ad94_26a460becd2c.jpg?w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100",
+          "video": null,
+          "specs": [
+            {
+              "label": "Length",
+              "value": "6 m"
+            },
+            {
+              "label": "Displacement",
+              "value": "1,300 kg"
+            },
+            {
+              "label": "Max speed",
+              "value": "7 kn"
+            },
+            {
+              "label": "Endurance",
+              "value": "48 h"
+            }
+          ],
+          "tags": [
+            "usv",
+            "hydrographic-survey",
+            "russia",
+            "multibeam"
+          ],
+          "id": "t2-9"
+        },
+        {
+          "date": "2026-10-20",
+          "title": "L42B survey USV gets Bureau Veritas approval in principle / OceanAlpha",
+          "tech": "An 8.5 m diesel-electric survey catamaran built for remotely supervised hydrographic and geophysical work.",
+          "details": "Bureau Veritas reviewed the L42B against its NI 641 autonomous-shipping guidelines, covering harbour manoeuvring in complex traffic, docking, open-sea survey and transit under shore or support-vessel supervision. The aluminium catamaran carries multibeam, side-scan sonar and magnetometers, runs up to eight days at 4 knots and has a stated 1,500 km range. Its power comes from diesel generators, electric propulsion and LFP batteries.",
+          "summary": "China's OceanAlpha wins Bureau Veritas approval in principle for its 8.5 m L42B survey USV.",
+          "source": {
+            "name": "Hydro International",
+            "url": "https://www.hydro-international.com/news/oceanalpha-l42b-marine-survey-usv-receives-bureau-veritas-aip-certificate"
+          },
+          "image": "https://cdn.hydro-international.com/4p7BvqZn.png",
+          "video": null,
+          "region": "East Asia",
+          "lat": 22.54,
+          "lng": 114.06,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Length",
+              "value": "8.51 m"
+            },
+            {
+              "label": "Endurance",
+              "value": "8 days @ 4 kn"
+            },
+            {
+              "label": "Range",
+              "value": "1,500 km"
+            }
+          ],
+          "tags": [
+            "usv",
+            "survey",
+            "class approval",
+            "china"
+          ],
+          "via": [
+            "gemini"
+          ],
+          "id": "t2-10"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Ghost Shark XL-AUV payloads / Anduril & Australian DoD",
+          "tech": "Modular payload bays let the extra-large autonomous undersea vehicle lay sea mines, leave logistics caches on the seabed and launch tube-fired ALTIUS aerial drones from underwater.",
+          "details": "Australia revealed three previously classified Ghost Shark payloads: up to 12 sea mines per mission, seabed supply caches, and ALTIUS UAVs. Footage Anduril released on 21 October shows a 12-tube launcher, and TWZ estimates about two dozen drones per sortie. Anduril says the ALTIUS-600 has a range of about 275 miles and can stay airborne for at least four hours. The payloads are also going to Speartooth LUUVs and Bluebottle USVs.",
+          "summary": "Australia's Ghost Shark gets teeth: 12 sea mines, seabed supply caches and tube-launched ALTIUS drone swarms.",
+          "source": {
+            "name": "The War Zone",
+            "url": "https://www.twz.com/sea/ghost-shark-uncrewed-submarine-shown-launching-aerial-drones-for-the-first-time"
+          },
+          "region": "Oceania",
+          "lat": -33.87,
+          "lng": 151.21,
+          "domain": "cross-domain",
+          "image": "https://www.twz.com/wp-content/uploads/2026/10/Ghost-Shark-Drone-Firing.jpg?w=1200",
+          "video": null,
+          "specs": [
+            {
+              "label": "Sea mines",
+              "value": "up to 12 per mission"
+            },
+            {
+              "label": "Launcher",
+              "value": "12-tube"
+            },
+            {
+              "label": "ALTIUS-600 range",
+              "value": "~275 mi"
+            }
+          ],
+          "tags": [
+            "xl-auv",
+            "anduril",
+            "australia",
+            "mine-laying",
+            "loitering-munition"
+          ],
+          "via": [
+            "spark",
+            "gemini",
+            "claude"
+          ],
+          "id": "t2-11"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Bluebottle Hybrid USV at Maritime Big Play Pacific / Ocius",
+          "tech": "A diesel-hybrid version of the renewably powered Bluebottle USV, carrying acoustic intelligence payloads.",
+          "details": "Two Bluebottle Hybrids are taking part in the US Navy-led Maritime Big Play Pacific exercise, an AUKUS Pillar II series, through October. It is the variant's first navy exercise. They carry ThayerMahan Outpost acoustic payloads with TransparenSea processing to detect and track undersea threats, and the diesel generator supplements solar and wind power when more energy is needed.",
+          "summary": "Ocius' diesel-hybrid Bluebottle USVs hunt undersea threats in their first navy exercise, AUKUS' Maritime Big Play Pacific.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/ocius-new-bluebottle-hybrid-usv-demonstrates-capability-at-maritime-big-play-pacific/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Ocius-Bluebottle-Hybrid-BUTCH-2-scaled.jpg",
+          "video": null,
+          "region": "Americas",
+          "lat": 32.7,
+          "lng": -117.2,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Units",
+              "value": "2"
+            },
+            {
+              "label": "Payload",
+              "value": "Outpost acoustic"
+            }
+          ],
+          "tags": [
+            "usv",
+            "asw",
+            "aukus",
+            "ocius"
+          ],
+          "via": [
+            "gemini",
+            "spark",
+            "claude"
+          ],
+          "id": "t2-12"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Saildrone sailing drones for Baltic surveillance / Swedish Navy, Saildrone",
+          "tech": "Ten-metre uncrewed sailing drones, operated as a service by Saildrone staff, for persistent maritime domain awareness.",
+          "details": "The Swedish Armed Forces and FMV signed an agreement with Saildrone, developed within NORDEFCO so other Nordic countries can join on their own terms. Four drones were shown at Nynäshamn on 22 October. They track vessel traffic in the Baltic for the Navy's picture of activity at sea and support NATO's Task Force X Baltic under Operation Baltic Sentry.",
+          "summary": "Sweden contracts Saildrone's 10 m sailing drones to watch Baltic shipping for the Navy and NATO.",
+          "source": {
+            "name": "Nordic Defence Sector",
+            "url": "https://nordicdefencesector.com/en/article/swedish-navy-to-show-saildrone-sea-drones-agreed-via-nordefco"
+          },
+          "image": "https://imagedelivery.net/XO8UY-c6-LfWgEjQsN8IQw/91a74cca-6951-48ea-3f61-8d0de356e600/public",
+          "video": null,
+          "region": "Europe",
+          "lat": 58.9,
+          "lng": 17.95,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Drones",
+              "value": "4"
+            },
+            {
+              "label": "Length",
+              "value": "10 m"
+            }
+          ],
+          "tags": [
+            "usv",
+            "saildrone",
+            "sweden",
+            "baltic"
+          ],
+          "id": "t2-13"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Autonomous USV demonstration with US Navy / EDGE, UAE Navy",
+          "tech": "USVs ran reconnaissance and protection missions under AI-supported sensors and a single command-and-control layer.",
+          "details": "EDGE led the integration of sovereign autonomous systems for a UAE Navy demonstration with US Navy participation, supplying planning, facilities and operational assets. The scenarios showed USVs carrying out reconnaissance and protection missions with AI, advanced sensors and C2. EDGE's CEO said the focus is connecting every system through a single command layer, with people defining the mission.",
+          "summary": "EDGE leads a UAE Navy demonstration of autonomous USV reconnaissance and protection missions with the US Navy.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/edge-leads-integration-of-sovereign-autonomous-systems-in-uae-navy-demonstration-with-allied-forces/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Press-Release-EDGE-Leads-Integration-of-Sovereign-Autonomous-Systems-in-UAE-Navy-Demonstration-with-Allied-Forces.jpg",
+          "video": null,
+          "region": "Middle East",
+          "lat": 24.45,
+          "lng": 54.37,
+          "domain": "surface",
+          "specs": [],
+          "tags": [
+            "usv",
+            "uae",
+            "c2",
+            "edge"
+          ],
+          "via": [
+            "gemini",
+            "spark",
+            "claude"
+          ],
+          "id": "t2-14"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Elbit acquires International Submarine Engineering (ISE) / Elbit Systems",
+          "tech": "Elbit adds a Canadian maker of autonomous and remotely operated underwater vehicles to its line, which already includes the Seagull USV, to grow underwater ISR, MCM and ASW work.",
+          "details": "Elbit Systems acquired International Submarine Engineering, the Vancouver-area underwater robotics firm founded in 1974. ISE has delivered more than 250 underwater vehicles to customers in over 20 countries. The price was not disclosed; Elbit called it not material. Elbit expects the deal to expand its underwater ISR, mine countermeasures and anti-submarine warfare capabilities.",
+          "summary": "Elbit buys Canada's ISE, maker of 250+ underwater vehicles, to strengthen its uncrewed undersea business.",
+          "source": {
+            "name": "Breaking Defense",
+            "url": "https://breakingdefense.com/2026/10/israels-elbit-acquires-canadian-company-focused-on-autonomous-underwater-systems/"
+          },
+          "region": "Americas",
+          "lat": 49.26,
+          "lng": -122.78,
+          "domain": "subsurface",
+          "image": "https://breakingdefense.com/wp-content/uploads/sites/13/2026/10/ISE-1-e1792603672888.jpg",
+          "video": null,
+          "specs": [
+            {
+              "label": "Vehicles delivered",
+              "value": "250+"
+            },
+            {
+              "label": "Countries",
+              "value": "20+"
+            },
+            {
+              "label": "Founded",
+              "value": "1974"
+            }
+          ],
+          "tags": [
+            "auv",
+            "rov",
+            "elbit",
+            "acquisition",
+            "canada"
+          ],
+          "via": [
+            "spark",
+            "gemini",
+            "claude"
+          ],
+          "id": "t2-15"
+        }
+      ]
+    },
+    {
+      "key": "tech",
+      "title": "Product & Technology of Interest for Maritime Applications (Past 7 Days)",
+      "emptyNote": "No qualifying auxiliary products or technologies were published within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-15",
+          "title": "GPS-free autonomous drone landing on moving ships / NAWCAD",
+          "tech": "Vision-based guidance software that uses commercial cameras and motion sensors to recognise ship shapes and visual cues, and predicts deck motion in real time so a drone can land without GPS or a pilot.",
+          "details": "The US Navy's Naval Air Warfare Center Aircraft Division tested a tactical UAS that flew missions and landed on moving ships without GPS or pilot oversight. The software comes from NAWCAD's Maritime Autonomous Guidance-Navigation-Control Intelligent Coupled Systems Lab. It does not need the radar, recovery gear or ship modifications that at-sea recoveries usually require. It is modular for drones from small quadcopters up to combat-class aircraft, and next steps are fleet testing and adaptation for larger systems such as resupply drones. ONR and the Naval Innovative Science and Engineering programme funded the work.",
+          "summary": "NAWCAD's vision-based software lets drones land on moving ships with no GPS or pilot, using only cameras and real-time deck-motion prediction.",
+          "source": {
+            "name": "Naval Technology",
+            "url": "https://www.naval-technology.com/news/nawcad-drone-test-navy-ships/"
+          },
+          "region": "Americas",
+          "lat": 38.29,
+          "lng": -76.41,
+          "domain": "cross-domain",
+          "image": "https://www.naval-technology.com/wp-content/uploads/sites/15/2026/10/US-Navy-17.jpg",
+          "video": null,
+          "specs": [],
+          "tags": [
+            "vtol",
+            "gnss-denied",
+            "machine vision",
+            "ship landing",
+            "us navy"
+          ],
+          "application": "GNSS-free drone recovery on moving decks",
+          "via": [
+            "gemini",
+            "claude"
+          ],
+          "id": "t3-1"
+        },
+        {
+          "date": "2026-10-16",
+          "title": "USV and UAV oil-spill response concepts at JOSE 2026 / MPA Singapore, ST Engineering",
+          "tech": "Aerial drones guide uncrewed surface vessels to spray dispersant and tow containment booms, alongside a maritime digital twin that predicts oil drift.",
+          "details": "Singapore, Indonesia and Malaysia ran a ground deployment exercise simulating a collision spill in Singapore waters that reaches Indonesian and Malaysian shores. At the Joint Oil Spill Exercise 2026, MPA briefed the IMO, ITOPF and regional agencies on concepts in which UAVs guide USVs for dispersant spraying and boom towing, drawing on sea trials with ST Engineering. MPA's Maritime Digital Twin models where spilled oil will go and uses AI for response planning.",
+          "summary": "Singapore's MPA shows how drones and USVs trialled with ST Engineering could fight oil spills in the Singapore and Malacca straits.",
+          "source": {
+            "name": "Maritime and Port Authority of Singapore",
+            "url": "https://www.mpa.gov.sg/media-centre/details/singapore-conducts-trilateral-oil-spill-response-exercise-and-tests-new-technologies-at-jose-2026"
+          },
+          "image": null,
+          "video": null,
+          "region": "Southeast Asia",
+          "lat": 1.27,
+          "lng": 103.82,
+          "domain": "cross-domain",
+          "specs": [
+            {
+              "label": "Exercise",
+              "value": "JOSE 2026"
+            },
+            {
+              "label": "States",
+              "value": "SG · ID · MY"
+            }
+          ],
+          "tags": [
+            "usv",
+            "uav",
+            "oil spill",
+            "singapore",
+            "hazmat"
+          ],
+          "via": [
+            "spark"
+          ],
+          "application": "Oil-spill response: dispersant spraying and boom towing",
+          "id": "t3-2"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "Sea Launcher automated UUV launch & recovery / HII",
+          "tech": "An automated shipboard launch and recovery system that handles the ship-to-vehicle interface for REMUS UUVs, so sailors spend less time on exposed decks.",
+          "details": "HII again demonstrated shipboard deployment and recovery of a REMUS 620 UUV with its Sea Launcher system, validating a fully autonomous end-to-end launch and recovery sequence. The test used a representative ship configured for real-world mission conditions; the ship and test site were not named. HII links Sea Launcher to its ROMULUS USV family, which is in production and could eventually carry REMUS vehicles. HII says REMUS is used by more than 30 navies.",
+          "summary": "HII's Sea Launcher autonomously launched and recovered a REMUS 620 UUV again in a new shipboard test, moving it closer to fleet use.",
+          "source": {
+            "name": "Ocean News & Technology",
+            "url": "https://oceannews.com/news/science-technology/hii-sea-launcher-test-moves-remus-uuv-autonomy-closer-to-fleet-deployment"
+          },
+          "region": "Americas",
+          "lat": 41.69,
+          "lng": -70.62,
+          "domain": "subsurface",
+          "image": "https://oceannews.com/wp-content/uploads/2026/10/2026-10-19-UPDATED_SEA_LAUNCHER_PR_5a4d3482f1_badccfacee-img01-1200x630-1.jpg",
+          "video": null,
+          "specs": [
+            {
+              "label": "Vehicle",
+              "value": "REMUS 620"
+            },
+            {
+              "label": "Navies using REMUS",
+              "value": "30+"
+            }
+          ],
+          "tags": [
+            "launch and recovery",
+            "uuv",
+            "remus",
+            "hii",
+            "automation"
+          ],
+          "application": "Automated UUV launch and recovery from ships",
+          "via": [
+            "gemini",
+            "groq",
+            "claude"
+          ],
+          "id": "t3-3"
+        },
+        {
+          "date": "2026-10-19",
+          "title": "Radar map-matching navigation without GNSS / Voyant on Kraken K3 Scout",
+          "tech": "Software that matches live radar imagery against reference maps with particle-filter algorithms to estimate position without satellites.",
+          "details": "Voyant demonstrated satellite-independent navigation for the UK Ministry of Defence in the Solent aboard a Kraken K3 Scout autonomous surface vessel. The system calculates the vessel's position and the uncertainty around it from existing radar, so autonomous vessels can keep operating when GNSS is jammed or spoofed.",
+          "summary": "Voyant keeps a Kraken K3 Scout USV navigating without GPS by matching live radar to maps, in UK MoD trials.",
+          "source": {
+            "name": "Splash247",
+            "url": "https://splash247.com/british-autonomous-vessel-tests-navigation-without-gps/"
+          },
+          "image": "https://splash247.com/wp-content/uploads/2026/10/Kraken.jpeg",
+          "video": null,
+          "region": "Europe",
+          "lat": 50.78,
+          "lng": -1.2,
+          "domain": "surface",
+          "specs": [],
+          "tags": [
+            "gnss-denied",
+            "navigation",
+            "radar",
+            "usv"
+          ],
+          "application": "GNSS-free navigation for autonomous vessels",
+          "id": "t3-4"
+        },
+        {
+          "date": "2026-10-20",
+          "title": "USV-12 + SAGAN UAV coordinated strike demo / HAVELSAN",
+          "tech": "HAVELSAN command-and-control, mission-management and autonomy software ran an uncrewed surface vessel and a deck-launched VTOL drone as one coordinated system.",
+          "details": "HAVELSAN linked VN Maritime's USV-12 unmanned surface vessel with ASİSGUARD's SAGAN UAV for a joint mission. The USV navigated autonomously, and SAGAN took off autonomously from its deck and dropped a 60 mm mortar round on a designated target. An operator kept control of the firing decision. HAVELSAN says the architecture lets unmanned systems from different makers work under common C2 aligned with NATO interoperability standards.",
+          "summary": "HAVELSAN software linked a USV-12 drone boat and a deck-launched SAGAN UAV, which took off autonomously and hit a target with a 60 mm round.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/havelsan-demonstrates-coordinated-unmanned-air-and-maritime-operations/"
+          },
+          "region": "Europe",
+          "lat": 39.93,
+          "lng": 32.86,
+          "domain": "cross-domain",
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/havelsan-1024x617.png",
+          "video": null,
+          "specs": [
+            {
+              "label": "Munition",
+              "value": "60 mm mortar round"
+            }
+          ],
+          "tags": [
+            "vtol drone",
+            "usv",
+            "c2 software",
+            "interoperability",
+            "turkey"
+          ],
+          "application": "Drone launch from USVs and multi-vendor C2",
+          "via": [
+            "gemini",
+            "spark",
+            "claude"
+          ],
+          "id": "t3-5"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Counter-drone package for the Royal Malaysian Navy / Japan OSA",
+          "tech": "A counter-UAS system combining medium-range radar, cameras and interceptor capability to protect naval forces near key sea lanes.",
+          "details": "Japan and Malaysia signed the agreement in Tokyo on 20 October. It is the first time Japan's Official Security Assistance programme is supplying a counter-unmanned aerial system. The equipment goes to the Royal Malaysian Navy, near shipping corridors linking Indian Ocean energy suppliers with East Asia.",
+          "summary": "Japan funds a counter-drone system for the Royal Malaysian Navy, its first OSA counter-UAS grant.",
+          "source": {
+            "name": "Defence Security Asia",
+            "url": "https://defencesecurityasia.com/en/japan-malaysia-navy-counter-drone-osa-2026-sea-lanes/"
+          },
+          "image": "https://defencesecurityasia.com/wp-content/uploads/2026/10/858973294_1662076675286990_3937843333958404694_n.jpg",
+          "video": null,
+          "region": "Southeast Asia",
+          "lat": 3.14,
+          "lng": 101.69,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Programme",
+              "value": "Japan OSA"
+            },
+            {
+              "label": "Signed",
+              "value": "20 Oct, Tokyo"
+            }
+          ],
+          "tags": [
+            "counter-uas",
+            "malaysia",
+            "japan",
+            "sea lanes"
+          ],
+          "application": "Naval force protection against drones",
+          "id": "t3-6"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Marins inertial navigation for a navy's entire USV fleet / Exail",
+          "tech": "Military-grade inertial navigation systems that give USVs position, heading, attitude and velocity when GNSS is jammed or spoofed.",
+          "details": "An undisclosed navy picked Exail's Marins INS for its complete fleet of uncrewed surface vessels. Exail says resilient navigation is critical as navies operate USVs without crews or continuous human oversight. The contract value and fleet size were not disclosed.",
+          "summary": "A navy chooses Exail's Marins INS for its entire USV fleet, to keep them navigating when GNSS is denied.",
+          "source": {
+            "name": "Naval News",
+            "url": "https://www.navalnews.com/naval-news/2026/10/leading-navy-selects-exail-navigation-systems-for-usv-fleet/"
+          },
+          "image": "https://www.navalnews.com/wp-content/uploads/2026/10/Marins-Series-©Exail_1.jpg",
+          "video": null,
+          "region": "Europe",
+          "lat": 48.9,
+          "lng": 2.09,
+          "domain": "surface",
+          "specs": [],
+          "tags": [
+            "navigation",
+            "ins",
+            "usv",
+            "gnss-denied"
+          ],
+          "via": [
+            "gemini",
+            "spark",
+            "claude"
+          ],
+          "application": "Resilient USV navigation",
+          "id": "t3-7"
+        }
+      ]
+    },
+    {
+      "key": "comms",
+      "title": "Maritime Comms Products & Technologies (Past 7 Days)",
+      "emptyNote": "No qualifying maritime communications products were published within the 7-day window.",
+      "entries": [
+        {
+          "date": "2026-10-20",
+          "title": "Rock Lobster underwater acoustic comms relay / L3Harris",
+          "tech": "A deployable acoustic communication relay that passes command and control between undersea and surface assets.",
+          "details": "During an AUKUS Pillar II undersea warfare activity at RIMPAC 2026 off Hawaii, Rock Lobster was tested alongside US Navy capabilities, showing allied acoustic communications working together under water. L3Harris presented the results on 20 October.",
+          "summary": "L3Harris' Rock Lobster acoustic relay worked with US Navy systems in an AUKUS undersea trial at RIMPAC.",
+          "source": {
+            "name": "Seapower Magazine",
+            "url": "https://seapowermagazine.org/l3harris-rock-lobster-acoustic-communications-system-advances-aukus-undersea-warfare-capabilities-at-rimpac-2026/"
+          },
+          "image": null,
+          "video": null,
+          "region": "Americas",
+          "lat": 21.3,
+          "lng": -157.85,
+          "domain": "subsurface",
+          "specs": [],
+          "tags": [
+            "acoustic",
+            "aukus",
+            "rimpac",
+            "relay"
+          ],
+          "via": [
+            "gemini",
+            "claude"
+          ],
+          "medium": "acoustic",
+          "id": "t4-1"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "Hybrid dual-LEO connectivity across 41 RoRo ships / Speedcast, Soya IT",
+          "tech": "Starlink and OneWeb LEO links as primary, with Iridium Certus and LTE backup, under one managed network.",
+          "details": "Speedcast and Soya IT finished upgrading 41 Wallenius Wilhelmsen car carriers, which make port calls of only a few hours. The hardware was delivered to scheduled ports and commissioned by crews under remote supervision, without taking any ship out of service.",
+          "summary": "Speedcast and Soya IT remotely commission dual-LEO satcom across 41 RoRo ships without taking any out of service.",
+          "source": {
+            "name": "SatNews",
+            "url": "https://satnews.com/2026/10/21/speedcast-and-soya-it-complete-hybrid-dual-leo-connectivity-rollout-on-41-wallenius-wilhelmsen-vessels/"
+          },
+          "image": null,
+          "video": null,
+          "region": "Global",
+          "lat": 59.91,
+          "lng": 10.75,
+          "domain": "surface",
+          "specs": [
+            {
+              "label": "Vessels",
+              "value": "41"
+            },
+            {
+              "label": "Links",
+              "value": "2 LEO + L-band + LTE"
+            }
+          ],
+          "tags": [
+            "satcom",
+            "leo",
+            "remote commissioning"
+          ],
+          "medium": "satcom",
+          "id": "t4-2"
+        },
+        {
+          "date": "2026-10-21",
+          "title": "MQ-25A pLEO satcom BLOS control / US Navy, Boeing",
+          "tech": "A shipboard MD-5C Ground Control Station used a Proliferated Low Earth Orbit (pLEO) satellite network to hold a Beyond Line-of-Sight link from an aircraft carrier at sea to an uncrewed aircraft.",
+          "details": "The Unmanned Air Warfare Center aboard USS Ronald Reagan (CVN 76) used its MD-5C Ground Control Station, linked through a pLEO satellite network, to set up a BLOS connection while the carrier was underway in the Pacific. It controlled a Boeing MQ-25A Stingray test aircraft at Boeing's Mascoutah, Illinois facility, more than 2,100 miles away. The article calls it the first-ever remote control of an uncrewed aerial refueler by an underway aircraft carrier. The partners named are PMA-268, Boeing, Lockheed Martin and the MQ-25 Integrated Test Team.",
+          "summary": "A US carrier underway in the Pacific flew an MQ-25A more than 2,100 miles away over a pLEO satellite link from its MD-5C ground station.",
+          "source": {
+            "name": "Naval Technology",
+            "url": "https://www.naval-technology.com/news/us-navy-m1-25a-refueller/"
+          },
+          "region": "Americas",
+          "lat": 38.49,
+          "lng": -89.79,
+          "domain": "cross-domain",
+          "image": null,
+          "video": null,
+          "specs": [
+            {
+              "label": "Link range",
+              "value": ">2,100 miles"
+            },
+            {
+              "label": "Network",
+              "value": "pLEO satcom"
+            },
+            {
+              "label": "Ground station",
+              "value": "MD-5C GCS"
+            }
+          ],
+          "tags": [
+            "satcom",
+            "pleo",
+            "bvlos",
+            "mq-25",
+            "carrier"
+          ],
+          "medium": "satcom",
+          "id": "t4-3"
+        },
+        {
+          "date": "2026-10-22",
+          "title": "Multi-orbit satcom and edge cloud for remote maritime operations / Orbius, Armada",
+          "tech": "LEO satellite connectivity and private network interconnects feeding edge AI nodes at sea and offshore.",
+          "details": "Orbius Communications has partnered with Armada to offer edge cloud computing for maritime and offshore operators. Traffic from Starlink, Eutelsat OneWeb and, later, Amazon Leo runs over private layer-two paths to regional data centres rather than the public internet, so AI analytics can run close to remote assets.",
+          "summary": "Orbius and Armada pair LEO satcom with edge cloud so AI can run on data from remote maritime assets.",
+          "source": {
+            "name": "Riviera Maritime Media",
+            "url": "https://www.rivieramm.com/news-content-hub/satellites-edge-cloud-computing-unlock-ai-for-shipping-offshore-90329"
+          },
+          "image": "https://dvzpv6x5302g1.cloudfront.net/AcuCustom/Sitename/DAM/185/LEO_satellite_illustration_of_Eutelsat_OneWeb1_Thumb.png",
+          "video": null,
+          "region": "Global",
+          "lat": 51.5,
+          "lng": -0.12,
+          "domain": "surface",
+          "specs": [],
+          "tags": [
+            "satcom",
+            "edge computing",
+            "leo",
+            "ai"
+          ],
+          "medium": "satcom",
+          "id": "t4-4"
+        }
+      ]
+    }
+  ],
+  "contributors": {
+    "claude": {
+      "published": 25
+    },
+    "gemini": {
+      "submitted": 31,
+      "published": 13
+    },
+    "spark": {
+      "submitted": 11,
+      "published": 9
+    },
+    "groq": {
+      "submitted": 1,
+      "published": 1
+    }
+  }
+}

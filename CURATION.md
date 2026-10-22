@@ -15,7 +15,8 @@ Monday at about 08:00 Singapore time (SGT). A fresh agent session follows these 
 1. Get the repo `raus-ums/UMS-Ping` with push access. If it is not already in the session, attach it with `add_repo` and clone it.
 2. `git fetch origin main && git checkout -B main origin/main`
 3. Work out the dates in SGT. `END` is today, the Monday of the run (`YYYY-MM-DD`), and `START` is `END − 7 days`. The issue id is `END`.
-4. Read `data/index.json`. The new issue's `number` is the latest issue's number + 1. If an issue with id `END` already exists, update it instead of creating a duplicate.
+4. Read `data/index.json`. The new issue's `number` is the highest whole issue number + 1. Special editions with a decimal
+   number (e.g. `1.5`) don't count: after Nº 001 and Nº 001.5 comes Nº 002. If an issue with id `END` already exists, update it instead of creating a duplicate.
 5. Read `data/learnings.json`: Ping's memory from earlier runs (reader preferences, each source's track record,
    productive sites and searches, known gaps, sites that failed). Use it to plan this week's research.
 

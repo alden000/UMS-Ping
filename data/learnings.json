@@ -10,39 +10,63 @@
   "sources": {
     "claude": {
       "role": "Main researcher (Monday run)",
-      "weeks": 1, "found": 18, "published": 18,
+      "weeks": 1,
+      "found": 18,
+      "published": 18,
       "rejections": {},
-      "unique_finds": ["Navis Sardina survey USV", "Sentiq Defence", "Voyant GNSS-free navigation", "Speedcast dual-LEO", "China second UUV mothership"],
+      "unique_finds": [
+        "Navis Sardina survey USV",
+        "Sentiq Defence",
+        "Voyant GNSS-free navigation",
+        "Speedcast dual-LEO",
+        "China second UUV mothership"
+      ],
       "status": "active",
       "notes": "Benchmark 2026-10-22 on the Monday brief: 13/13 working links; the only source that also reported on the Singapore/SEA watch."
     },
     "spark": {
       "role": "Gemini Spark agent, Monday 00:00 SGT, writes to a Google Doc",
-      "weeks": 0, "submitted": 8, "published": 0,
+      "weeks": 0,
+      "submitted": 8,
+      "published": 0,
       "rejections": {},
-      "unique_finds": ["Taiwan Coast Guard MARTAC Devil Ray T24 USVs"],
+      "unique_finds": [
+        "Taiwan Coast Guard MARTAC Devil Ray T24 USVs"
+      ],
       "status": "active",
       "notes": "Benchmark 2026-10-22: 8/8 working links; empty for threats and comms."
     },
     "gemini": {
       "role": "Gemini API (3.8 Flash), Sunday ~21:17 SGT, ~12 US cents per run",
-      "weeks": 0, "submitted": 11, "published": 0,
-      "rejections": { "wrong or dead link": 2 },
-      "unique_finds": ["Navantia / Multiverse naval edge AI"],
+      "weeks": 0,
+      "submitted": 11,
+      "published": 0,
+      "rejections": {
+        "wrong or dead link": 2
+      },
+      "unique_finds": [
+        "Navantia / Multiverse naval edge AI"
+      ],
       "status": "watch",
       "notes": "Benchmark 2026-10-22: 9/11 correct links. Writes URLs from memory; the collector repairs or drops dead ones. Lite tier is not usable (0 working links)."
     },
     "groq": {
       "role": "Groq free tier (gpt-oss), Sunday ~21:17 SGT",
-      "weeks": 0, "submitted": 2, "published": 0,
-      "rejections": { "outside window": 2 },
+      "weeks": 0,
+      "submitted": 2,
+      "published": 0,
+      "rejections": {
+        "outside window": 2
+      },
       "unique_finds": [],
       "status": "watch",
       "notes": "Often hits the free daily token limit during testing; judge it on normal Sunday runs."
     },
     "reader": {
       "role": "Story tips from readers via the site",
-      "weeks": 0, "submitted": 0, "published": 0,
+      "weeks": 0,
+      "submitted": 0,
+      "published": 0,
       "rejections": {},
       "unique_finds": [],
       "status": "active",
@@ -50,17 +74,52 @@
     }
   },
   "search": {
-    "productive_sites": ["navalnews.com", "bairdmaritime.com", "navaltoday.com", "breakingdefense.com", "twz.com", "defenceconnect.com.au", "oceannews.com", "militarnyi.com", "seapowermagazine.org"],
+    "productive_sites": [
+      "navalnews.com",
+      "bairdmaritime.com",
+      "navaltoday.com",
+      "breakingdefense.com",
+      "twz.com",
+      "defenceconnect.com.au",
+      "oceannews.com",
+      "militarnyi.com",
+      "seapowermagazine.org"
+    ],
     "productive_queries": [],
-    "gaps": ["Threats outside the Black Sea", "Singapore / Southeast Asia in all tables", "Maritime comms products", "East Asia coast-guard and navy programmes"]
+    "gaps": [
+      "Threats outside the Black Sea",
+      "Singapore / Southeast Asia in all tables",
+      "Maritime comms products",
+      "East Asia coast-guard and navy programmes"
+    ]
   },
   "sites": {
     "failed": [
-      { "host": "arabnews.pk", "why": "Internal staff portal shown to Singapore readers", "date": "2026-10-19" },
-      { "host": "unmannedsystemstechnology.com", "why": "Returns HTTP 403 to the reader-view check", "date": "2026-10-22" }
+      {
+        "host": "arabnews.pk",
+        "why": "Internal staff portal shown to Singapore readers",
+        "date": "2026-10-19"
+      },
+      {
+        "host": "unmannedsystemstechnology.com",
+        "why": "Returns HTTP 403 to the reader-view check",
+        "date": "2026-10-22"
+      }
     ]
   },
   "history": [
-    { "edition": "2026-10-26", "changes": ["Set up the learning loop: reader tips, weekly focus page for contributors, source scorecards", "Janes news articles and Tech Briefs allowed; Gemini Spark added as a contributor"] }
+    {
+      "edition": "2026-10-22",
+      "changes": [
+        "Special edition Nº 001.5 (15–22 Oct) published from a trial run; Monday's Nº 002 skips its stories as already covered"
+      ]
+    },
+    {
+      "edition": "2026-10-26",
+      "changes": [
+        "Set up the learning loop: reader tips, weekly focus page for contributors, source scorecards",
+        "Janes news articles and Tech Briefs allowed; Gemini Spark added as a contributor"
+      ]
+    }
   ]
 }
