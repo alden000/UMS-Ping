@@ -201,43 +201,66 @@ def focused_prompts(base):
                     "Return every qualifying item you can verify (aim for 2-6). Use section \"" + key + "\" for all entries.")
 
 
+def _objects(text, start=0):
+    """Yield each balanced {...} block from start onwards, ignoring braces inside JSON strings."""
+    depth, begin, in_str, esc = 0, None, False, False
+    for i in range(start, len(text)):
+        ch = text[i]
+        if in_str:
+            esc = (ch == "\\") and not esc
+            if ch == '"' and not esc:
+                in_str = False
+            continue
+        if ch == '"':
+            in_str, esc = True, False
+        elif ch == "{":
+            if depth == 0:
+                begin = i
+            depth += 1
+        elif ch == "}" and depth:
+            depth -= 1
+            if depth == 0:
+                yield text[begin:i + 1]
+
+
 def extract_entries(text):
-    """Pull the {"entries": [...]} object out of a model reply (tolerates code fences and stray prose)."""
-    text = re.sub(r"```(?:json)?", "", text)
-    start = text.find("{")
-    while start != -1:
-        depth = 0
-        for i in range(start, len(text)):
-            if text[i] == "{":
-                depth += 1
-            elif text[i] == "}":
-                depth -= 1
-                if depth == 0:
-                    try:
-                        obj = json.loads(text[start:i + 1])
-                        if isinstance(obj, dict) and isinstance(obj.get("entries"), list):
-                            return obj["entries"]
-                    except json.JSONDecodeError:
-                        pass
-                    break
-        start = text.find("{", start + 1)
-    return []
+    """Pull the {"entries": [...]} list out of a model reply. Tolerates code fences and stray prose, and
+    salvages the well-formed entries when the overall JSON is broken (e.g. a truncated last item)."""
+    text = re.sub(r"```(?:json)?", "", text or "")
+    for block in _objects(text):
+        try:
+            obj = json.loads(block)
+            if isinstance(obj, dict) and isinstance(obj.get("entries"), list):
+                return obj["entries"]
+        except json.JSONDecodeError:
+            continue
+    at = text.find('"entries"')
+    if at == -1:
+        return []
+    bracket = text.find("[", at)
+    salvaged = []
+    for block in _objects(text, bracket + 1 if bracket != -1 else at):
+        try:
+            item = json.loads(block)
+            if isinstance(item, dict) and item.get("section"):
+                salvaged.append(item)
+        except json.JSONDecodeError:
+            continue
+    return salvaged
 
 
 def resolve(url):
-    """Follow redirects (e.g. search-grounding redirect links) and return (final_url, status)."""
-    for method in ("HEAD", "GET"):
-        try:
-            req = urllib.request.Request(url, method=method, headers={"user-agent": UA})
-            with urllib.request.urlopen(req, timeout=20) as r:
-                return r.geturl(), r.status
-        except urllib.error.HTTPError as e:
-            if method == "GET" or e.code not in (403, 405, 501):
-                return e.geturl() or url, e.code
-        except Exception:
-            if method == "GET":
-                return url, None
-    return url, None
+    """Load the page (following redirects) and return (final_url, status). A full GET, because some sites
+    answer HEAD requests with 200 even for pages that don't exist."""
+    try:
+        req = urllib.request.Request(url, headers={"user-agent": UA})
+        with urllib.request.urlopen(req, timeout=25) as r:
+            r.read(2048)
+            return r.geturl(), r.status
+    except urllib.error.HTTPError as e:
+        return e.geturl() or url, e.code
+    except Exception:
+        return url, None
 
 
 def prefilter(entries, start, end):
