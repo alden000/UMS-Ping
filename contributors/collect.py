@@ -76,7 +76,8 @@ def first_working(name, models, call):
                 return text
             except ApiError as e:
                 errors.append(f"{model}: {e}")
-                if "HTTP 429" in str(e) and attempt == 1:
+                transient = any(f"HTTP {c}" in str(e) for c in (429, 500, 502, 503, 504, 524))
+                if transient and attempt == 1:
                     time.sleep(30)
                     continue
                 break
@@ -157,6 +158,7 @@ def ask_groq(prompt):
         body = {"model": model, "messages": [{"role": "user", "content": prompt}]}
         if "compound" not in model:
             body["tools"] = [{"type": "browser_search"}]  # gpt-oss models search the web through this tool
+            body["reasoning_effort"] = "low"  # keeps each answer well inside Groq's ~100 s gateway timeout
         data = post_json("https://api.groq.com/openai/v1/chat/completions", body,
                          {"authorization": "Bearer " + os.environ["GROQ_API_KEY"]})
         msg = data["choices"][0]["message"]
@@ -189,8 +191,8 @@ FOCUS = {
 def focused_prompts(base):
     for key, (label, queries) in FOCUS.items():
         hints = "; ".join(f'"{q}"' for q in queries)
-        yield key, (f"{base}\n\nFOCUS: {label} Run at least 5 separate web searches before answering, for example: "
-                    f"{hints}. Open the most promising news results to confirm the publication date. "
+        yield key, (f"{base}\n\nFOCUS: {label} Run 2-3 targeted web searches before answering (choose from, e.g.: "
+                    f"{hints}). Confirm each item's publication date from the result or the article. "
                     "Return every qualifying item you can verify (aim for 2-6). Use section \"" + key + "\" for all entries.")
 
 
@@ -290,7 +292,9 @@ def main():
             except Exception as e:  # one provider failing must not stop the others
                 print(f"! {name}: request failed ({section}): {e}")
                 failed = True
-                break  # the same error would repeat for every section (e.g. quota or bad key)
+                if any(f"HTTP {c}" in str(e) for c in (500, 502, 503, 504, 524)) or "timed out" in str(e):
+                    continue  # temporary server trouble: try the remaining tables
+                break  # hard errors (quota, bad key, unknown model) would repeat for every table
             got = extract_entries(reply)
             if not got:
                 # Show what the model actually said, so an empty or malformed answer can be diagnosed.
