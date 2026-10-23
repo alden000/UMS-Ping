@@ -799,6 +799,7 @@
   }
 
   /* ---------- Marine snow ---------- */
+  let depthNow = 0; // scroll depth 0..1, shared by the scroll handler and the snow layer
   (function snow() {
     const cv = $("#snow"), ctx = cv.getContext("2d");
     let W, H, parts = [], raf;
@@ -811,7 +812,7 @@
       ctx.clearRect(0, 0, W, H);
       const light = document.documentElement.dataset.theme === "light";
       ctx.fillStyle = light ? "rgba(31,78,121,1)" : "rgba(200,230,255,1)";
-      const depth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--depth")) || 0;
+      const depth = depthNow;
       for (const p of parts) {
         p.y += p.v; p.w += 0.01; p.x += Math.sin(p.w) * 0.15;
         if (p.y > H + 4) { p.y = -4; p.x = Math.random() * W; }
@@ -820,7 +821,13 @@
       }
       raf = requestAnimationFrame(tick);
     };
-    init(); addEventListener("resize", init, { passive: true });
+    // Phones resize the viewport whenever the address bar hides or shows mid-scroll: only rebuild the
+    // particles when the width really changes, and just stretch the canvas for height changes.
+    let rz;
+    init(); addEventListener("resize", () => {
+      clearTimeout(rz);
+      rz = setTimeout(() => { if (innerWidth !== W) init(); else if (Math.abs(innerHeight - H) > 1) { H = cv.height = innerHeight; } }, 150);
+    }, { passive: true });
     const run = () => { cancelAnimationFrame(raf); if (!reduced.matches && !document.hidden) tick(); else ctx.clearRect(0, 0, W, H); };
     document.addEventListener("visibilitychange", run); reduced.addEventListener?.("change", run);
     run();
@@ -839,18 +846,28 @@
     $$("#main > section").forEach((s) => sectionIO.observe(s));
   }
   let ticking = false;
+  // Runs once per frame while scrolling, and only touches transforms, opacity and changed text, so the browser
+  // never has to restyle or re-lay-out the page mid-scroll.
+  const scrollEls = {};
+  let lastRead = "", lastScrolled = null, lastShow = null;
   function onScroll() {
     if (ticking) return; ticking = true;
     requestAnimationFrame(() => {
       ticking = false;
+      const el = scrollEls.bar ? scrollEls : Object.assign(scrollEls, {
+        bar: $(".progress i"), ambient: $("#ambient"), top: $("#topbar"), depth: $("#depth"), dot: $("#depthDot"),
+        read: $("#depthRead"), scale: $("#depth .scale")?.offsetHeight || 180 });
       const max = document.documentElement.scrollHeight - innerHeight;
       const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
-      $(".progress i").style.transform = `scaleX(${p})`;
-      document.documentElement.style.setProperty("--depth", p.toFixed(3));
-      $("#topbar").classList.toggle("scrolled", scrollY > 10);
-      $("#depth").classList.toggle("show", scrollY > innerHeight * 0.5);
-      $("#depthDot").style.top = p * 100 + "%";
-      $("#depthRead").textContent = String(Math.round(p * 6500)).padStart(4, "0") + " m";
+      depthNow = p;
+      el.bar.style.transform = `scaleX(${p})`;
+      el.ambient.style.opacity = (1 - p * 0.85).toFixed(3);
+      const scrolled = scrollY > 10, show = scrollY > innerHeight * 0.5;
+      if (scrolled !== lastScrolled) el.top.classList.toggle("scrolled", (lastScrolled = scrolled));
+      if (show !== lastShow) el.depth.classList.toggle("show", (lastShow = show));
+      el.dot.style.transform = `translateY(calc(-50% + ${(p * el.scale).toFixed(1)}px))`;
+      const read = String(Math.round(p * 6500)).padStart(4, "0") + " m";
+      if (read !== lastRead) el.read.textContent = (lastRead = read);
     });
   }
   addEventListener("scroll", onScroll, { passive: true });

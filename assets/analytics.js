@@ -93,18 +93,26 @@
   ["pointerdown", "keydown", "touchstart", "wheel", "mousemove"].forEach((t) => addEventListener(t, input, { passive: true }));
 
   let lastScrollT = performance.now();
+  // Measured once per animation frame (not per scroll event), so tracking never adds work mid-scroll.
+  let scrollQueued = false;
   addEventListener("scroll", () => {
-    if (!v) return;
-    input();
-    const now = performance.now(), dy = Math.abs(scrollY - lastY), dt = Math.max(16, now - lastScrollT);
-    v.scrolled += dy;
-    if (dy / (dt / 1000) > FAST_SCROLL) v.fast += dy;
-    lastY = scrollY; lastScrollT = now; lastScrollAt = Date.now(); pausedCounted = false;
-    const h = document.documentElement.scrollHeight - innerHeight;
-    if (h > 0) v.depth = Math.max(v.depth, Math.round((scrollY / h) * 100));
-    const fb = document.getElementById("feedback");
-    if (fb && fb.getBoundingClientRect().top < innerHeight) v.bottom = true;
-    dirty = true;
+    if (!v || scrollQueued) return;
+    scrollQueued = true;
+    requestAnimationFrame(() => {
+      scrollQueued = false;
+      input();
+      const now = performance.now(), dy = Math.abs(scrollY - lastY), dt = Math.max(16, now - lastScrollT);
+      v.scrolled += dy;
+      if (dy / (dt / 1000) > FAST_SCROLL) v.fast += dy;
+      lastY = scrollY; lastScrollT = now; lastScrollAt = Date.now(); pausedCounted = false;
+      const h = document.documentElement.scrollHeight - innerHeight;
+      if (h > 0) v.depth = Math.max(v.depth, Math.round((scrollY / h) * 100));
+      if (!v.bottom) {
+        const fb = document.getElementById("feedback");
+        if (fb && fb.getBoundingClientRect().top < innerHeight) v.bottom = true;
+      }
+      dirty = true;
+    });
   }, { passive: true });
 
   // What readers interact with (event delegation, so it survives re-renders).
