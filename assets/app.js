@@ -877,6 +877,13 @@
     toast(haptics.on ? "Haptics on" : "Haptics off");
   });
   $("#archiveBtn").addEventListener("click", openArchive);
+  // The Ping logo scrolls back to the top of the issue being read (it no longer jumps to the latest issue).
+  $(".brand").addEventListener("click", (ev) => {
+    ev.preventDefault();
+    window.scrollTo({ top: 0, behavior: reduced.matches ? "auto" : "smooth" });
+    if (state.issue) history.replaceState(null, "", "#/" + state.issue.id);
+    haptic("tap");
+  });
   $("#scrim").addEventListener("click", closeOverlays);
   $$("[data-close]").forEach((b) => b.addEventListener("click", closeOverlays));
   // The video viewer closes with a tap anywhere around the player (taps on the video itself go to YouTube).
