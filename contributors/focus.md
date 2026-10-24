@@ -21,6 +21,7 @@ free, publicly readable articles only, direct links copied from the browser, pub
 - Good this week: Naval News, Baird Maritime, Naval Today, Breaking Defense, The War Zone, Defence Connect,
   Ocean News & Technology, Militarnyi, Seapower Magazine.
 - Janes news articles (links containing /defence-news/) are allowed. Other Janes pages are not.
-- Never: Lloyd's List, FT, WSJ, Bloomberg, Arab News.
+- Never: Lloyd's List, FT, WSJ, Bloomberg, arabnews.pk, unmannedsystemstechnology.com (human-check wall).
+  arabnews.com is fine.
 - Common mistakes to avoid: links to an older article on the same topic, homepage or section links,
   and stories dated before the window.

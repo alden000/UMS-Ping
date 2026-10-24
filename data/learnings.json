@@ -1,6 +1,6 @@
 {
   "_comment": "Ping's memory between Monday runs. Read it before researching and update it before publishing (CURATION.md step 5c). Public file: no personal details, no reader text verbatim.",
-  "updated": "2026-10-23",
+  "updated": "2026-10-24",
   "readers": {
     "weeks_with_feedback": 0,
     "preferences": [],
@@ -114,17 +114,33 @@
     "failed": [
       {
         "host": "arabnews.pk",
-        "why": "Internal staff portal shown to Singapore readers",
-        "date": "2026-10-19"
+        "why": "SRMG internal staff portal for Singapore readers (confirmed in a normal browser)",
+        "date": "2026-10-24"
       },
       {
         "host": "unmannedsystemstechnology.com",
-        "why": "Returns HTTP 403 to the reader-view check",
-        "date": "2026-10-22"
+        "why": "Cloudflare human-check before every article, even in a normal browser",
+        "date": "2026-10-24"
+      },
+      {
+        "host": "wsj.com / bloomberg.com",
+        "why": "CAPTCHA / robot check before articles",
+        "date": "2026-10-24"
+      },
+      {
+        "host": "ft.com",
+        "why": "Subscribe wall after the headline",
+        "date": "2026-10-24"
       }
     ]
   },
   "history": [
+    {
+      "edition": "2026-10-24",
+      "changes": [
+        "Rechecked blocked sites in a normal browser in Singapore: arabnews.com unblocked (free, no portal); unmannedsystemstechnology.com blocked (human-check wall); FT, WSJ, Bloomberg, Lloyd's List and arabnews.pk stay blocked."
+      ]
+    },
     {
       "edition": "2026-10-22",
       "changes": [
