@@ -43,6 +43,20 @@ const ctx = await browser.newContext({
   timezoneId: "Asia/Singapore",
 });
 
+// Hosts a person confirmed readable from Singapore that block the cloud browser (data/reader-verified-hosts.json).
+const READER_OK = new Set((() => {
+  try { return JSON.parse(fs.readFileSync(new URL("../data/reader-verified-hosts.json", import.meta.url), "utf8")).hosts.map((h) => h.host); }
+  catch { return []; }
+})());
+async function plainFetchOk(url) {
+  try {
+    const r = await fetch(url, { headers: { "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0 Safari/537.36", "accept-language": "en-SG,en;q=0.9" }, redirect: "follow" });
+    const html = await r.text();
+    const text = html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, " ").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
+    return r.ok && text.length >= 2500 && !WALL.test(text.slice(0, 6000)) ? { status: r.status, chars: text.length } : null;
+  } catch { return null; }
+}
+
 let hard = 0, warn = 0;
 const entries = issue.sections.flatMap((s, si) => s.entries.map((e, n) => ({ ...e, id: e.id || `t${si + 1}-${n + 1}` })));
 for (const e of entries) {
@@ -86,6 +100,13 @@ for (const e of entries) {
     }
   } catch (err) {
     problems.push(`could not load: ${String(err.message).split("\n")[0]}`);
+  }
+  if (problems.length && READER_OK.has(host(url))) {
+    const ok = await plainFetchOk(url);
+    if (ok) {
+      notes.push(`cloud browser blocked (${problems.join("; ")}), but a plain download returned the full article (${ok.chars} chars) and this host is reader-verified from Singapore`);
+      problems.length = 0;
+    }
   }
   await page.close();
   hard += problems.length ? 1 : 0;

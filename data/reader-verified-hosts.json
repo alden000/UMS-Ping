@@ -1,0 +1,6 @@
+{
+  "_comment": "Sites the maintainer confirmed are freely readable from Singapore in a normal browser, but which refuse the cloud browser used by scripts/verify_sources.mjs. For these hosts only, a browser block is double-checked with a plain download: the story passes (with a warning) if the full article text comes through. Re-test them now and then.",
+  "hosts": [
+    { "host": "arabnews.com", "checked": "2026-10-24", "how": "Maintainer's Firefox in Singapore: full AFP article, no wall, no portal" }
+  ]
+}

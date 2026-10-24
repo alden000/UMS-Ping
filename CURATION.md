@@ -258,6 +258,10 @@ node scripts/verify_sources.mjs data/issues/<END>.json
   with a freely readable article from a mainstream publisher covering the same story, or drop the entry. Then rebuild and
   re-run until there are **0 failing**.
 - **warn**: fix it. Update redirected links to the final URL, and re-check the date if the page date differs.
+  Exception: a "cloud browser blocked … host is reader-verified from Singapore" warning needs no fix. Those hosts
+  (`data/reader-verified-hosts.json`) were confirmed readable by a person in Singapore but refuse this cloud browser;
+  the script has already checked that a plain download returns the full article. Only the maintainer adds hosts to
+  that list, after opening the site in a normal browser.
 - If a story's key claim, e.g. the uncrewed-vessel involvement that qualifies it for Table 1, appears in only one source and
   that source fails, drop the story rather than keep a link readers can't open.
 - Readers are in Singapore. Prefer widely reachable international publishers (e.g. Naval News, Maritime Executive,
